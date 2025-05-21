@@ -1,43 +1,82 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meu Projeto Web3</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>SUI Cars</title>
+  <link rel="icon" href="/path/to/favicon.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #001f3f;
+      color: #00aced;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      background-color: #001a35;
+      width: 100%;
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    header img {
+      height: 60px;
+    }
+    h1 {
+      margin-top: 40px;
+      color: #00aced;
+      text-align: center;
+    }
+    .rarities {
+      display: flex;
+      gap: 30px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .rarity {
+      background-color: #003366;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 0 10px #00aced88;
+    }
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      color: #0074D9;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>SUI CARS</h1>
-    <p>Explore o futuro dos carros Web3</p>
+    <img src="/path/to/logo-full.png" alt="SUI Cars Logo" />
   </header>
-
-  <main>
-    <section class="hero">
-      <h2>Corridas simuladas. NFTs únicos. Recompensas reais.</h2>
-      <a href="#" class="btn">Comece agora</a>
-    </section>
-
-    <section class="features">
-      <div class="card">
-        <h3>🚗 NFTs de Carros</h3>
-        <p>5 raridades, 5 atributos. Cada carro é único e gera tokens.</p>
-      </div>
-      <div class="card">
-        <h3>💰 Recompensas</h3>
-        <p>Ganhe tokens participando das corridas simuladas.</p>
-      </div>
-      <div class="card">
-        <h3>⚙️ Baseado na SUI</h3>
-        <p>Alta performance, taxas baixas e interoperabilidade.</p>
-      </div>
-    </section>
-  </main>
-
+  <h1>Welcome to SUI Cars</h1>
+  <p style="text-align: center; max-width: 600px; padding: 0 20px;">
+    Discover the world of NFTs on the Sui blockchain. Each SUI Car is a unique digital vehicle with one of three rarities: Common, Hybrid, and Eletric. Own your NFT and put it to race daily to receive your prize.
+  </p>
+  <div class="rarities">
+    <div class="rarity">
+      <h2>Common</h2>
+      <p>Most frequently minted cars. Stylish NFT art with vivid colors.</p>
+    </div>
+    <div class="rarity">
+      <h2>Hybrid</h2>
+      <p>Less common, these cars have improved potential and a sleeker look.</p>
+    </div>
+    <div class="rarity">
+      <h2>Eletric</h2>
+      <p>Ultra-rare NFTs. Representing innovation and performance.</p>
+    </div>
+  </div>
   <footer>
-    <p>© 2025 SUI Cars - Todos os direitos reservados</p>
+    &copy; 2025 SUI Cars. All rights reserved.
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
