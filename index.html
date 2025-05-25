@@ -18,13 +18,25 @@
     header {
       background-color: #001a35;
       width: 100%;
-      padding: 20px 0;
+      padding: 20px 40px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
     }
     header img {
       height: 60px;
+    }
+    .connect-btn {
+      background-color: #00aced;
+      color: #001f3f;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .connect-btn:hover {
+      background-color: #0074D9;
     }
     h1 {
       margin-top: 40px;
@@ -55,12 +67,15 @@
 </head>
 <body>
   <header>
-    <img src="sui cars.png" />
+    <img src="sui cars.png" alt="SUI Cars Logo" />
+    <button class="connect-btn" onclick="connectWallet()">Connect Wallet</button>
   </header>
+
   <h1>Welcome to SUI Cars</h1>
   <p style="text-align: center; max-width: 600px; padding: 0 20px;">
     Discover the world of NFTs on the Sui blockchain. Each SUI Car is a unique digital vehicle with one of three rarities: Common, Hybrid, and Eletric. Own your NFT and put it to race daily to receive your prize.
   </p>
+
   <div class="rarities">
     <div class="rarity">
       <h2>Common</h2>
@@ -75,8 +90,32 @@
       <p>Ultra-rare NFTs. Representing innovation and performance.</p>
     </div>
   </div>
+
   <footer>
     &copy; 2025 SUI Cars. All rights reserved.
   </footer>
+
+  <script>
+    async function connectWallet() {
+      if (!window.suiWallet) {
+        alert("Sui Wallet extension not found. Please install it first.");
+        return;
+      }
+
+      try {
+        const accounts = await window.suiWallet.request({
+          method: "sui_connect",
+        });
+
+        if (accounts.accounts && accounts.accounts.length > 0) {
+          alert("Wallet connected: " + accounts.accounts[0].address);
+        } else {
+          alert("No accounts found.");
+        }
+      } catch (error) {
+        alert("Failed to connect wallet: " + error.message);
+      }
+    }
+  </script>
 </body>
 </html>
