@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUI Cars Whitepaper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #001f3f;
+      color: #00aced;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #00aced;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #00aced;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #003366;
+    }
+    a {
+      color: #00aced;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏁 SUI Cars Whitepaper</h1>
+
+  <h2>1. Introduction</h2>
+  <p>
+    SUI Cars is a blockchain-based play-to-earn game where players own NFT cars with different rarities and earn rewards by racing. Built on the Sui blockchain, the game brings together NFTs, daily gameplay, and on-chain rewards.
+  </p>
+
+  <h2>2. Vision</h2>
+  <p>
+    Our mission is to create a sustainable and engaging Web3 game where owning and upgrading your cars leads to real rewards and community value.
+  </p>
+
+  <h2>3. Gameplay Overview</h2>
+  <ul>
+    <li>Each car is an NFT with one of 3 rarities: <strong>Common</strong>, <strong>Hybrid</strong>, and <strong>Electric</strong>.</li>
+    <li>Cars can be raced daily to earn rewards based on their rarity and a touch of randomness.</li>
+    <li>The better your car, the higher your daily earning potential.</li>
+  </ul>
+
+  <h2>4. Rarity System</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Rarity</th>
+        <th>Color</th>
+        <th>Stars</th>
+        <th>Supply Share</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Common</td>
+        <td>Gray</td>
+        <td>⭐</td>
+        <td>~60%</td>
+      </tr>
+      <tr>
+        <td>Hybrid</td>
+        <td>Blue</td>
+        <td>⭐⭐</td>
+        <td>~30%</td>
+      </tr>
+      <tr>
+        <td>Electric</td>
+        <td>Gold</td>
+        <td>⭐⭐⭐</td>
+        <td>~10%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5. Earning System</h2>
+  <p>
+    Cars can race once per day. The rewards are distributed in the native token (to be announced). The better the rarity, the higher the reward multiplier.
+  </p>
+
+  <h2>6. Minting Process</h2>
+  <ul>
+    <li>NFTs will be minted directly via <strong>Tradeport</strong> on the Sui blockchain.</li>
+    <li>Total supply: <strong>10,000 NFTs</strong></li>
+    <li>Mint date: To be announced on our Twitter & website.</li>
+  </ul>
+
+  <h2>7. Tokenomics (Future Feature)</h2>
+  <p>
+    A native token may be introduced for in-game upgrades, marketplace use, and staking.
+  </p>
+
+  <h2>8. Wallet Support</h2>
+  <p>
+    Users can connect with <strong>Slush</strong> and <strong>Phantom Wallets</strong>. Wallet integration is done using the <a href="https://github.com/wallet-standard" target="_blank">wallet-standard</a> approach on Sui.
+  </p>
+
+  <h2>9. Team</h2>
+  <p>
+    Anonymous team with experience in Web3, gaming, and NFTs. Operating with transparency and focusing on delivering fun and utility.
+  </p>
+
+  <h2>10. Roadmap</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Phase</th>
+        <th>Milestone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Q2 2025</td>
+        <td>Website Launch, NFT Design, Wallet Support</td>
+      </tr>
+      <tr>
+        <td>Q3 2025</td>
+        <td>NFT Mint on Tradeport, Game Beta</td>
+      </tr>
+      <tr>
+        <td>Q4 2025</td>
+        <td>Daily Race System, Reward Distribution</td>
+      </tr>
+      <tr>
+        <td>2026+</td>
+        <td>Native Token, Marketplace, Expansion</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>11. Community</h2>
+  <p>
+    Join our community on:
+    <br />
+    <a href="https://twitter.com">Twitter</a>
+    <br />
+    <a href="#">Discord</a>
+  </p>
+</body>
+</html>
