@@ -66,10 +66,18 @@
   </style>
 </head>
 <body>
-  <header>
-    <img src="sui cars.png" alt="SUI Cars Logo" />
-    <button class="connect-btn" onclick="connectWallet()">Connect Wallet</button>
-  </header>
+<header>
+  <img src="sui cars.png" />
+  <div style="position: absolute; top: 20px; right: 20px; display: flex; gap: 10px;">
+    <button onclick="connectWallet()" style="background-color: #00aced; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer;">
+      Connect Wallet
+    </button>
+    <a href="whitepaper.html" target="_blank" style="background-color: transparent; border: 1px solid #00aced; color: #00aced; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+      Whitepaper
+    </a>
+  </div>
+</header>
+
 
   <h1>Welcome to SUI Cars</h1>
   <p style="text-align: center; max-width: 600px; padding: 0 20px;">
