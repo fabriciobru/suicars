@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SUI Cars - NFTs & Racing</title>
+  <title>SUI Cars</title>
   <link rel="icon" href="Captura de tela 2025-05-16 195749.png" type="image/png" />
   <!-- Google Fonts - Orbitron for headings, Lato for body -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -373,8 +373,8 @@
 <body>
 <header>
   <!-- Replace 'sui cars.png' with your actual logo, or use text like below -->
-  <!-- <img src="sui cars.png" alt="SUI Cars Logo" class="logo" /> -->
-  <a href="#" class="logo-text">SUI CARS</a>
+   <img src="sui cars.png" alt="SUI Cars Logo" class="logo" />
+    <!-- <a href="#" class="logo-text">SUI CARS</a> --> 
   
   <nav>
     <a href="#about">About</a>
