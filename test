@@ -48,7 +48,7 @@
     }
 
     header .logo {
-      height: 50px; /* Adjust height for your logo */
+      height: 80px; /* Adjust height for your logo */
       filter: drop-shadow(0 0 5px var(--primary-neon)); /* Subtle glow on logo */
     }
     
@@ -441,9 +441,9 @@
   <footer>
     <div class="social-links">
       <!-- You'll need to link to a font icon library (e.g., Font Awesome) or use SVG icons for these -->
-      <a href="#"  title="Join us on Discord">Discord</a> | 
-      <a href="#"  title="Follow us on X/Twitter">X/Twitter</a> |
-      <a href="#"  title="Join our Telegram group">Telegram</a>
+    <!--  <a href="#"  title="Join us on Discord">Discord</a> |  -->
+      <a href="#"  title="Follow us on X/Twitter">X/Twitter</a> 
+  <!--    <a href="#"  title="Join our Telegram group">Telegram</a> -->
     </div>
     &copy; 2025 SUI Cars. All rights reserved.
   </footer>
