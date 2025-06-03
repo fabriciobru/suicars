@@ -388,9 +388,7 @@
     <button onclick="connectWallet()" class="btn">
       Connect Wallet
     </button>
-    <a href="whitepaper.html"  class="btn btn-secondary">
-      Whitepaper
-    </a>
+    <!-- Botão de Whitepaper removido -->
   </div>
 </header>
 
