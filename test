@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SUI Cars</title>
-  <link rel="icon" href="Captura de tela 2025-05-16 195749.png" type="image/png" />
+  <link rel="icon" href="favicon.png" type="image/png" /> <!-- LINHA ALTERADA AQUI -->
   <!-- Google Fonts - Orbitron for headings, Lato for body -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
