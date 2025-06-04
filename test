@@ -91,11 +91,11 @@
       background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
       color: var(--bg-dark); /* Dark text on bright button */
       border: none;
-      padding: 12px 16px;
+      padding: 12px 16px; /* Aumentei o vertical (12px) e diminuí o horizontal (16px) */
       border-radius: 6px; 
       cursor: pointer;
       font-weight: 700;
-      font-size: 0.9em; /* Diminuído de 1em */
+      font-size: 1em; /* Um pouco maior que 0.9em para o texto */
       text-transform: uppercase;
       letter-spacing: 1px;
       box-shadow: 0 0 15px var(--primary-neon);
@@ -183,7 +183,7 @@
       flex-wrap: wrap;
     }
 
-    /* Rarity Section */
+    /* General Section Titles */
     .section-title {
       font-family: 'Orbitron', sans-serif;
       font-size: 3em;
@@ -194,6 +194,7 @@
       text-shadow: 0 0 15px var(--primary-neon);
     }
 
+    /* Rarity Section */
     .rarities {
       display: flex;
       gap: 40px;
@@ -270,6 +271,42 @@
       object-fit: cover; /* Cover the placeholder area */
     }
 
+    /* Roadmap Section Styles */
+    .roadmap-section {
+        width: 100%;
+        padding: 60px 20px;
+        text-align: center;
+        background-color: var(--bg-dark); /* Ensure it matches body background or has a subtle difference */
+    }
+
+    .roadmap-section .section-title {
+        margin-top: 0; /* Adjust margin as section already has padding */
+        margin-bottom: 20px;
+    }
+
+    .roadmap-image-container {
+        max-width: 900px; /* Limit image width for better presentation */
+        margin: 0 auto 30px auto; /* Center the image and add bottom margin */
+        border-radius: 15px;
+        overflow: hidden; /* Ensures image corners respect border-radius */
+        box-shadow: 0 0 30px var(--border-glow); /* Add a glow effect to the image */
+        border: 2px solid var(--primary-neon); /* Subtle border */
+    }
+
+    .roadmap-image-container img {
+        width: 100%;
+        height: auto;
+        display: block; /* Remove extra space below image */
+    }
+
+    .roadmap-description {
+        font-size: 1.2em;
+        color: var(--text-medium);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
     /* Footer */
     footer {
       width: 100%;
@@ -329,6 +366,9 @@
       .rarity {
         width: 280px;
         padding: 25px;
+      }
+      .roadmap-image-container {
+        max-width: 95%;
       }
     }
 
@@ -403,15 +443,14 @@
         <button class="btn">Play Now</button>
         <button class="btn btn-secondary">Explore NFTs</button>
       </div>
-    </div>
-  </section>
+    </section>
 
   <h1 class="section-title">Discover Unique Rarities</h1>
   <p style="text-align: center; max-width: 800px; padding: 0 20px; font-size: 1.1em; color: var(--text-medium); margin-bottom: 40px;">
     Each SUI Car is a unique digital vehicle with one of three rarities: Common, Hybrid, and Electric. Own your NFT and put it to race daily to receive your prize.
   </p>
 
-  <div class="rarities">
+  <div class="rarities" id="nfts"> <!-- Adicionei o ID "nfts" para que o link de navegação funcione -->
     <div class="rarity">
       <div class="rarity-image-placeholder">
         <img src="https://raw.githubusercontent.com/fabriciobru/suicars/main/pack%20sui%20cars.png" alt="SUI Cars Pack NFT">
@@ -434,6 +473,17 @@
       <p>Ultra-rare NFTs. Representing the pinnacle of innovation, performance, and exclusive design.</p>
     </div>
   </div>
+
+  <!-- Nova Seção do Roadmap -->
+  <section class="roadmap-section" id="roadmap"> <!-- Adicionei o ID "roadmap" para o link de navegação -->
+    <h1 class="section-title">Our Racing Roadmap</h1>
+    <p class="roadmap-description">Acelere conosco nesta jornada! Nosso roadmap traça o caminho para o futuro de SUI Cars, com marcos emocionantes a cada etapa da pista.</p>
+    <div class="roadmap-image-container">
+      <img src="roadmap.png" alt="SUI Cars Roadmap - Race Track"> <!-- Caminho da imagem atualizado aqui -->
+    </div>
+  </section>
+  <!-- Fim da Nova Seção do Roadmap -->
+
 </main>
 
   <footer>
