@@ -86,16 +86,16 @@
       gap: 15px;
     }
 
-    /* General Button Styles */
+      /* General Button Styles */
     .btn {
       background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
       color: var(--bg-dark); /* Dark text on bright button */
       border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
+      padding: 8px 18px; /* Diminuído de 12px 25px */
+      border-radius: 6px; /* Diminuído de 8px */
       cursor: pointer;
       font-weight: 700;
-      font-size: 1em;
+      font-size: 0.9em; /* Diminuído de 1em */
       text-transform: uppercase;
       letter-spacing: 1px;
       box-shadow: 0 0 15px var(--primary-neon);
