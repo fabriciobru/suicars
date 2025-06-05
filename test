@@ -91,11 +91,11 @@
       background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
       color: var(--bg-dark); /* Dark text on bright button */
       border: none;
-      padding: 12px 16px; /* Aumentei o vertical (12px) e diminuí o horizontal (16px) */
+      padding: 12px 16px; 
       border-radius: 6px; 
       cursor: pointer;
       font-weight: 700;
-      font-size: 1em; /* Um pouco maior que 0.9em para o texto */
+      font-size: 1em;
       text-transform: uppercase;
       letter-spacing: 1px;
       box-shadow: 0 0 15px var(--primary-neon);
@@ -450,7 +450,7 @@
     Each SUI Car is a unique digital vehicle with one of three rarities: Common, Hybrid, and Electric. Own your NFT and put it to race daily to receive your prize.
   </p>
 
-  <div class="rarities" id="nfts"> <!-- Adicionei o ID "nfts" para que o link de navegação funcione -->
+  <div class="rarities" id="nfts">
     <div class="rarity">
       <div class="rarity-image-placeholder">
         <img src="https://raw.githubusercontent.com/fabriciobru/suicars/main/pack%20sui%20cars.png" alt="SUI Cars Pack NFT">
@@ -477,12 +477,12 @@
   <!-- Nova Seção do Roadmap -->
   <section class="roadmap-section" id="roadmap"> <!-- Adicionei o ID "roadmap" para o link de navegação -->
     <h1 class="section-title">Our Racing Roadmap</h1>
-    <p class="roadmap-description">Acelere conosco nesta jornada! Nosso roadmap traça o caminho para o futuro de SUI Cars, com marcos emocionantes a cada etapa da pista.</p>
+    <p class="roadmap-description">Race with us on this journey! Our roadmap is the future of SUI Cars. Each stop is a new goal achieved..</p>
     <div class="roadmap-image-container">
-      <img src="roadmap.png" alt="SUI Cars Roadmap - Race Track"> <!-- Caminho da imagem atualizado aqui -->
+      <img src="roadmap.png" alt="SUI Cars Roadmap - Race Track"> 
     </div>
   </section>
-  <!-- Fim da Nova Seção do Roadmap -->
+
 
 </main>
 
