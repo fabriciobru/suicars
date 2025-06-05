@@ -446,9 +446,9 @@
     </section>
 
   <h1 class="section-title">Discover Unique Rarities</h1>
-  <p style="text-align: center; max-width: 800px; padding: 0 20px; font-size: 1.1em; color: var(--text-medium); margin-bottom: 40px;">
+<p style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; padding: 0 20px; font-size: 1.1em; color: var(--text-medium);">
     Each SUI Car is a unique digital vehicle with one of three rarities: Common, Hybrid, and Electric. Own your NFT and put it to race daily to receive your prize.
-  </p>
+</p>
 
   <div class="rarities" id="nfts">
     <div class="rarity">
@@ -475,7 +475,7 @@
   </div>
 
   <!-- Nova Seção do Roadmap -->
-  <section class="roadmap-section" id="roadmap"> <!-- Adicionei o ID "roadmap" para o link de navegação -->
+  <section class="roadmap-section" id="roadmap">
     <h1 class="section-title">Our Racing Roadmap</h1>
     <p class="roadmap-description">Race with us on this journey! Our roadmap is the future of SUI Cars. Each stop is a new goal achieved..</p>
     <div class="roadmap-image-container">
