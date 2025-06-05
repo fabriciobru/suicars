@@ -323,6 +323,44 @@
         line-height: 1.6;
     }
 
+    /* Tokenomics Section Styles (similar to roadmap for consistency) */
+    .tokenomics-section {
+        width: 100%;
+        padding: 60px 20px;
+        text-align: center;
+        background-color: var(--bg-dark);
+    }
+
+    .tokenomics-section .section-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .tokenomics-image-container {
+        max-width: 600px; /* Adjust max-width for pie chart if needed */
+        margin: 0 auto 30px auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 30px var(--border-glow);
+        border: 2px solid var(--primary-neon);
+        background-color: var(--card-bg); /* Add background for the chart container */
+        padding: 20px; /* Add padding around the chart */
+    }
+
+    .tokenomics-image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .tokenomics-description {
+        font-size: 1.2em;
+        color: var(--text-medium);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
     /* Footer */
     footer {
       width: 100%;
@@ -383,7 +421,7 @@
         width: 280px;
         padding: 25px;
       }
-      .roadmap-image-container {
+      .roadmap-image-container, .tokenomics-image-container {
         max-width: 95%;
       }
     }
@@ -437,6 +475,7 @@
     <a href="#gameplay">Gameplay</a>
     <a href="#nfts">NFTs</a>
     <a href="#roadmap">Roadmap</a>
+    <a href="#tokenomics">Tokenomics</a> <!-- New Nav Link -->
     <a href="#community">Whitepaper</a>
   </nav>
 
@@ -465,13 +504,13 @@
   <section class="about-section" id="about">
     <h1 class="section-title">About SUI Cars</h1>
     <p>
-      SUI Cars is a Play-to-Earn (P2E) racing game built on the Sui blockchain,
-      where fun meets strategy and digital ownership drives your success. Experience the thrill of high-octane
+      SUI Cars is a groundbreaking Play-to-Earn (P2E) racing game built on the Sui blockchain,
+      where speed meets strategy and digital ownership drives your success. Experience the thrill of high-octane
       races, collect unique NFT cars, and earn valuable $SCAR tokens.
     </p>
     <p>
       Our vision is to create a vibrant, engaging ecosystem where players are truly owners of their assets,
-      driving towards a new era of blockchain gaming. Join a community of passionate racers and become part of the SUI Cars legacy! We don't want a very complex game, but an easy and simple fun game.
+      driving towards a new era of blockchain gaming. Join a community of passionate racers and become part of the SUI Cars legacy!
     </p>
   </section>
   <!-- End About Section -->
@@ -484,35 +523,48 @@
   <div class="rarities" id="nfts">
     <div class="rarity">
       <div class="rarity-image-placeholder">
-        <img src="https://raw.githubusercontent.com/fabriciobru/suicars/main/pack%20sui%20cars.png" alt="SUI Cars Pack NFT">
+        <img src="sui cars.png" alt="SUI Cars Pack NFT - Common">
       </div>
       <h2>Common</h2>
       <p>Most frequently minted cars. Stylish NFT art with vivid colors and solid performance.</p>
     </div>
     <div class="rarity">
       <div class="rarity-image-placeholder">
-        <img src="https://raw.githubusercontent.com/fabriciobru/suicars/main/pack%20sui%20cars.png" alt="SUI Cars Pack NFT">
+        <img src="sui cars.png" alt="SUI Cars Pack NFT - Hybrid">
       </div>
       <h2>Hybrid</h2>
       <p>Less common, these cars boast improved potential, a sleeker look, and enhanced capabilities.</p>
     </div>
     <div class="rarity">
       <div class="rarity-image-placeholder">
-        <img src="https://raw.githubusercontent.com/fabriciobru/suicars/main/pack%20sui%20cars.png" alt="SUI Cars Pack NFT">
+        <img src="sui cars.png" alt="SUI Cars Pack NFT - Electric">
       </div>
       <h2>Electric</h2>
       <p>Ultra-rare NFTs. Representing the pinnacle of innovation, performance, and exclusive design.</p>
     </div>
   </div>
 
-  <!-- Nova Seção do Roadmap -->
-  <section class="roadmap-section" id="roadmap"> <!-- Adicionei o ID "roadmap" para o link de navegação -->
+  <!-- Roadmap Section -->
+  <section class="roadmap-section" id="roadmap">
     <h1 class="section-title">Our Racing Roadmap</h1>
-    <p class="roadmap-description">Race with us on this journey! Our roadmap is the future of SUI Cars. Each stop is a new goal achieved..</p>
+    <p class="roadmap-description">Race with us on this journey! Our roadmap is the future of SUI Cars. Each stop is a new goal achieved.</p>
     <div class="roadmap-image-container">
       <img src="roadmap.png" alt="SUI Cars Roadmap - Race Track"> 
     </div>
   </section>
+
+  <!-- New Tokenomics Section -->
+  <section class="tokenomics-section" id="tokenomics">
+    <h1 class="section-title">Tokenomics</h1>
+    <p class="tokenomics-description">
+      The $SCAR token fuels the SUI Cars ecosystem, designed for sustainable growth and rewarding active participation.
+      Here's a breakdown of the token distribution:
+    </p>
+    <div class="tokenomics-image-container">
+      <img src="tokenomics-chart.png" alt="SUI Cars Tokenomics Distribution Chart">
+    </div>
+  </section>
+  <!-- End Tokenomics Section -->
 
 
 </main>
