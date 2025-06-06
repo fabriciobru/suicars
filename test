@@ -576,7 +576,7 @@
     <div class="rarities"> <!-- Reusing .rarities class for consistent styling -->
         <div class="rarity"> <!-- Reusing .rarity class for consistent styling -->
             <div class="rarity-image-placeholder">
-                <img src="https://via.placeholder.com/180x250/000000/00FFFF?text=Race+for+Glory" alt="Race for Glory">
+                <img src="pack sui cars.png" alt="Get your pack">
             </div>
             <h2>Get your pack</h2>
             <p>Exciting packs to give you the feeling of opening one and getting a rare NFT.</p>
