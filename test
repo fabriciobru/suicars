@@ -266,20 +266,20 @@
       margin-bottom: 20px;
     }
 
-    .rarity-image-placeholder {
-      width: 100%;
-      height: 180px;
-      background-color: #0d0d2d; /* Dark background for car image */
-      border: 1px dashed var(--primary-neon);
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--text-medium);
-      font-style: italic;
-      margin-bottom: 15px;
-      overflow: hidden; /* Ensure image fits */
-    }
+.rarity-image-placeholder {
+  width: 180px;  
+  height: 250px;  
+  margin: 0 auto 15px auto; 
+  background-color: #0d0d2d; /* Dark background for car image */
+  border: 1px dashed var(--primary-neon);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-medium);
+  font-style: italic;
+  overflow: hidden; /* Ensure image fits */
+}
 
     .rarity-image-placeholder img {
       width: 100%;
