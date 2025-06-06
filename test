@@ -266,20 +266,20 @@
       margin-bottom: 20px;
     }
 
-.rarity-image-placeholder {
-  width: 180px;  
-  height: 250px;  
-  margin: 0 auto 15px auto; 
-  background-color: #0d0d2d; /* Dark background for car image */
-  border: 1px dashed var(--primary-neon);
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--text-medium);
-  font-style: italic;
-  overflow: hidden; /* Ensure image fits */
-}
+    .rarity-image-placeholder {
+      width: 180px;   /* Largura reduzida para ficar mais estreito */
+      height: 250px;  /* Altura aumentada para ficar mais alto */
+      margin: 0 auto 15px auto; /* Centraliza horizontalmente e mantém a margem inferior */
+      background-color: #0d0d2d; /* Dark background for car image */
+      border: 1px dashed var(--primary-neon);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-medium);
+      font-style: italic;
+      overflow: hidden; /* Ensure image fits */
+    }
 
     .rarity-image-placeholder img {
       width: 100%;
@@ -472,10 +472,10 @@
   
   <nav>
     <a href="#about">About</a>
-    <a href="#gameplay">Gameplay</a>
+    <a href="#gameplay">Gameplay</a> <!-- NOVO LINK DE NAVEGAÇÃO -->
     <a href="#nfts">NFTs</a>
     <a href="#roadmap">Roadmap</a>
-    <a href="#tokenomics">Tokenomics</a> <!-- New Nav Link -->
+    <a href="#tokenomics">Tokenomics</a>
     <a href="#community">Whitepaper</a>
   </nav>
 
@@ -566,6 +566,38 @@
   </section>
   <!-- End Tokenomics Section -->
 
+  <!-- NEW GAMEPLAY SECTION -->
+  <section class="gameplay-section" id="gameplay">
+    <h1 class="section-title">Experience Thrilling Gameplay</h1>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; padding: 0 20px; font-size: 1.1em; color: var(--text-medium);">
+        Dive into the world of SUI Cars with exhilarating races, strategic upgrades, and competitive events.
+    </p>
+
+    <div class="rarities"> <!-- Reusing .rarities class for consistent styling -->
+        <div class="rarity"> <!-- Reusing .rarity class for consistent styling -->
+            <div class="rarity-image-placeholder">
+                <img src="https://via.placeholder.com/180x250/000000/00FFFF?text=Race+for+Glory" alt="Race for Glory">
+            </div>
+            <h2>Get your pack</h2>
+            <p>Exciting packs to give you the feeling of opening one and getting a rare NFT.</p>
+        </div>
+        <div class="rarity">
+            <div class="rarity-image-placeholder">
+                <img src="https://via.placeholder.com/180x250/000000/00FFFF?text=Upgrade+Your+Ride" alt="Upgrade Your Ride">
+            </div>
+            <h2>Get your NFT</h2>
+            <p>Turn your NFT into a super stylish and fun car.</p>
+        </div>
+        <div class="rarity">
+            <div class="rarity-image-placeholder">
+                <img src="https://via.placeholder.com/180x250/000000/00FFFF?text=Earn+%24SCAR+Tokens" alt="Earn $SCAR Tokens">
+            </div>
+            <h2>Race & Earn</h2>
+            <p>Put your car to race and win $SCAR tokens and itens. Trade in the market.</p>
+        </div>
+    </div>
+  </section>
+  <!-- END NEW GAMEPLAY SECTION -->
 
 </main>
 
