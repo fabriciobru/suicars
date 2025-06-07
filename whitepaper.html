@@ -7,31 +7,65 @@
   <!-- Google Fonts - Orbitron for headings, Lato for body -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    /* Variáveis de estilo do site principal */
+    /* Main website style variables */
     :root {
-      --bg-dark: #0A0A0A; /* Fundo muito escuro */
-      --primary-neon: #00FFFF; /* Ciano brilhante */
-      --secondary-neon: #FF00FF; /* Magenta brilhante */
-      --card-bg: #1A1A2E; /* Azul-roxo mais escuro para cards */
-      --text-light: #E0E0E0; /* Texto claro para legibilidade */
-      --text-medium: #A0A0A0; /* Texto cinza médio */
-      --border-glow: #00FFFF88; /* Efeito de brilho ciano */
+      --bg-dark: #0A0A0A; /* Very dark background */
+      --primary-neon: #00FFFF; /* Bright cyan */
+      --secondary-neon: #FF00FF; /* Bright magenta */
+      --card-bg: #1A1A2E; /* Darker blue-purple for cards */
+      --text-light: #E0E0E0; /* Light text for readability */
+      --text-medium: #A0A0A0; /* Medium gray text */
+      --border-glow: #00FFFF88; /* Cyan glow effect */
+      --button-hover: #00E0E0; /* Lighter cyan on button hover */
     }
 
     body {
       margin: 0;
       padding: 40px 20px;
-      font-family: 'Lato', sans-serif; /* Fonte do corpo do texto */
-      background-color: var(--bg-dark); /* Fundo escuro */
-      color: var(--text-light); /* Cor do texto claro */
+      font-family: 'Lato', sans-serif; /* Body font */
+      background-color: var(--bg-dark); /* Dark background */
+      color: var(--text-light); /* Light text color */
       line-height: 1.6;
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
-      overflow-x: hidden; /* Evita rolagem horizontal */
+      overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
-    /* Estilo dos títulos, usando a fonte Orbitron e brilho neon */
+    /* Back button style */
+    .back-to-home {
+      display: block; /* Takes full width to center */
+      text-align: center;
+      margin-bottom: 30px; /* Space below button */
+    }
+
+    /* Button styles (copied from main website) */
+    .btn {
+      background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+      color: var(--bg-dark); /* Dark text on bright button */
+      border: none;
+      padding: 12px 16px; 
+      border-radius: 6px; 
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px var(--primary-neon);
+      transition: all 0.3s ease;
+      text-decoration: none; /* For anchor tags used as buttons */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px var(--button-hover), 0 0 50px var(--secondary-neon);
+      background: linear-gradient(45deg, var(--button-hover), var(--secondary-neon));
+    }
+
+    /* Heading styles, using Orbitron font and neon glow */
     h1, h2, h3 {
       font-family: 'Orbitron', sans-serif;
       color: var(--primary-neon);
@@ -41,12 +75,12 @@
     h1 {
       text-align: center;
       margin-bottom: 40px;
-      font-size: 3.5em; /* Tamanho ajustado para título principal */
-      text-shadow: 0 0 20px var(--primary-neon), 0 0 40px rgba(0, 255, 255, 0.5); /* Brilho mais forte */
+      font-size: 3.5em; /* Adjusted size for main title */
+      text-shadow: 0 0 20px var(--primary-neon), 0 0 40px rgba(0, 255, 255, 0.5); /* Stronger glow */
     }
 
     h2 {
-      font-size: 2.2em; /* Tamanho para títulos de seção */
+      font-size: 2.2em; /* Size for section titles */
       margin-top: 50px;
       margin-bottom: 20px;
     }
@@ -58,89 +92,94 @@
     }
 
     p {
-        color: var(--text-light); /* Garante que os parágrafos sejam claros */
+        color: var(--text-light); /* Ensures paragraphs are light */
         margin-bottom: 1em;
     }
 
-    /* Estilo das listas (ul), com bullets personalizados e cores neon */
+    /* List styles (ul), with custom bullets and neon colors */
     ul {
-        list-style: none; /* Remove bullet padrão */
-        padding-left: 20px; /* Recuo para listas */
+        list-style: none; /* Remove default bullet */
+        padding-left: 20px; /* Indent for lists */
     }
 
     ul li {
         position: relative;
         margin-bottom: 10px;
-        padding-left: 15px; /* Espaço para bullet customizado */
+        padding-left: 15px; /* Space for custom bullet */
         color: var(--text-light);
     }
 
     ul li::before {
-        content: '»'; /* Bullet customizado */
-        color: var(--primary-neon); /* Cor neon para o bullet */
+        content: '»'; /* Custom bullet */
+        color: var(--primary-neon); /* Neon color for bullet */
         position: absolute;
         left: 0;
         top: 0;
         font-weight: bold;
     }
 
-    ul ul { /* Listas aninhadas */
+    ul ul { /* Nested lists */
         margin-top: 5px;
         margin-bottom: 5px;
     }
 
     ul ul li::before {
-        content: '-'; /* Bullet diferente para lista aninhada */
+        content: '-'; /* Different bullet for nested list */
         color: var(--secondary-neon);
     }
 
-    /* Estilo da tabela, harmonizado com o tema neon */
+    /* Table style, harmonized with the neon theme */
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
-      background-color: var(--card-bg); /* Fundo do card */
-      box-shadow: 0 0 15px var(--border-glow); /* Brilho na tabela */
-      border: 1px solid var(--primary-neon); /* Borda neon */
+      background-color: var(--card-bg); /* Card background */
+      box-shadow: 0 0 15px var(--border-glow); /* Table glow */
+      border: 1px solid var(--primary-neon); /* Neon border */
     }
 
     th, td {
-      border: 1px solid var(--primary-neon); /* Borda neon para células */
+      border: 1px solid var(--primary-neon); /* Neon border for cells */
       padding: 12px;
       text-align: left;
-      color: var(--text-light); /* Texto claro para células */
+      color: var(--text-light); /* Light text for cells */
     }
 
     th {
-      background-color: var(--bg-dark); /* Fundo escuro para cabeçalho da tabela */
+      background-color: var(--bg-dark); /* Dark background for table header */
       font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    /* Estilo do rodapé, igual ao do site principal */
+    /* Footer style, same as main website */
     footer {
       margin-top: 60px;
       text-align: center;
       font-size: 0.9em;
-      color: var(--text-medium); /* Texto médio para rodapé */
+      color: var(--text-medium); /* Medium text for footer */
       padding: 20px 0;
-      border-top: 1px solid rgba(0, 255, 255, 0.2); /* Borda sutil do site principal */
+      border-top: 1px solid rgba(0, 255, 255, 0.2); /* Subtle border from main website */
     }
 
-    /* Estilo para as estrelas, usando a cor neon e brilho */
+    /* Style for stars, using neon color and glow */
     .star {
       color: var(--primary-neon);
       text-shadow: 0 0 5px var(--primary-neon);
     }
 
-    /* Espaçamento básico para as seções */
+    /* Basic spacing for sections */
     section {
         margin-bottom: 40px;
     }
   </style>
 </head>
 <body>
+  <!-- Button to go back to the main page -->
+  <div class="back-to-home">
+    <a href="index.html" class="btn">Back to SUI Cars</a>
+  </div>
+
   <h1>🏁 SUI Cars – Whitepaper</h1>
 
   <section>
@@ -221,17 +260,17 @@
   </section>
 
   <section>
-    <h2>�� Roadmap</h2>
+    <h2>📊 Roadmap</h2> <!-- Emoticon changed to a more common one -->
     <ul>
       <li>✅ <strong>Q2 2025</strong> – Website Launch + Genesis NFT Drop (10,000 Cars)</li>
       <li>🚧 <strong>Q3 2025</strong> – Race Engine + $SCAR Token Launch</li>
       <li>🔜 <strong>Q4 2025</strong> – Internal Marketplace, NFT upgrades</li>
-      <li>�� <strong>2026</strong> – DAO, Partnerships, and Mobile Expansion</li>
+      <li>🌟 <strong>2026</strong> – DAO, Partnerships, and Mobile Expansion</li>
     </ul>
   </section>
 
   <section>
-    <h2>�� Team & Vision</h2>
+    <h2>💡 Team & Vision</h2> <!-- Emoticon changed to a more common one -->
     <p>SUI Cars is built by a team of game devs and blockchain builders. Our mission: make Web3 gaming fun, fair, and rewarding for everyone.</p>
   </section>
 
