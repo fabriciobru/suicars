@@ -4,102 +4,610 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SUI Cars</title>
-  <link rel="icon" href="Captura de tela 2025-05-16 195749.png" type="image/png" />
+  <link rel="icon" href="favicon.png" type="image/png" /> 
+  <!-- Google Fonts - Orbitron for headings, Lato for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-dark: #0A0A0A; /* Very dark background */
+      --primary-neon: #00FFFF; /* Bright cyan */
+      --secondary-neon: #FF00FF; /* Bright magenta */
+      --card-bg: #1A1A2E; /* Darker blue-purple for cards */
+      --text-light: #E0E0E0; /* Light text for readability */
+      --text-medium: #A0A0A0; /* Medium gray text */
+      --border-glow: #00FFFF88; /* Cyan glow effect */
+      --button-hover: #00E0E0; /* Lighter cyan on hover */
+      --header-bg: rgba(10, 10, 10, 0.9); /* Slightly transparent for sticky header */
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #001f3f;
-      color: #00aced;
+      font-family: 'Lato', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden; /* Prevent horizontal scroll */
     }
+
+    /* Header Styles */
     header {
-      background-color: #001a35;
+      background-color: var(--header-bg);
       width: 100%;
-      padding: 20px 40px;
+      padding: 15px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(5px); /* Frosty glass effect */
     }
-    header img {
-      height: 60px;
+
+    header .logo {
+      height: 80px; /* Adjust height for your logo */
+      filter: drop-shadow(0 0 5px var(--primary-neon)); /* Subtle glow on logo */
     }
-    .connect-btn {
-      background-color: #00aced;
-      color: #001f3f;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
+    
+    header .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2em;
+      color: var(--primary-neon);
+      text-shadow: 0 0 8px var(--primary-neon);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
-    .connect-btn:hover {
-      background-color: #0074D9;
-    }
-    h1 {
-      margin-top: 40px;
-      color: #00aced;
-      text-align: center;
-    }
-    .rarities {
+
+    nav {
       display: flex;
       gap: 30px;
-      margin: 40px 0;
-      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1.1em;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary-neon);
+      text-shadow: 0 0 5px var(--primary-neon);
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+      /* General Button Styles */
+    .btn {
+      background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+      color: var(--bg-dark); /* Dark text on bright button */
+      border: none;
+      padding: 12px 16px; 
+      border-radius: 6px; 
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px var(--primary-neon);
+      transition: all 0.3s ease;
+      text-decoration: none; /* For anchor tags used as buttons */
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
     }
-    .rarity {
-      background-color: #003366;
-      padding: 20px;
-      border-radius: 10px;
-      width: 250px;
-      text-align: center;
-      box-shadow: 0 0 10px #00aced88;
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px var(--button-hover), 0 0 50px var(--secondary-neon);
+      background: linear-gradient(45deg, var(--button-hover), var(--secondary-neon));
     }
-    footer {
-      margin-top: auto;
+
+    /* Secondary Button Style (e.g., Whitepaper) */
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--primary-neon);
+      color: var(--primary-neon);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-neon);
+      color: var(--bg-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--primary-neon);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      width: 100%;
+      height: 80vh; /* Adjust as needed */
+      background: url('https://via.placeholder.com/1920x1080/000000/00FFFF?text=SUI+CARS+HERO+IMAGE') no-repeat center center/cover; /* Placeholder. Replace with actual car art */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
       padding: 20px;
-      color: #0074D9;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4.5em;
+      color: var(--primary-neon);
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px var(--primary-neon), 0 0 40px rgba(0, 255, 255, 0.5);
+      line-height: 1.1;
+    }
+
+    .hero-content p {
+      font-size: 1.4em;
+      color: var(--text-medium);
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* General Section Titles */
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      color: var(--primary-neon);
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 40px;
+      text-shadow: 0 0 15px var(--primary-neon);
+    }
+
+    /* About Section */
+    .about-section {
+        width: 100%;
+        max-width: 900px;
+        padding: 40px 20px;
+        text-align: center;
+        margin: 60px auto; /* Adjust margin to provide space */
+    }
+
+    .about-section p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: var(--text-light);
+        margin-bottom: 20px;
+    }
+
+    /* Rarity Section */
+    .rarities {
+      display: flex;
+      gap: 40px;
+      margin: 40px 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .rarity {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 20px var(--border-glow);
+      border: 1px solid var(--primary-neon);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rarity::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle at center, rgba(0,255,255,0.05) 0%, transparent 70%);
+      transform: rotate(45deg);
+      transition: transform 0.5s ease;
+    }
+
+    .rarity:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 0 35px var(--primary-neon), 0 0 70px var(--secondary-neon);
+    }
+
+    .rarity h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary-neon);
+      font-size: 1.8em;
+      margin-top: 15px;
+      text-shadow: 0 0 10px var(--primary-neon);
+    }
+
+    .rarity p {
+      color: var(--text-medium);
+      font-size: 1em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .rarity-image-placeholder {
+      width: 180px;   /* Largura reduzida para ficar mais estreito */
+      height: 250px;  /* Altura aumentada para ficar mais alto */
+      margin: 0 auto 15px auto; /* Centraliza horizontalmente e mantém a margem inferior */
+      background-color: #0d0d2d; /* Dark background for car image */
+      border: 1px dashed var(--primary-neon);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-medium);
+      font-style: italic;
+      overflow: hidden; /* Ensure image fits */
+    }
+
+    .rarity-image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Cover the placeholder area */
+    }
+
+    /* Roadmap Section Styles */
+    .roadmap-section {
+        width: 100%;
+        padding: 60px 20px;
+        text-align: center;
+        background-color: var(--bg-dark); /* Ensure it matches body background or has a subtle difference */
+    }
+
+    .roadmap-section .section-title {
+        margin-top: 0; /* Adjust margin as section already has padding */
+        margin-bottom: 20px;
+    }
+
+    .roadmap-image-container {
+        max-width: 900px; /* Limit image width for better presentation */
+        margin: 0 auto 30px auto; /* Center the image and add bottom margin */
+        border-radius: 15px;
+        overflow: hidden; /* Ensures image corners respect border-radius */
+        box-shadow: 0 0 30px var(--border-glow); /* Add a glow effect to the image */
+        border: 2px solid var(--primary-neon); /* Subtle border */
+    }
+
+    .roadmap-image-container img {
+        width: 100%;
+        height: auto;
+        display: block; /* Remove extra space below image */
+    }
+
+    .roadmap-description {
+        font-size: 1.2em;
+        color: var(--text-medium);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Tokenomics Section Styles (similar to roadmap for consistency) */
+    .tokenomics-section {
+        width: 100%;
+        padding: 60px 20px;
+        text-align: center;
+        background-color: var(--bg-dark);
+    }
+
+    .tokenomics-section .section-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .tokenomics-image-container {
+        max-width: 600px; /* Adjust max-width for pie chart if needed */
+        margin: 0 auto 30px auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 0 30px var(--border-glow);
+        border: 2px solid var(--primary-neon);
+        background-color: var(--card-bg); /* Add background for the chart container */
+        padding: 20px; /* Add padding around the chart */
+    }
+
+    .tokenomics-image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .tokenomics-description {
+        font-size: 1.2em;
+        color: var(--text-medium);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      margin-top: auto; /* Pushes footer to the bottom */
+      padding: 30px 20px;
+      background-color: var(--card-bg);
+      color: var(--text-medium);
+      text-align: center;
+      font-size: 0.9em;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .social-links {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .social-links a {
+      color: var(--primary-neon);
+      font-size: 1.5em;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--secondary-neon);
+      transform: translateY(-3px);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 992px) {
+      .hero-content h1 {
+        font-size: 3.5em;
+      }
+      .hero-content p {
+        font-size: 1.2em;
+      }
+      .section-title {
+        font-size: 2.5em;
+      }
+      header {
+        padding: 15px 20px;
+      }
+      nav {
+        gap: 20px;
+      }
+      .header-buttons {
+        gap: 10px;
+      }
+      .btn {
+        padding: 10px 20px;
+      }
+      .rarities {
+        gap: 30px;
+      }
+      .rarity {
+        width: 280px;
+        padding: 25px;
+      }
+      .roadmap-image-container, .tokenomics-image-container {
+        max-width: 95%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .header-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+      .hero-section {
+        height: 60vh;
+      }
+      .hero-content h1 {
+        font-size: 2.8em;
+      }
+      .hero-content p {
+        font-size: 1em;
+      }
+      .section-title {
+        font-size: 2em;
+      }
+      .rarities {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+      }
+      .rarity {
+        width: 90%; /* Take more width on smaller screens */
+        max-width: 350px;
+      }
     }
   </style>
 </head>
 <body>
 <header>
-  <img src="sui cars.png" />
-  <div style="position: absolute; top: 20px; right: 20px; display: flex; gap: 10px;">
-    <button onclick="connectWallet()" style="background-color: #00aced; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer;">
+  <!-- Replace 'sui cars.png' with your actual logo, or use text like below -->
+   <img src="sui cars.png" alt="SUI Cars Logo" class="logo" />
+    <!-- <a href="#" class="logo-text">SUI CARS</a> --> 
+  
+  <nav>
+    <a href="#about">About</a>
+    <a href="#gameplay">Gameplay</a> <!-- NOVO LINK DE NAVEGAÇÃO -->
+    <a href="#nfts">NFTs</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#community">Whitepaper</a>
+  </nav>
+
+  <div class="header-buttons">
+    <button onclick="connectWallet()" class="btn">
       Connect Wallet
     </button>
-    <a href="whitepaper.html" target="_blank" style="background-color: transparent; border: 1px solid #00aced; color: #00aced; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
-      Whitepaper
-    </a>
+    <!-- Botão de Whitepaper removido -->
   </div>
 </header>
 
+<main>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Race, Earn, Own.</h1>
+      <p>
+        Are you ready for the best PlayToEarn game on SUI? Mint! Collect! Race for $SCAR tokens!
+      </p>
+      <div class="hero-buttons">
+        <button class="btn">Play Now</button>
+        <button class="btn btn-secondary">Explore NFTs</button>
+      </div>
+    </section>
 
-  <h1>Welcome to SUI Cars</h1>
-  <p style="text-align: center; max-width: 600px; padding: 0 20px;">
-    Discover the world of NFTs on the Sui blockchain. Each SUI Car is a unique digital vehicle with one of three rarities: Common, Hybrid, and Eletric. Own your NFT and put it to race daily to receive your prize.
+  <!-- About Section - New! -->
+  <section class="about-section" id="about">
+    <h1 class="section-title">About SUI Cars</h1>
+    <p>
+      SUI Cars is a groundbreaking Play-to-Earn (P2E) racing game built on the Sui blockchain,
+      where speed meets strategy and digital ownership drives your success. Experience the thrill of high-octane
+      races, collect unique NFT cars, and earn valuable $SCAR tokens.
+    </p>
+    <p>
+      Our vision is to create a vibrant, engaging ecosystem where players are truly owners of their assets,
+      driving towards a new era of blockchain gaming. Join a community of passionate racers and become part of the SUI Cars legacy!
+    </p>
+  </section>
+  <!-- End About Section -->
+
+  <h1 class="section-title">Discover Unique Rarities</h1>
+  <p style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; padding: 0 20px; font-size: 1.1em; color: var(--text-medium);">
+    Each SUI Car is a unique digital vehicle with one of three rarities: Common, Hybrid, and Electric. Own your NFT and put it to race daily to receive your prize.
   </p>
 
-  <div class="rarities">
+  <div class="rarities" id="nfts">
     <div class="rarity">
+      <div class="rarity-image-placeholder">
+        <img src="pack sui cars.png" alt="SUI Cars Pack NFT - Common">
+      </div>
       <h2>Common</h2>
-      <p>Most frequently minted cars. Stylish NFT art with vivid colors.</p>
+      <p>Most frequently minted cars. Stylish NFT art with vivid colors and solid performance.</p>
     </div>
     <div class="rarity">
+      <div class="rarity-image-placeholder">
+        <img src="pack sui cars.png" alt="SUI Cars Pack NFT - Hybrid">
+      </div>
       <h2>Hybrid</h2>
-      <p>Less common, these cars have improved potential and a sleeker look.</p>
+      <p>Less common, these cars boast improved potential, a sleeker look, and enhanced capabilities.</p>
     </div>
     <div class="rarity">
-      <h2>Eletric</h2>
-      <p>Ultra-rare NFTs. Representing innovation and performance.</p>
+      <div class="rarity-image-placeholder">
+        <img src="pack sui cars.png" alt="SUI Cars Pack NFT - Electric">
+      </div>
+      <h2>Electric</h2>
+      <p>Ultra-rare NFTs. Representing the pinnacle of innovation, performance, and exclusive design.</p>
     </div>
   </div>
 
+  <!-- Roadmap Section -->
+  <section class="roadmap-section" id="roadmap">
+    <h1 class="section-title">Our Racing Roadmap</h1>
+    <p class="roadmap-description">Race with us on this journey! Our roadmap is the future of SUI Cars. Each stop is a new goal achieved.</p>
+    <div class="roadmap-image-container">
+      <img src="roadmap.png" alt="SUI Cars Roadmap - Race Track"> 
+    </div>
+  </section>
+
+  <!-- New Tokenomics Section -->
+  <section class="tokenomics-section" id="tokenomics">
+    <h1 class="section-title">Tokenomics</h1>
+    <p class="tokenomics-description">
+      The $SCAR token fuels the SUI Cars ecosystem, designed for sustainable growth and rewarding active participation.
+      Here's a breakdown of the token distribution:
+    </p>
+    <div class="tokenomics-image-container">
+      <img src="tokenomics.png" alt="SUI Cars Tokenomics Distribution Chart">
+    </div>
+  </section>
+  <!-- End Tokenomics Section -->
+
+  <!-- NEW GAMEPLAY SECTION -->
+  <section class="gameplay-section" id="gameplay">
+    <h1 class="section-title">Experience Thrilling Gameplay</h1>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; padding: 0 20px; font-size: 1.1em; color: var(--text-medium);">
+        Dive into the world of SUI Cars with exhilarating races, strategic upgrades, and competitive events.
+    </p>
+
+    <div class="rarities"> <!-- Reusing .rarities class for consistent styling -->
+        <div class="rarity"> <!-- Reusing .rarity class for consistent styling -->
+            <div class="rarity-image-placeholder">
+                <img src="pack sui cars.png" alt="Get your pack">
+            </div>
+            <h2>Get your pack</h2>
+            <p>Exciting packs to give you the feeling of opening one and getting a rare NFT.</p>
+        </div>
+        <div class="rarity">
+            <div class="rarity-image-placeholder">
+                <img src="common.png" alt="Get your NFT">
+            </div>
+            <h2>Get your NFT</h2>
+            <p>Turn your NFT into a super stylish and fun car.</p>
+        </div>
+        <div class="rarity">
+            <div class="rarity-image-placeholder">
+                <img src="race.png" alt="Race & Earn">
+            </div>
+            <h2>Race & Earn</h2>
+            <p>Put your car to race and win $SCAR tokens and itens. Trade in the market.</p>
+        </div>
+    </div>
+  </section>
+  <!-- END NEW GAMEPLAY SECTION -->
+
+</main>
+
   <footer>
+    <div class="social-links">
+      <!-- You'll need to link to a font icon library (e.g., Font Awesome) or use SVG icons for these -->
+    <!--  <a href="#"  title="Join us on Discord">Discord</a> |  -->
+      <a href="#"  title="Follow us on X/Twitter">X/Twitter</a> 
+  <!--    <a href="#"  title="Join our Telegram group">Telegram</a> -->
+    </div>
     &copy; 2025 SUI Cars. All rights reserved.
   </footer>
 
