@@ -413,10 +413,11 @@
       </div>
 
       <div class="mint-info">
-        <p>Price: <strong id="mintPrice">4 SUI</strong></p>
-        <p>Supply: <strong id="totalSupply">10,000</strong></p>
-        <p>Minted: <strong id="mintedSupply">0</strong> / 10,000</p>
-        <p>Connected Wallet: <strong id="walletAddress">Not Connected</strong></p>
+        <p>Price per NFT: <strong id="mintPrice">0.5 SUI</strong></p>
+        <p>Total Supply: <strong id="totalSupply">10,000</strong></p>
+        <!-- Changed to display percentage -->
+        <p>Minted: <strong id="mintedSupply">0%</strong></p>
+        <p>Your Connected Wallet: <strong id="walletAddress">Not Connected</strong></p>
       </div>
 
       <div class="mint-quantity-control">
@@ -623,14 +624,22 @@
     mintStatusDiv.className = `mint-status ${type}`; // Add success/error class
   }
 
+  // Updated to display percentage
   function updateMintedCount() {
-    mintedSupplySpan.textContent = `${currentMintedCount} / ${TOTAL_NFT_SUPPLY}`;
+    let percentage = 0;
+    if (TOTAL_NFT_SUPPLY > 0) {
+      percentage = (currentMintedCount / TOTAL_NFT_SUPPLY) * 100;
+    }
+    // Round to the nearest integer
+    const formattedPercentage = Math.round(percentage);
+
+    mintedSupplySpan.textContent = `${formattedPercentage}%`;
   }
 
   // --- Initial Setup and Event Listeners ---
   document.addEventListener('DOMContentLoaded', () => {
     // Initialize UI with (simulated) values
-    updateMintedCount(); // Set initial count display
+    updateMintedCount(); // Set initial count display to 0%
 
     // Set the max attribute for the input for basic validation
     mintQuantityInput.setAttribute('max', MAX_MINT_PER_TX);
