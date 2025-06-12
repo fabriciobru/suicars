@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUI Cars - Mint NFT</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <!-- Google Fonts - Orbitron for headings, Lato for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variáveis CSS para consistência de tema */
+    :root {
+      --bg-dark: #0A0A0A; /* Fundo muito escuro */
+      --primary-neon: #00FFFF; /* Ciano brilhante */
+      --secondary-neon: #FF00FF; /* Magenta brilhante */
+      --card-bg: #1A1A2E; /* Azul-roxo mais escuro para cards */
+      --text-light: #E0E0E0; /* Texto claro para legibilidade */
+      --text-medium: #A0A0A0; /* Texto cinza médio */
+      --border-glow: #00FFFF88; /* Efeito de brilho ciano */
+      --button-hover: #00E0E0; /* Ciano mais claro no hover */
+      --header-bg: rgba(10, 10, 10, 0.9); /* Ligeiramente transparente para cabeçalho fixo */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden; /* Evita rolagem horizontal */
+    }
+
+    /* Estilos do Cabeçalho (Copiado do seu index.html para consistência) */
+    header {
+      background-color: var(--header-bg);
+      width: 100%;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(5px); /* Efeito de vidro fosco */
+    }
+
+    header .logo {
+      height: 80px; /* Ajuste a altura do seu logo */
+      filter: drop-shadow(0 0 5px var(--primary-neon)); /* Brilho sutil no logo */
+    }
+
+    header .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2em;
+      color: var(--primary-neon);
+      text-shadow: 0 0 8px var(--primary-neon);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1.1em;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary-neon);
+      text-shadow: 0 0 5px var(--primary-neon);
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    /* Estilos Gerais de Botão (Copiado do seu index.html) */
+    .btn {
+      background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+      color: var(--bg-dark); /* Texto escuro no botão brilhante */
+      border: none;
+      padding: 12px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px var(--primary-neon);
+      transition: all 0.3s ease;
+      text-decoration: none; /* Para tags de âncora usadas como botões */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px var(--button-hover), 0 0 50px var(--secondary-neon);
+      background: linear-gradient(45deg, var(--button-hover), var(--secondary-neon));
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--primary-neon);
+      color: var(--primary-neon);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-neon);
+      color: var(--bg-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--primary-neon);
+    }
+
+    /* Título da Seção (Copiado do seu index.html) */
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      color: var(--primary-neon);
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 40px;
+      text-shadow: 0 0 15px var(--primary-neon);
+    }
+
+    /* Estilos Específicos da Seção de Mint */
+    .mint-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        max-width: 800px;
+        width: 100%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 0 30px var(--primary-neon);
+        border: 1px solid var(--primary-neon);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mint-section::before {
+        content: '';
+        position: absolute;
+        top: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
+        background: radial-gradient(circle at center, rgba(0,255,255,0.05) 0%, transparent 70%);
+        transform: rotate(45deg);
+    }
+
+    .mint-section h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3.5em;
+        color: var(--primary-neon);
+        margin-bottom: 30px;
+        text-shadow: 0 0 15px var(--primary-neon);
+        z-index: 1; /* Garante que o texto fique acima do pseudo-elemento */
+    }
+
+    .mint-details-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        z-index: 1;
+        width: 100%;
+    }
+
+    .nft-preview {
+        width: 250px;
+        height: 250px;
+        background-color: #0d0d2d;
+        border: 2px solid var(--primary-neon);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 20px;
+        box-shadow: 0 0 15px var(--primary-neon);
+    }
+
+    .nft-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mint-info {
+        text-align: center;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        color: var(--text-light);
+    }
+
+    .mint-info p {
+        margin: 8px 0;
+    }
+
+    .mint-info strong {
+        color: var(--primary-neon);
+    }
+
+    .mint-quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .mint-quantity-control button {
+        background-color: var(--primary-neon);
+        color: var(--bg-dark);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 1.8em;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 0 10px var(--primary-neon);
+    }
+
+    .mint-quantity-control button:hover {
+        background-color: var(--button-hover);
+        transform: scale(1.1);
+    }
+
+    .mint-quantity-control input {
+        width: 80px;
+        padding: 10px;
+        text-align: center;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        border: 1px solid var(--primary-neon);
+        border-radius: 5px;
+        font-size: 1.2em;
+        -moz-appearance: textfield; /* Remove setas no Firefox */
+    }
+
+    /* Remove setas para Chrome, Safari, Edge */
+    .mint-quantity-control input::-webkit-outer-spin-button,
+    .mint-quantity-control input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .mint-button {
+        width: 250px;
+        padding: 15px 30px;
+        font-size: 1.3em;
+    }
+
+    .mint-status {
+        margin-top: 25px;
+        font-size: 1.1em;
+        color: var(--text-light);
+        text-align: center;
+        min-height: 30px; /* Reserva espaço para mensagens de status */
+    }
+
+    .mint-status.success {
+        color: limegreen;
+        text-shadow: 0 0 10px limegreen;
+    }
+
+    .mint-status.error {
+        color: red;
+        text-shadow: 0 0 10px red;
+    }
+
+    /* Rodapé (Copiado do seu index.html) */
+    footer {
+      width: 100%;
+      margin-top: auto; /* Empurra o rodapé para o final da página */
+      padding: 30px 20px;
+      background-color: var(--card-bg);
+      color: var(--text-medium);
+      text-align: center;
+      font-size: 0.9em;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .social-links {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .social-links a {
+      color: var(--primary-neon);
+      font-size: 1.5em;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--secondary-neon);
+      transform: translateY(-3px);
+    }
+
+    /* Responsividade */
+    @media (max-width: 992px) {
+      .mint-section {
+        max-width: 600px;
+        padding: 30px 15px;
+      }
+      .mint-section h1 {
+        font-size: 3em;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      .header-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+      .mint-section {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 20px 10px;
+      }
+      .mint-section h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+      .mint-info {
+        font-size: 1em;
+      }
+      .mint-button {
+        width: 200px;
+        font-size: 1.1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mint-section h1 {
+        font-size: 2em;
+      }
+      .nft-preview {
+        width: 200px;
+        height: 200px;
+      }
+      .mint-quantity-control button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5em;
+      }
+      .mint-quantity-control input {
+        width: 60px;
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <img src="sui cars.png" alt="SUI Cars Logo" class="logo" />
+  <nav>
+    <a href="index.html#about">About</a>
+    <a href="index.html#gameplay">Gameplay</a>
+    <a href="index.html#nfts">NFTs</a>
+    <a href="index.html#roadmap">Roadmap</a>
+    <a href="index.html#tokenomics">Tokenomics</a>
+    <a href="whitepaper.html">Whitepaper</a>
+    <a href="mint.html">Mint</a> <!-- Link para a nova página de mint -->
+  </nav>
+
+  <div class="header-buttons">
+    <button id="connectWalletBtn" class="btn">
+      Connect Wallet
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="mint-section">
+    <h1>Mint Your SUI Car NFT!</h1>
+
+    <div class="mint-details-container">
+      <div class="nft-preview">
+        <img src="pack sui cars.png" alt="SUI Car NFT Preview">
+      </div>
+
+      <div class="mint-info">
+        <p>Price per NFT: <strong id="mintPrice">0.5 SUI</strong></p>
+        <p>Total Supply: <strong id="totalSupply">10,000</strong></p>
+        <p>Minted: <strong id="mintedSupply">0</strong> / 10,000</p>
+        <p>Your Connected Wallet: <strong id="walletAddress">Not Connected</strong></p>
+      </div>
+
+      <div class="mint-quantity-control">
+        <button id="decreaseQuantity">-</button>
+        <input type="number" id="mintQuantity" value="1" min="1" max="5" readonly>
+        <button id="increaseQuantity">+</button>
+      </div>
+
+      <button id="mintBtn" class="btn mint-button" disabled>Mint Now!</button>
+      <div id="mintStatus" class="mint-status"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="social-links">
+    <!-- Certifique-se de que esses links estão corretos ou adicione os ícones das redes sociais -->
+    <a href="https://x.com/suicarsxyz"  title="Follow us on X/Twitter">X/Twitter</a>
+  </div>
+  &copy; 2025 SUI Cars. All rights reserved.
+</footer>
+
+<script type="module">
+  // --- Elementos da UI ---
+  const connectWalletBtn = document.getElementById('connectWalletBtn');
+  const walletAddressSpan = document.getElementById('walletAddress');
+  const mintQuantityInput = document.getElementById('mintQuantity');
+  const decreaseQuantityBtn = document.getElementById('decreaseQuantity');
+  const increaseQuantityBtn = document.getElementById('increaseQuantity');
+  const mintBtn = document.getElementById('mintBtn');
+  const mintStatusDiv = document.getElementById('mintStatus');
+  const mintedSupplySpan = document.getElementById('mintedSupply');
+
+  // --- Configuração (SUBSTITUA ESTES VALORES PELOS DETALHES DO SEU CONTRATO SUI!) ---
+  const MINT_PRICE_PER_NFT = 0.5; // Preço por NFT (em SUI, ou o token que você usa)
+  const TOTAL_NFT_SUPPLY = 10000;
+  const MAX_MINT_PER_TX = 5; // Máximo de NFTs que o usuário pode mintar de uma vez
+  const YOUR_SUI_PACKAGE_ID = '0xYOUR_SUI_PACKAGE_ID'; // Substitua pelo Package ID do seu contrato Sui
+  const YOUR_SUI_MODULE_NAME = 'YOUR_MODULE_NAME';   // Substitua pelo nome do Módulo do seu contrato Sui (ex: 'sui_cars_nft')
+  const YOUR_MINT_FUNCTION_NAME = 'mint_car';     // Substitua pelo nome da função de Mint do seu contrato Sui
+
+  let currentWalletAddress = null;
+  let currentMintedCount = 0; // Este valor deveria ser lido do seu contrato Sui em uma aplicação real
+
+  // --- Lógica de Conexão da Carteira ---
+  async function connectWallet() {
+    if (!window.suiWallet) {
+      displayStatus("Extensão Sui Wallet não encontrada. Por favor, instale-a primeiro.", "error");
+      return;
+    }
+
+    try {
+      displayStatus("Conectando carteira...", "");
+      // A chamada para `sui_connect` solicitará ao usuário para conectar a carteira.
+      const accounts = await window.suiWallet.request({
+        method: "sui_connect",
+      });
+
+      if (accounts.accounts && accounts.accounts.length > 0) {
+        currentWalletAddress = accounts.accounts[0].address;
+        walletAddressSpan.textContent = currentWalletAddress;
+        mintBtn.disabled = false; // Habilita o botão de mint após a conexão
+        displayStatus("Carteira conectada com sucesso!", "success");
+        updateConnectButton(true);
+      } else {
+        displayStatus("Nenhuma conta encontrada na Sui Wallet.", "error");
+        updateConnectButton(false);
+      }
+    } catch (error) {
+      console.error("Falha ao conectar a carteira:", error);
+      displayStatus(`Falha ao conectar a carteira: ${error.message || error}`, "error");
+      currentWalletAddress = null;
+      walletAddressSpan.textContent = "Not Connected";
+      mintBtn.disabled = true;
+      updateConnectButton(false);
+    }
+  }
+
+  // Atualiza o texto e estilo do botão de conectar carteira
+  function updateConnectButton(isConnected) {
+    if (isConnected) {
+      connectWalletBtn.textContent = "Carteira Conectada";
+      connectWalletBtn.disabled = true;
+      connectWalletBtn.classList.remove('btn-secondary');
+      connectWalletBtn.style.background = 'linear-gradient(45deg, #00C0C0, #800080)'; // Cor mais discreta
+      connectWalletBtn.style.boxShadow = '0 0 10px #00C0C0';
+    } else {
+      connectWalletBtn.textContent = "Conectar Carteira";
+      connectWalletBtn.disabled = false;
+      connectWalletBtn.style = ''; // Reseta estilos
+      connectWalletBtn.classList.add('btn-secondary');
+    }
+  }
+
+  // --- Lógica de Mint ---
+  async function mintNFT() {
+    if (!currentWalletAddress) {
+      displayStatus("Por favor, conecte sua Carteira Sui primeiro.", "error");
+      return;
+    }
+
+    const quantity = parseInt(mintQuantityInput.value);
+    if (isNaN(quantity) || quantity < 1 || quantity > MAX_MINT_PER_TX) {
+      displayStatus(`Por favor, insira uma quantidade entre 1 e ${MAX_MINT_PER_TX}.`, "error");
+      return;
+    }
+
+    if (currentMintedCount + quantity > TOTAL_NFT_SUPPLY) {
+      displayStatus("Não há NFTs suficientes restantes para mintar essa quantidade.", "error");
+      return;
+    }
+
+    displayStatus("Iniciando transação de mint...", "");
+    mintBtn.disabled = true;
+
+    try {
+      // IMPORTANTE: Esta é uma representação SIMULADA da TransactionBlock.
+      // Em um projeto real, você PRECISA instalar a biblioteca `@mysten/sui.js`
+      // (ex: `npm install @mysten/sui.js`) e usar `new TransactionBlock()` para
+      // construir a transação correta para o SEU contrato inteligente.
+      //
+      // Exemplo de como seria com @mysten/sui.js (requer a biblioteca):
+      // import { TransactionBlock } from '@mysten/sui.js';
+      // const tx = new TransactionBlock();
+      // tx.moveCall({
+      //   target: `${YOUR_SUI_PACKAGE_ID}::${YOUR_SUI_MODULE_NAME}::${YOUR_MINT_FUNCTION_NAME}`,
+      //   arguments: [
+      //     tx.pure(quantity), // Se sua função de mint aceita a quantidade como argumento
+      //     // Adicione outros argumentos que sua função de mint precise (ex: nome, descrição, url da imagem)
+      //   ],
+      //   // Se sua função de mint espera pagamento em SUI, você pode precisar fazer algo como:
+      //   // coins: [tx.gas], // Use a moeda de gás para pagar (se seu contrato aceita isso)
+      //   // ou `tx.splitCoins(tx.gas, [tx.pure(quantidade * MINT_PRICE_PER_NFT * 1_000_000_000)])`
+      // });
+      // tx.setGasBudget(10_000_000); // Defina um orçamento de gás adequado (em MIST)
+      // const result = await window.suiWallet.request({
+      //   method: "wallet_signAndExecuteTransactionBlock",
+      //   params: { transactionBlock: tx.toJSON() },
+      // });
+
+
+      // --- BLOCO DE TRANSAÇÃO SIMULADO PARA FINS DE DEMONSTRAÇÃO ---
+      // Este objeto é o que a extensão da carteira Sui espera para um moveCall simples.
+      // Você precisará adaptá-lo para a assinatura exata da sua função de mint.
+      const simulatedTxBlock = {
+        kind: 'moveCall',
+        target: `${YOUR_SUI_PACKAGE_ID}::${YOUR_SUI_MODULE_NAME}::${YOUR_MINT_FUNCTION_NAME}`,
+        arguments: [
+          // Exemplo de argumento: a quantidade de NFTs a serem mintadas.
+          // O tipo e o valor devem corresponder ao que sua função de mint espera.
+          { kind: 'Input', index: 0, type: 'u64', value: quantity.toString() },
+          // Se sua função de mint exigir mais argumentos (ex: nome, descrição), adicione-os aqui:
+          // { kind: 'Input', index: 1, type: 'vector<u8>', value: 'Meu NFT' },
+          // { kind: 'Input', index: 2, type: 'vector<u8>', value: 'Descrição do NFT' },
+        ],
+        // Se sua função de mint lida com pagamento de SUI diretamente, ela pode não precisar de `gasPayment` aqui.
+        // Se ela exigir um `Coin` específico, você terá que criá-lo ou dividi-lo.
+      };
+
+
+      // A chamada real para a extensão da carteira Sui
+      const result = await window.suiWallet.request({
+        method: "wallet_signAndExecuteTransactionBlock",
+        params: {
+          transactionBlock: simulatedTxBlock, // Em código real: tx.toJSON() da TransactionBlock do @mysten/sui.js
+          options: { showEffects: true, showEvents: true }, // Solicita mais detalhes na resposta
+        },
+      });
+
+      if (result.effects && result.effects.status.status === 'success') {
+        currentMintedCount += quantity; // Simula a atualização da contagem de mintados
+        updateMintedCount();
+        displayStatus(`Mint bem-sucedido! ID da Transação: ${result.digest}`, "success");
+        console.log("Resultado da Transação de Mint:", result);
+        // Você pode adicionar um link para o explorer da Sui aqui:
+        // `https://suiexplorer.com/tx/${result.digest}?network=devnet` (ou testnet/mainnet)
+      } else {
+        throw new Error(result.effects?.status?.error || 'A transação falhou sem mensagem de erro específica.');
+      }
+    } catch (error) {
+      console.error("Falha no Mint:", error);
+      displayStatus(`Falha no Mint: ${error.message || error}`, "error");
+    } finally {
+      mintBtn.disabled = false; // Reabilita o botão
+    }
+  }
+
+  // --- Controle de Quantidade ---
+  function updateQuantity(change) {
+    let current = parseInt(mintQuantityInput.value);
+    let newQuantity = current + change;
+
+    if (newQuantity < 1) {
+      newQuantity = 1;
+    } else if (newQuantity > MAX_MINT_PER_TX) {
+      newQuantity = MAX_MINT_PER_TX;
+    }
+    mintQuantityInput.value = newQuantity;
+  }
+
+  // --- Funções Auxiliares de Atualização da UI ---
+  function displayStatus(message, type) {
+    mintStatusDiv.textContent = message;
+    mintStatusDiv.className = `mint-status ${type}`; // Adiciona classe de sucesso/erro
+  }
+
+  function updateMintedCount() {
+    mintedSupplySpan.textContent = `${currentMintedCount} / ${TOTAL_NFT_SUPPLY}`;
+  }
+
+  // --- Configuração Inicial e Listeners de Eventos ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa a UI com valores (simulados por enquanto)
+    updateMintedCount(); // Define a exibição inicial da contagem
+
+    // Define o atributo max para o input para validação básica
+    mintQuantityInput.setAttribute('max', MAX_MINT_PER_TX);
+
+    // Listeners de Eventos
+    connectWalletBtn.addEventListener('click', connectWallet);
+    mintBtn.addEventListener('click', mintNFT);
+    decreaseQuantityBtn.addEventListener('click', () => updateQuantity(-1));
+    increaseQuantityBtn.addEventListener('click', () => updateQuantity(1));
+
+    // Em uma aplicação real, você também poderia tentar verificar o status da carteira
+    // ao carregar a página (ex: `wallet_getAccounts`) para ver se já está conectada.
+  });
+</script>
+</body>
+</html>
