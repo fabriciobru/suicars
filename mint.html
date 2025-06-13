@@ -185,6 +185,15 @@
         width: 100%;
     }
 
+    .current-phase {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.8em;
+        color: var(--secondary-neon);
+        text-shadow: 0 0 10px var(--secondary-neon);
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
     .nft-preview {
         width: 250px;
         height: 250px;
@@ -328,6 +337,9 @@
       .mint-section h1 {
         font-size: 3em;
       }
+      .current-phase {
+        font-size: 1.5em;
+      }
     }
 
     @media (max-width: 768px) {
@@ -353,6 +365,9 @@
       .mint-section h1 {
         font-size: 2.5em;
         margin-bottom: 20px;
+      }
+      .current-phase {
+        font-size: 1.2em;
       }
       .mint-info {
         font-size: 1em;
@@ -405,19 +420,21 @@
 
 <main>
   <section class="mint-section">
-    <h1>Mint your pack!</h1>
+    <h1>Mint Your SUI Car NFT!</h1>
 
     <div class="mint-details-container">
+      <div id="currentPhaseDisplay" class="current-phase">Determining Phase...</div>
+
       <div class="nft-preview">
         <img src="pack sui cars.png" alt="SUI Car NFT Preview">
       </div>
 
       <div class="mint-info">
-        <p>Price: <strong id="mintPrice">4 SUI</strong></p>
-        <p>Supply: <strong id="totalSupply">10,000</strong></p>
-        <!-- Changed to display percentage -->
+        <p>Price per NFT: <strong id="mintPrice">N/A</strong></p>
+        <p>Total Supply: <strong id="totalSupply">10,000</strong></p>
         <p>Minted: <strong id="mintedSupply">0%</strong></p>
-        <p>Connected Wallet: <strong id="walletAddress">Not Connected</strong></p>
+        <p>Max Per Wallet: <strong id="maxPerWallet">N/A</strong></p>
+        <p>Your Connected Wallet: <strong id="walletAddress">Not Connected</strong></p>
       </div>
 
       <div class="mint-quantity-control">
@@ -450,17 +467,66 @@
   const mintBtn = document.getElementById('mintBtn');
   const mintStatusDiv = document.getElementById('mintStatus');
   const mintedSupplySpan = document.getElementById('mintedSupply');
+  const mintPriceSpan = document.getElementById('mintPrice');
+  const totalSupplySpan = document.getElementById('totalSupply');
+  const maxPerWalletSpan = document.getElementById('maxPerWallet');
+  const currentPhaseDisplay = document.getElementById('currentPhaseDisplay');
 
   // --- Configuration (REPLACE THESE VALUES WITH YOUR SUI CONTRACT DETAILS!) ---
-  const MINT_PRICE_PER_NFT = 4; // Price per NFT (in SUI, or your token)
-  const TOTAL_NFT_SUPPLY = 10000;
-  const MAX_MINT_PER_TX = 5; // Maximum NFTs a user can mint at once
+  const TOTAL_NFT_SUPPLY = 10000; // Overall total supply for all phases
+
+  // IMPORTANT: For a real project, the `contractFunctionName` should map to different functions
+  // on your Sui smart contract that implement the specific logic for each phase.
+  // The `allowedWallets` for OG/WL phases would ideally come from a secure source (e.g., a merkle tree check on-chain).
+  // Dates are UTC (YYYY-MM-DDTHH:MM:SSZ)
+  const MINT_PHASES = [
+    {
+      name: "OG Mint",
+      id: "og",
+      startTime: new Date("2025-06-12T10:00:00Z"), // Example: June 12, 2025, 10:00 AM UTC
+      endTime: new Date("2025-06-12T12:00:00Z"),   // Example: June 12, 2025, 12:00 PM UTC
+      price: 0.3,
+      maxPerTx: 2,
+      maxPerWallet: 5,
+      allowedWallets: [
+        "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b", // Example OG wallet 1
+        "0xabc123def456ghi789jkl012mno345pqr678stu901vwx234yz567abc890def1234"  // Example OG wallet 2
+      ],
+      contractFunctionName: 'mint_og'
+    },
+    {
+      name: "Whitelist Mint",
+      id: "wl",
+      startTime: new Date("2025-06-12T12:00:00Z"), // Starts when OG ends
+      endTime: new Date("2025-06-12T14:00:00Z"),   // Example: June 12, 2025, 02:00 PM UTC
+      price: 0.4,
+      maxPerTx: 3,
+      maxPerWallet: 10,
+      allowedWallets: [
+        "0xdef456ghi789jkl012mno345pqr678stu901vwx234yz567abc890def1234abcde", // Example WL wallet 1
+        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"  // Example WL wallet 2
+      ],
+      contractFunctionName: 'mint_wl'
+    },
+    {
+      name: "Public Mint",
+      id: "public",
+      startTime: new Date("2025-06-12T14:00:00Z"), // Starts when WL ends
+      endTime: new Date("2025-06-13T14:00:00Z"),   // Example: June 13, 2025, 02:00 PM UTC (lasts 24 hours)
+      price: 0.5,
+      maxPerTx: 5,
+      maxPerWallet: Infinity, // Unlimited for public mint in this example
+      allowedWallets: [], // Empty means all connected wallets are allowed
+      contractFunctionName: 'mint_public'
+    }
+  ];
+
   const YOUR_SUI_PACKAGE_ID = '0xYOUR_SUI_PACKAGE_ID'; // Replace with your Sui contract's Package ID
   const YOUR_SUI_MODULE_NAME = 'YOUR_MODULE_NAME';   // Replace with your Sui contract's Module Name (e.g., 'sui_cars_nft')
-  const YOUR_MINT_FUNCTION_NAME = 'mint_car';     // Replace with your Sui contract's Mint Function Name
 
   let currentWalletAddress = null;
   let currentMintedCount = 0; // This value should ideally be read from your Sui contract in a real application
+  let activeMintPhase = null; // Stores the currently active mint phase object
 
   // --- Wallet Connection Logic ---
   async function connectWallet() {
@@ -471,7 +537,6 @@
 
     try {
       displayStatus("Connecting wallet...", "");
-      // The `sui_connect` call will prompt the user to connect their wallet.
       const accounts = await window.suiWallet.request({
         method: "sui_connect",
       });
@@ -479,9 +544,9 @@
       if (accounts.accounts && accounts.accounts.length > 0) {
         currentWalletAddress = accounts.accounts[0].address;
         walletAddressSpan.textContent = currentWalletAddress;
-        mintBtn.disabled = false; // Enable mint button after connection
         displayStatus("Wallet connected successfully!", "success");
         updateConnectButton(true);
+        updateMintUI(); // Update UI based on connected wallet and current time
       } else {
         displayStatus("No accounts found in Sui Wallet.", "error");
         updateConnectButton(false);
@@ -493,6 +558,7 @@
       walletAddressSpan.textContent = "Not Connected";
       mintBtn.disabled = true;
       updateConnectButton(false);
+      updateMintUI(); // Update UI for disconnected state
     }
   }
 
@@ -519,14 +585,21 @@
       return;
     }
 
-    const quantity = parseInt(mintQuantityInput.value);
-    if (isNaN(quantity) || quantity < 1 || quantity > MAX_MINT_PER_TX) {
-      displayStatus(`Please enter a quantity between 1 and ${MAX_MINT_PER_TX}.`, "error");
+    if (!activeMintPhase) {
+      displayStatus("No active mint phase. Please wait or check the schedule.", "error");
       return;
     }
 
+    const quantity = parseInt(mintQuantityInput.value);
+    if (isNaN(quantity) || quantity < 1 || quantity > activeMintPhase.maxPerTx) {
+      displayStatus(`Please enter a quantity between 1 and ${activeMintPhase.maxPerTx} for this phase.`, "error");
+      return;
+    }
+
+    // In a real application, you'd also check maxPerWallet against the contract state.
+    // For this demo, we'll just check against TOTAL_NFT_SUPPLY.
     if (currentMintedCount + quantity > TOTAL_NFT_SUPPLY) {
-      displayStatus("Not enough NFTs left to mint this quantity.", "error");
+      displayStatus("Not enough NFTs left in total supply to mint this quantity.", "error");
       return;
     }
 
@@ -539,61 +612,33 @@
       // (e.g., `npm install @mysten/sui.js`) and use `new TransactionBlock()` to
       // construct the correct transaction for YOUR smart contract.
       //
-      // Example of how it would look with @mysten/sui.js (requires the library):
-      // import { TransactionBlock } from '@mysten/sui.js';
-      // const tx = new TransactionBlock();
-      // tx.moveCall({
-      //   target: `${YOUR_SUI_PACKAGE_ID}::${YOUR_SUI_MODULE_NAME}::${YOUR_MINT_FUNCTION_NAME}`,
-      //   arguments: [
-      //     tx.pure(quantity), // If your mint function accepts quantity as an argument
-      //     // Add other arguments your mint function might need (e.g., name, description, image URL)
-      //   ],
-      //   // If your mint function expects payment in SUI, you might need something like:
-      //   // coins: [tx.gas], // Use the gas coin to pay (if your contract accepts this)
-      //   // or `tx.splitCoins(tx.gas, [tx.pure(quantity * MINT_PRICE_PER_NFT * 1_000_000_000)])`
-      // });
-      // tx.setGasBudget(10_000_000); // Set an appropriate gas budget (in MIST)
-      // const result = await window.suiWallet.request({
-      //   method: "wallet_signAndExecuteTransactionBlock",
-      //   params: { transactionBlock: tx.toJSON() },
-      // });
-
-
-      // --- SIMULATED TRANSACTION BLOCK FOR DEMONSTRATION PURPOSES ---
-      // This object is what the Sui wallet extension expects for a simple moveCall.
-      // You will need to adapt it to the exact signature of your mint function.
+      // The `target` of the moveCall will now dynamically change based on `activeMintPhase.contractFunctionName`.
+      // Also, the arguments might differ slightly for different mint functions (e.g., for WL, you might pass a proof).
       const simulatedTxBlock = {
         kind: 'moveCall',
-        target: `${YOUR_SUI_PACKAGE_ID}::${YOUR_SUI_MODULE_NAME}::${YOUR_MINT_FUNCTION_NAME}`,
+        target: `${YOUR_SUI_PACKAGE_ID}::${YOUR_SUI_MODULE_NAME}::${activeMintPhase.contractFunctionName}`,
         arguments: [
           // Example argument: the quantity of NFTs to be minted.
-          // The type and value must match what your mint function expects.
+          // The type and value must match what your mint function expects for the *current* phase.
           { kind: 'Input', index: 0, type: 'u64', value: quantity.toString() },
-          // If your mint function requires more arguments (e.g., name, description), add them here:
-          // { kind: 'Input', index: 1, type: 'vector<u8>', value: 'My NFT' },
-          // { kind: 'Input', index: 2, type: 'vector<u8>', value: 'NFT Description' },
+          // If your OG/WL functions require a proof, you'd add it here, e.g.:
+          // { kind: 'Input', index: 1, type: 'vector<vector<u8>>', value: YOUR_MERKLE_PROOF_ARRAY },
         ],
-        // If your mint function handles SUI payment directly, it might not need `gasPayment` here.
-        // If it requires a specific `Coin` object, you'll need to create or split it.
       };
 
-
-      // The actual call to the Sui wallet extension
       const result = await window.suiWallet.request({
         method: "wallet_signAndExecuteTransactionBlock",
         params: {
-          transactionBlock: simulatedTxBlock, // In real code: tx.toJSON() from @mysten/sui.js TransactionBlock
-          options: { showEffects: true, showEvents: true }, // Request more details in the response
+          transactionBlock: simulatedTxBlock,
+          options: { showEffects: true, showEvents: true },
         },
       });
 
       if (result.effects && result.effects.status.status === 'success') {
         currentMintedCount += quantity; // Simulate updating the minted count
-        updateMintedCount();
+        updateMintedCountDisplay();
         displayStatus(`Mint successful! Transaction ID: ${result.digest}`, "success");
         console.log("Mint Transaction Result:", result);
-        // You can add a link to the Sui explorer here:
-        // `https://suiexplorer.com/tx/${result.digest}?network=devnet` (or testnet/mainnet)
       } else {
         throw new Error(result.effects?.status?.error || 'Transaction failed without specific error message.');
       }
@@ -610,12 +655,76 @@
     let current = parseInt(mintQuantityInput.value);
     let newQuantity = current + change;
 
+    const maxTx = activeMintPhase ? activeMintPhase.maxPerTx : MAX_MINT_PER_TX_DEFAULT; // Use phase max or a default
     if (newQuantity < 1) {
       newQuantity = 1;
-    } else if (newQuantity > MAX_MINT_PER_TX) {
-      newQuantity = MAX_MINT_PER_TX;
+    } else if (newQuantity > maxTx) {
+      newQuantity = maxTx;
     }
     mintQuantityInput.value = newQuantity;
+  }
+
+  // --- Phase Detection & UI Update ---
+  function getActiveMintPhase(walletAddress, currentTime) {
+    for (const phase of MINT_PHASES) {
+      if (currentTime >= phase.startTime && currentTime < phase.endTime) {
+        // Check if wallet is allowed for this phase (only for OG/WL)
+        if (phase.allowedWallets.length > 0) {
+          if (walletAddress && phase.allowedWallets.includes(walletAddress)) {
+            return phase; // Wallet is allowed
+          } else if (!walletAddress) {
+            // Wallet not connected, but it's a restricted phase.
+            // We can indicate it's active but requires a specific wallet.
+            return { ...phase, requiresSpecificWallet: true };
+          }
+        } else {
+          // Public phase or no specific wallet restriction
+          return phase;
+        }
+      }
+    }
+    return null; // No active phase
+  }
+
+  function updateMintUI() {
+    const now = new Date();
+    activeMintPhase = getActiveMintPhase(currentWalletAddress, now);
+
+    if (activeMintPhase) {
+      currentPhaseDisplay.textContent = activeMintPhase.name;
+      mintPriceSpan.textContent = `${activeMintPhase.price} SUI`;
+      maxPerWalletSpan.textContent = activeMintPhase.maxPerWallet === Infinity ? "Unlimited" : activeMintPhase.maxPerWallet;
+      mintQuantityInput.setAttribute('max', activeMintPhase.maxPerTx);
+      mintQuantityInput.value = 1; // Reset quantity on phase change
+
+      if (currentWalletAddress) {
+        if (activeMintPhase.requiresSpecificWallet) {
+           displayStatus(`This is the ${activeMintPhase.name}. Your wallet is not whitelisted for this phase.`, "error");
+           mintBtn.disabled = true;
+        } else {
+           displayStatus(`The ${activeMintPhase.name} is now LIVE!`, "");
+           mintBtn.disabled = false;
+        }
+      } else {
+        displayStatus("Connect your wallet to participate in the mint.", "info");
+        mintBtn.disabled = true;
+      }
+    } else {
+      let nextPhase = MINT_PHASES.find(phase => now < phase.startTime);
+      if (nextPhase) {
+        currentPhaseDisplay.textContent = "Mint Not Started";
+        displayStatus(`Next phase (${nextPhase.name}) starts at ${nextPhase.startTime.toLocaleString()} UTC.`, "info");
+      } else {
+        currentPhaseDisplay.textContent = "Mint Ended";
+        displayStatus("The mint has concluded. Thank you for your participation!", "info");
+      }
+      mintPriceSpan.textContent = "N/A";
+      maxPerWalletSpan.textContent = "N/A";
+      mintBtn.disabled = true;
+      mintQuantityInput.setAttribute('max', 1); // Disable quantity control effectively
+      mintQuantityInput.value = 1;
+    }
+    updateMintedCountDisplay();
   }
 
   // --- UI Update Helper Functions ---
@@ -625,24 +734,24 @@
   }
 
   // Updated to display percentage
-  function updateMintedCount() {
+  function updateMintedCountDisplay() {
+    totalSupplySpan.textContent = TOTAL_NFT_SUPPLY; // Always show total supply
     let percentage = 0;
     if (TOTAL_NFT_SUPPLY > 0) {
       percentage = (currentMintedCount / TOTAL_NFT_SUPPLY) * 100;
     }
-    // Round to the nearest integer
-    const formattedPercentage = Math.round(percentage);
-
+    const formattedPercentage = Math.round(percentage); // Round to the nearest integer
     mintedSupplySpan.textContent = `${formattedPercentage}%`;
   }
 
   // --- Initial Setup and Event Listeners ---
   document.addEventListener('DOMContentLoaded', () => {
-    // Initialize UI with (simulated) values
-    updateMintedCount(); // Set initial count display to 0%
+    // Initial UI setup
+    updateMintedCountDisplay();
+    updateMintUI(); // Determine initial phase and update UI
 
     // Set the max attribute for the input for basic validation
-    mintQuantityInput.setAttribute('max', MAX_MINT_PER_TX);
+    mintQuantityInput.setAttribute('max', activeMintPhase ? activeMintPhase.maxPerTx : 5); // Default to 5 if no phase
 
     // Event Listeners
     connectWalletBtn.addEventListener('click', connectWallet);
@@ -650,8 +759,8 @@
     decreaseQuantityBtn.addEventListener('click', () => updateQuantity(-1));
     increaseQuantityBtn.addEventListener('click', () => updateQuantity(1));
 
-    // In a real application, you might also try to check wallet status
-    // on page load (e.g., `wallet_getAccounts`) to see if it's already connected.
+    // Optional: Refresh UI every few seconds to update phase/countdown
+    // setInterval(updateMintUI, 5000); // Update every 5 seconds
   });
 </script>
 </body>
