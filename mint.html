@@ -308,10 +308,10 @@
     }
 
     .phases-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-      gap: 30px;
-      justify-content: center;
+      display: flex; /* Changed to flexbox */
+      flex-direction: column; /* Stack vertically */
+      align-items: center; /* Center cards horizontally */
+      gap: 30px; /* Vertical gap between cards */
     }
 
     .phase-card {
@@ -324,6 +324,8 @@
       position: relative;
       overflow: hidden;
       z-index: 0; /* Ensure content is above glow effect */
+      width: 100%; /* Take full width of the flex item */
+      max-width: 500px; /* Limit the maximum width of each card */
     }
 
     .phase-card::before {
@@ -469,10 +471,7 @@
       .current-phase {
         font-size: 1.5em;
       }
-      /* Responsive adjustments for phases overview */
-      .phases-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
+      /* Removed .phases-container grid adjustments as it's now flex column by default */
     }
 
     @media (max-width: 768px) {
@@ -509,10 +508,7 @@
         width: 200px;
         font-size: 1.1em;
       }
-      /* Responsive adjustments for phases overview */
-      .phases-container {
-        grid-template-columns: 1fr; /* Stack cards on smaller screens */
-      }
+      /* phase-card width is already handled by max-width: 500px and width: 100% */
       .phase-card h3 {
         font-size: 1.5em;
       }
@@ -753,7 +749,7 @@
     // In a real application, you'd also check maxPerWallet against the contract state.
     // For this demo, we'll just check against TOTAL_NFT_SUPPLY.
     if (currentMintedCount + quantity > TOTAL_NFT_SUPPLY) {
-      displayStatus("Not enough NFTs left in total supply to mint this quantity. 😢", "error");
+      displayStatus("Not enough NFTs left in total supply to mint this quantity. ��", "error");
       return;
     }
 
@@ -861,14 +857,14 @@
 
       if (currentWalletAddress) {
         if (activeMintPhase.requiresSpecificWallet && !activeMintPhase.allowedWallets.includes(currentWalletAddress)) {
-           displayStatus(`This is the ${activeMintPhase.name} phase. Your wallet is NOT whitelisted for this phase. ��`, "error");
+           displayStatus(`This is the ${activeMintPhase.name} phase. Your wallet is NOT whitelisted for this phase. `, "error");
            mintBtn.disabled = true;
         } else {
            displayStatus(`The ${activeMintPhase.name} phase is LIVE! 🎉`, "");
            mintBtn.disabled = false;
         }
       } else {
-        displayStatus("Connect your wallet to participate in the mint. ��", "info");
+        displayStatus("Connect your wallet to participate in the mint. ", "info");
         mintBtn.disabled = true;
       }
     } else {
