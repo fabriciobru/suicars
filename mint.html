@@ -298,6 +298,135 @@
         text-shadow: 0 0 10px red;
     }
 
+    /* NEW CSS FOR MINT PHASES OVERVIEW */
+    .mint-phases-overview {
+      width: 100%;
+      max-width: 1000px; /* Wider to accommodate multiple cards */
+      padding: 40px 20px;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+
+    .phases-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .phase-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--primary-neon);
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 0; /* Ensure content is above glow effect */
+    }
+
+    .phase-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, rgba(0,255,255,0.02) 0%, transparent 70%);
+        transform: rotate(45deg);
+        z-index: 0;
+    }
+
+    .phase-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px var(--secondary-neon);
+    }
+
+    .phase-card.active {
+      border-color: var(--secondary-neon);
+      box-shadow: 0 0 30px var(--secondary-neon), 0 0 50px rgba(255, 0, 255, 0.4);
+      transform: scale(1.02);
+      z-index: 1; /* Bring active card to front slightly */
+    }
+
+    .phase-card.upcoming {
+      opacity: 0.7;
+      border-color: rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+    }
+
+    .phase-card.ended {
+      opacity: 0.5;
+      border-color: rgba(160, 160, 160, 0.3);
+      box-shadow: none;
+    }
+
+    .phase-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary-neon);
+      font-size: 1.8em;
+      margin-top: 0;
+      margin-bottom: 15px;
+      text-shadow: 0 0 8px var(--primary-neon);
+      position: relative;
+      z-index: 1;
+    }
+
+    .phase-card.active h3 {
+      color: var(--secondary-neon);
+      text-shadow: 0 0 10px var(--secondary-neon);
+    }
+
+    .phase-card p {
+      margin: 8px 0;
+      font-size: 1.1em;
+      color: var(--text-light);
+      position: relative;
+      z-index: 1;
+    }
+
+    .phase-card p strong {
+      color: var(--primary-neon);
+    }
+
+    .phase-card.active p strong {
+      color: var(--secondary-neon);
+    }
+
+    .phase-status {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.2em;
+        font-weight: 700;
+        text-align: right;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .phase-status.active-status {
+        color: limegreen;
+        text-shadow: 0 0 8px limegreen;
+    }
+
+    .phase-status.upcoming-status {
+        color: yellow;
+        text-shadow: 0 0 8px yellow;
+    }
+
+    .phase-status.ended-status {
+        color: var(--text-medium);
+    }
+
+    .countdown {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.1em;
+        color: var(--secondary-neon);
+        text-shadow: 0 0 8px var(--secondary-neon);
+        margin-top: 10px;
+        text-align: center;
+    }
+
     /* Footer (Copied from your index.html) */
     footer {
       width: 100%;
@@ -340,6 +469,10 @@
       .current-phase {
         font-size: 1.5em;
       }
+      /* Responsive adjustments for phases overview */
+      .phases-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
     }
 
     @media (max-width: 768px) {
@@ -375,6 +508,16 @@
       .mint-button {
         width: 200px;
         font-size: 1.1em;
+      }
+      /* Responsive adjustments for phases overview */
+      .phases-container {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+      }
+      .phase-card h3 {
+        font-size: 1.5em;
+      }
+      .phase-card p {
+        font-size: 1em;
       }
     }
 
@@ -447,6 +590,14 @@
       <div id="mintStatus" class="mint-status"></div>
     </div>
   </section>
+
+  <!-- NEW SECTION FOR MINT PHASES OVERVIEW -->
+  <section class="mint-phases-overview">
+    <h2 class="section-title">Mint Phases Overview</h2>
+    <div class="phases-container" id="mintPhasesOverviewContainer">
+      <!-- Phase cards will be injected here by JavaScript -->
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -471,6 +622,7 @@
   const totalSupplySpan = document.getElementById('totalSupply');
   const maxPerWalletSpan = document.getElementById('maxPerWallet');
   const currentPhaseDisplay = document.getElementById('currentPhaseDisplay');
+  const mintPhasesOverviewContainer = document.getElementById('mintPhasesOverviewContainer'); // NEW
 
   // --- Configuration (REPLACE THESE VALUES WITH YOUR SUI CONTRACT DETAILS!) ---
   const TOTAL_NFT_SUPPLY = 10000; // Overall total supply for all phases
@@ -483,8 +635,8 @@
     {
       name: "OG Mint",
       id: "og",
-      startTime: new Date("2025-07-12T10:00:00Z"), // Example: June 12, 2025, 10:00 AM UTC
-      endTime: new Date("2025-07-12T12:00:00Z"),   // Example: June 12, 2025, 12:00 PM UTC
+      startTime: new Date("2025-07-12T10:00:00Z"), // Example: July 12, 2025, 10:00 AM UTC
+      endTime: new Date("2025-07-12T12:00:00Z"),   // Example: July 12, 2025, 12:00 PM UTC
       price: 0,
       maxPerTx: 2,
       maxPerWallet: 1,
@@ -498,7 +650,7 @@
       name: "Whitelist Mint",
       id: "wl",
       startTime: new Date("2025-07-22T12:00:00Z"), // Starts when OG ends
-      endTime: new Date("2025-07-22T14:00:00Z"),   // Example: June 12, 2025, 02:00 PM UTC
+      endTime: new Date("2025-07-22T14:00:00Z"),   // Example: July 12, 2025, 02:00 PM UTC
       price: 2.8,
       maxPerTx: 3,
       maxPerWallet: 10,
@@ -512,7 +664,7 @@
       name: "Public Mint",
       id: "public",
       startTime: new Date("2025-08-12T14:00:00Z"), // Starts when WL ends
-      endTime: new Date("2025-08-13T14:00:00Z"),   // Example: June 13, 2025, 02:00 PM UTC (lasts 24 hours)
+      endTime: new Date("2025-08-13T14:00:00Z"),   // Example: August 13, 2025, 02:00 PM UTC (lasts 24 hours)
       price: 4,
       maxPerTx: 5,
       maxPerWallet: Infinity, // Unlimited for public mint in this example
@@ -544,9 +696,10 @@
       if (accounts.accounts && accounts.accounts.length > 0) {
         currentWalletAddress = accounts.accounts[0].address;
         walletAddressSpan.textContent = currentWalletAddress;
-        displayStatus("Wallet connected successfully!", "success");
+        displayStatus("Wallet connected successfully! ✅", "success");
         updateConnectButton(true);
         updateMintUI(); // Update UI based on connected wallet and current time
+        renderMintPhasesOverview(); // Update phases overview
       } else {
         displayStatus("No accounts found in Sui Wallet.", "error");
         updateConnectButton(false);
@@ -559,6 +712,7 @@
       mintBtn.disabled = true;
       updateConnectButton(false);
       updateMintUI(); // Update UI for disconnected state
+      renderMintPhasesOverview(); // Update phases overview
     }
   }
 
@@ -581,12 +735,12 @@
   // --- Minting Logic ---
   async function mintNFT() {
     if (!currentWalletAddress) {
-      displayStatus("Please connect your Sui Wallet first.", "error");
+      displayStatus("Please connect your Sui Wallet first. 🦊", "error");
       return;
     }
 
     if (!activeMintPhase) {
-      displayStatus("No active mint phase. Please wait or check the schedule.", "error");
+      displayStatus("No active mint phase. Please wait or check the schedule. ⏳", "error");
       return;
     }
 
@@ -599,11 +753,11 @@
     // In a real application, you'd also check maxPerWallet against the contract state.
     // For this demo, we'll just check against TOTAL_NFT_SUPPLY.
     if (currentMintedCount + quantity > TOTAL_NFT_SUPPLY) {
-      displayStatus("Not enough NFTs left in total supply to mint this quantity.", "error");
+      displayStatus("Not enough NFTs left in total supply to mint this quantity. 😢", "error");
       return;
     }
 
-    displayStatus("Initiating mint transaction...", "");
+    displayStatus("Initiating mint transaction... 🚀", "");
     mintBtn.disabled = true;
 
     try {
@@ -637,14 +791,14 @@
       if (result.effects && result.effects.status.status === 'success') {
         currentMintedCount += quantity; // Simulate updating the minted count
         updateMintedCountDisplay();
-        displayStatus(`Mint successful! Transaction ID: ${result.digest}`, "success");
+        displayStatus(`Mint successful! Transaction ID: ${result.digest} 🎉`, "success");
         console.log("Mint Transaction Result:", result);
       } else {
         throw new Error(result.effects?.status?.error || 'Transaction failed without specific error message.');
       }
     } catch (error) {
       console.error("Mint failed:", error);
-      displayStatus(`Mint failed: ${error.message || error}`, "error");
+      displayStatus(`Mint failed: ${error.message || error} ❌`, "error");
     } finally {
       mintBtn.disabled = false; // Re-enable the button
     }
@@ -655,7 +809,7 @@
     let current = parseInt(mintQuantityInput.value);
     let newQuantity = current + change;
 
-    const maxTx = activeMintPhase ? activeMintPhase.maxPerTx : MAX_MINT_PER_TX_DEFAULT; // Use phase max or a default
+    const maxTx = activeMintPhase ? activeMintPhase.maxPerTx : 5; // Use phase max or a default
     if (newQuantity < 1) {
       newQuantity = 1;
     } else if (newQuantity > maxTx) {
@@ -671,26 +825,34 @@
         // Check if wallet is allowed for this phase (only for OG/WL)
         if (phase.allowedWallets.length > 0) {
           if (walletAddress && phase.allowedWallets.includes(walletAddress)) {
-            return phase; // Wallet is allowed
+            return { ...phase, requiresSpecificWallet: false, status: 'active' }; // Wallet is allowed
           } else if (!walletAddress) {
             // Wallet not connected, but it's a restricted phase.
             // We can indicate it's active but requires a specific wallet.
-            return { ...phase, requiresSpecificWallet: true };
+            return { ...phase, requiresSpecificWallet: true, status: 'active' };
+          } else {
+            // Wallet connected but not whitelisted for this active restricted phase
+            return { ...phase, requiresSpecificWallet: true, status: 'active' };
           }
         } else {
           // Public phase or no specific wallet restriction
-          return phase;
+          return { ...phase, requiresSpecificWallet: false, status: 'active' };
         }
+      } else if (currentTime < phase.startTime) {
+        return { ...phase, status: 'upcoming' }; // Found the next upcoming phase
       }
     }
-    return null; // No active phase
+    return { status: 'ended' }; // All phases have ended
   }
 
   function updateMintUI() {
     const now = new Date();
-    activeMintPhase = getActiveMintPhase(currentWalletAddress, now);
+    const phaseStatus = getActiveMintPhase(currentWalletAddress, now);
 
-    if (activeMintPhase) {
+    activeMintPhase = null; // Reset active phase for main mint button logic
+
+    if (phaseStatus.status === 'active') {
+      activeMintPhase = phaseStatus; // Set active phase for main mint button
       currentPhaseDisplay.textContent = activeMintPhase.name;
       mintPriceSpan.textContent = `${activeMintPhase.price} SUI`;
       maxPerWalletSpan.textContent = activeMintPhase.maxPerWallet === Infinity ? "Unlimited" : activeMintPhase.maxPerWallet;
@@ -698,25 +860,25 @@
       mintQuantityInput.value = 1; // Reset quantity on phase change
 
       if (currentWalletAddress) {
-        if (activeMintPhase.requiresSpecificWallet) {
-           displayStatus(`This is the ${activeMintPhase.name}. Your wallet is not whitelisted for this phase.`, "error");
+        if (activeMintPhase.requiresSpecificWallet && !activeMintPhase.allowedWallets.includes(currentWalletAddress)) {
+           displayStatus(`This is the ${activeMintPhase.name} phase. Your wallet is NOT whitelisted for this phase. ��`, "error");
            mintBtn.disabled = true;
         } else {
-           displayStatus(`The ${activeMintPhase.name} is now LIVE!`, "");
+           displayStatus(`The ${activeMintPhase.name} phase is LIVE! 🎉`, "");
            mintBtn.disabled = false;
         }
       } else {
-        displayStatus("Connect your wallet to participate in the mint.", "info");
+        displayStatus("Connect your wallet to participate in the mint. ��", "info");
         mintBtn.disabled = true;
       }
     } else {
       let nextPhase = MINT_PHASES.find(phase => now < phase.startTime);
       if (nextPhase) {
         currentPhaseDisplay.textContent = "Mint Not Started";
-        displayStatus(`Next phase (${nextPhase.name}) starts at ${nextPhase.startTime.toLocaleString()} UTC.`, "info");
+        displayStatus(`Next phase (${nextPhase.name}) starts at ${nextPhase.startTime.toLocaleString()} UTC. ⏳`, "info");
       } else {
         currentPhaseDisplay.textContent = "Mint Ended";
-        displayStatus("The mint has concluded. Thank you for your participation!", "info");
+        displayStatus("The mint has concluded. Thank you for your participation! ✅", "info");
       }
       mintPriceSpan.textContent = "N/A";
       maxPerWalletSpan.textContent = "N/A";
@@ -725,6 +887,72 @@
       mintQuantityInput.value = 1;
     }
     updateMintedCountDisplay();
+    renderMintPhasesOverview(); // Always render/update overview
+  }
+
+  // --- NEW: Render Mint Phases Overview ---
+  function renderMintPhasesOverview() {
+    mintPhasesOverviewContainer.innerHTML = ''; // Clear previous cards
+    const now = new Date();
+
+    MINT_PHASES.forEach(phase => {
+      const phaseCard = document.createElement('div');
+      phaseCard.className = 'phase-card';
+
+      let statusText = '';
+      let countdownHtml = '';
+      let phaseClass = '';
+
+      if (now >= phase.startTime && now < phase.endTime) {
+        statusText = 'LIVE! 🚀';
+        phaseClass = 'active';
+      } else if (now < phase.startTime) {
+        statusText = 'Upcoming Phase ⏳';
+        phaseClass = 'upcoming';
+        const timeLeft = phase.startTime.getTime() - now.getTime();
+        countdownHtml = `<div class="countdown" data-end-time="${phase.startTime.getTime()}"></div>`;
+      } else {
+        statusText = 'Ended ✅';
+        phaseClass = 'ended';
+      }
+
+      phaseCard.classList.add(phaseClass);
+
+      phaseCard.innerHTML = `
+        <p class="phase-status ${phaseClass}-status">${statusText}</p>
+        <h3>${phase.name}</h3>
+        <p>Price: <strong>${phase.price} SUI</strong></p>
+        <p>Starts: <strong>${phase.startTime.toLocaleString()} UTC</strong></p>
+        <p>Ends: <strong>${phase.endTime.toLocaleString()} UTC</strong></p>
+        <p>Max Per Transaction: <strong>${phase.maxPerTx}</strong></p>
+        <p>Max Per Wallet: <strong>${phase.maxPerWallet === Infinity ? "Unlimited" : phase.maxPerWallet}</strong></p>
+        ${countdownHtml}
+      `;
+      mintPhasesOverviewContainer.appendChild(phaseCard);
+    });
+  }
+
+  // --- NEW: Countdown Updater ---
+  function updateCountdowns() {
+    document.querySelectorAll('.countdown').forEach(countdownElement => {
+      const endTime = parseInt(countdownElement.dataset.endTime);
+      const now = new Date().getTime();
+      const distance = endTime - now;
+
+      if (distance < 0) {
+        countdownElement.textContent = 'Time expired!';
+        // After countdown ends, trigger a full UI update to reflect phase change
+        updateMintUI();
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.textContent = `Starts in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    });
   }
 
   // --- UI Update Helper Functions ---
@@ -759,8 +987,10 @@
     decreaseQuantityBtn.addEventListener('click', () => updateQuantity(-1));
     increaseQuantityBtn.addEventListener('click', () => updateQuantity(1));
 
-    // Optional: Refresh UI every few seconds to update phase/countdown
-    // setInterval(updateMintUI, 5000); // Update every 5 seconds
+    // Update countdowns every second
+    setInterval(updateCountdowns, 1000);
+    // Refresh UI every 10 seconds to update phase/countdown (in case of browser tab inactivity)
+    setInterval(updateMintUI, 10000);
   });
 </script>
 </body>
