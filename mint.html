@@ -420,7 +420,7 @@
 
 <main>
   <section class="mint-section">
-    <h1>Mint Your SUI Car NFT!</h1>
+    <h1>Mint your pack</h1>
 
     <div class="mint-details-container">
       <div id="currentPhaseDisplay" class="current-phase">Determining Phase...</div>
@@ -430,11 +430,11 @@
       </div>
 
       <div class="mint-info">
-        <p>Price per NFT: <strong id="mintPrice">N/A</strong></p>
-        <p>Total Supply: <strong id="totalSupply">10,000</strong></p>
+        <p>Price: <strong id="mintPrice">N/A</strong></p>
+        <p>Supply: <strong id="totalSupply">10,000</strong></p>
         <p>Minted: <strong id="mintedSupply">0%</strong></p>
         <p>Max Per Wallet: <strong id="maxPerWallet">N/A</strong></p>
-        <p>Your Connected Wallet: <strong id="walletAddress">Not Connected</strong></p>
+        <p>Connected Wallet: <strong id="walletAddress">Not Connected</strong></p>
       </div>
 
       <div class="mint-quantity-control">
@@ -485,9 +485,9 @@
       id: "og",
       startTime: new Date("2025-06-12T10:00:00Z"), // Example: June 12, 2025, 10:00 AM UTC
       endTime: new Date("2025-06-12T12:00:00Z"),   // Example: June 12, 2025, 12:00 PM UTC
-      price: 0.3,
+      price: 0,
       maxPerTx: 2,
-      maxPerWallet: 5,
+      maxPerWallet: 1,
       allowedWallets: [
         "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b", // Example OG wallet 1
         "0xabc123def456ghi789jkl012mno345pqr678stu901vwx234yz567abc890def1234"  // Example OG wallet 2
@@ -497,9 +497,9 @@
     {
       name: "Whitelist Mint",
       id: "wl",
-      startTime: new Date("2025-06-12T12:00:00Z"), // Starts when OG ends
-      endTime: new Date("2025-06-12T14:00:00Z"),   // Example: June 12, 2025, 02:00 PM UTC
-      price: 0.4,
+      startTime: new Date("2025-07-12T12:00:00Z"), // Starts when OG ends
+      endTime: new Date("2025-07-12T14:00:00Z"),   // Example: June 12, 2025, 02:00 PM UTC
+      price: 2.8,
       maxPerTx: 3,
       maxPerWallet: 10,
       allowedWallets: [
@@ -511,9 +511,9 @@
     {
       name: "Public Mint",
       id: "public",
-      startTime: new Date("2025-06-12T14:00:00Z"), // Starts when WL ends
-      endTime: new Date("2025-06-13T14:00:00Z"),   // Example: June 13, 2025, 02:00 PM UTC (lasts 24 hours)
-      price: 0.5,
+      startTime: new Date("2025-08-12T14:00:00Z"), // Starts when WL ends
+      endTime: new Date("2025-08-13T14:00:00Z"),   // Example: June 13, 2025, 02:00 PM UTC (lasts 24 hours)
+      price: 4,
       maxPerTx: 5,
       maxPerWallet: Infinity, // Unlimited for public mint in this example
       allowedWallets: [], // Empty means all connected wallets are allowed
