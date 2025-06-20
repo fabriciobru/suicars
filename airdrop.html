@@ -1,0 +1,134 @@
+<!-- ... (head and header using your existing code) ... -->
+
+<main>
+  <section class="hero-section airdrop-hero"> <!-- Using existing hero style with a specific class -->
+    <div class="hero-content">
+      <h1>Accelerate Your Journey:<br>Join the SUI Cars Airdrop!</h1>
+      <p>Complete tasks, collect points, and qualify for exclusive SUI Cars rewards.</p>
+      <button onclick="connectWallet()" class="btn">Connect Your Wallet to Start</button>
+      <!-- Add Countdown Timer here -->
+      <!-- <div class="countdown">Airdrop Ends In: <span>...</span></div> -->
+    </div>
+  </section>
+
+  <section class="tasks-section">
+    <h2 class="section-title">Earn Points: Complete These Missions</h2>
+    <div class="task-list">
+      <!-- Example Task Item (Dynamic Content from Backend) -->
+      <div class="task-item">
+        <h3>Follow on X/Twitter</h3>
+        <p>Follow our official X (formerly Twitter) account.</p>
+        <div class="points">Points: <span>100</span></div>
+        <div class="task-status">Status: <span class="status-incomplete">Incomplete</span></div> <!-- Use classes for status -->
+        <a href="https://x.com/suicarsxyz"  class="btn btn-secondary">Follow</a> <!-- Or a button triggering verification -->
+      </div>
+      <!-- Another Task Item -->
+      <div class="task-item">
+        <h3>Connect Your Wallet</h3>
+        <p>Connect your SUI wallet to register for the Airdrop.</p>
+        <div class="points">Points: <span>50</span></div>
+         <div class="task-status">Status: <span class="status-completed">Completed <i class="fas fa-check-circle"></i></span></div>
+        <button onclick="connectWallet()" class="btn" disabled>Wallet Connected</button> <!-- Disable if completed -->
+      </div>
+      <!-- Add more task items here -->
+    </div>
+  </section>
+
+  <section class="ranking-section">
+    <h2 class="section-title">Leaderboard: Top Racers</h2>
+    <!-- Add a note about update frequency -->
+    <p style="color: var(--text-medium); margin-bottom: 20px;">Ranking updates every hour.</p>
+    <table class="ranking-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Wallet Address</th>
+          <th>Total Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example Ranking Rows (Dynamic Content from Backend) -->
+        <tr class="user-row"> <!-- Class to highlight logged-in user -->
+            <td data-label="Rank">1</td>
+            <td data-label="Wallet Address">0x1a2b...3c4d</td>
+            <td data-label="Total Points">1500</td>
+        </tr>
+         <tr>
+            <td data-label="Rank">2</td>
+            <td data-label="Wallet Address">0x5e6f...7g8h</td>
+            <td data-label="Total Points">1480</td>
+        </tr>
+         <!-- More ranking rows -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Optional Rewards Section -->
+  <section class="rewards-section">
+      <h2 class="section-title">What Your Points Earn</h2>
+      <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-medium);">
+          Points earned in the Airdrop campaign increase your chances of qualifying for a share of the $SCAR token airdrop pool. High-ranking participants may receive additional benefits. Final reward distribution details will be announced closer to the TGE.
+      </p>
+  </section>
+
+   <!-- Optional FAQ Section -->
+   <section class="faq-section">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <!-- Add FAQ items (could use a simple list or JavaScript for an accordion effect) -->
+       <div class="faq-item">
+            <h3>How do I participate?</h3>
+            <p>Connect your SUI wallet and start completing tasks listed on this page.</p>
+       </div>
+       <!-- More FAQ items -->
+   </section>
+
+</main>
+
+<footer>
+  <!-- Your existing footer -->
+</footer>
+
+<script>
+  // Keep your connectWallet() script here, updated to English alerts
+  async function connectWallet() {
+    if (!window.suiWallet) {
+      alert("Wallet connection is not working yet. Please try again later or ensure the SUI wallet extension is installed.");
+      return;
+    }
+
+    try {
+      const result = await window.suiWallet.requestPermissions({
+        permissions: ["viewAccount", "suggestTransactions"],
+      });
+
+      if (result && result.accounts && result.accounts.length > 0) {
+        const connectedAccount = result.accounts[0];
+        alert("Wallet connected: " + connectedAccount.address);
+        // TODO: Send connectedAccount.address to your backend
+        // Example: registerAirdropParticipant(connectedAccount.address);
+      } else {
+        alert("Could not connect wallet or no account address found.");
+      }
+    } catch (error) {
+      alert("Failed to connect wallet: " + error.message);
+      console.error("Wallet connection error:", error);
+    }
+  }
+
+  // TODO: Add JavaScript functions to fetch tasks, user status, and ranking from your backend API
+  // Example:
+  // async function loadAirdropData(walletAddress) {
+  //   const tasksResponse = await fetch('/api/airdrop/tasks?wallet=' + walletAddress);
+  //   const tasks = await tasksResponse.json();
+  //   renderTasks(tasks); // Function to update the HTML tasks section
+
+  //   const rankingResponse = await fetch('/api/airdrop/ranking');
+  //   const ranking = await rankingResponse.json();
+  //   renderRanking(ranking, walletAddress); // Function to update the HTML ranking table
+  // }
+
+  // Call loadAirdropData after wallet connection or page load if wallet is already connected
+</script>
+
+</body>
+</html>
