@@ -1,133 +1,830 @@
-<!-- ... (head and header using your existing code) ... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUI Cars Airdrop</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <!-- Google Fonts - Orbitron for headings, Lato for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons (optional, if you use it for status indicators) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0A0A0A; /* Very dark background */
+      --primary-neon: #00FFFF; /* Bright cyan */
+      --secondary-neon: #FF00FF; /* Bright magenta */
+      --card-bg: #1A1A2E; /* Darker blue-purple for cards */
+      --text-light: #E0E0E0; /* Light text for readability */
+      --text-medium: #A0A0A0; /* Medium gray text */
+      --border-glow: #00FFFF88; /* Cyan glow effect */
+      --button-hover: #00E0E0; /* Lighter cyan on hover */
+      --header-bg: rgba(10, 10, 10, 0.9); /* Slightly transparent for sticky header */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Header Styles - Reused */
+    header {
+      background-color: var(--header-bg);
+      width: 100%;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(5px); /* Frosty glass effect */
+    }
+
+    header .logo {
+      height: 80px; /* Adjust height for your logo */
+      filter: drop-shadow(0 0 5px var(--primary-neon)); /* Subtle glow on logo */
+    }
+
+    header .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2em;
+      color: var(--primary-neon);
+      text-shadow: 0 0 8px var(--primary-neon);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap; /* Added for responsiveness */
+      justify-content: center; /* Added for responsiveness */
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1.1em;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary-neon);
+      text-shadow: 0 0 5px var(--primary-neon);
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap; /* Added for responsiveness */
+      justify-content: center; /* Added for responsiveness */
+    }
+
+    /* General Button Styles - Reused */
+    .btn {
+      background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+      color: var(--bg-dark); /* Dark text on bright button */
+      border: none;
+      padding: 12px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px var(--primary-neon);
+      transition: all 0.3s ease;
+      text-decoration: none; /* For anchor tags used as buttons */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px var(--button-hover), 0 0 50px var(--secondary-neon);
+      background: linear-gradient(45deg, var(--button-hover), var(--secondary-neon));
+    }
+
+    /* Secondary Button Style - Reused */
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--primary-neon);
+      color: var(--primary-neon);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-neon);
+      color: var(--bg-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--primary-neon);
+    }
+
+    /* Hero Section - Base Styles Reused, adjusted height for Airdrop */
+    .hero-section {
+      width: 100%;
+      height: 60vh; /* Slightly shorter than main hero */
+      /* Background image specific to Airdrop could be added here */
+      /* background: url('path/to/airdrop-hero-bg.jpg') no-repeat center center/cover; */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+      background-color: #0D0D0D; /* Fallback/default background */
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4em; /* Adjusted size */
+      color: var(--primary-neon);
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px var(--primary-neon), 0 0 40px rgba(0, 255, 255, 0.5);
+      line-height: 1.1;
+    }
+
+    .hero-content p {
+      font-size: 1.3em; /* Adjusted size */
+      color: var(--text-medium);
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons { /* Reused class */
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* General Section Titles - Reused */
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      color: var(--primary-neon);
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 40px;
+      text-shadow: 0 0 15px var(--primary-neon);
+    }
+
+    /* Section Padding/Container - New class for general content sections */
+    .airdrop-section-container {
+        width: 100%;
+        max-width: 1000px; /* Limit content width */
+        padding: 40px 20px;
+        text-align: center;
+        margin: 40px auto; /* Adjust margin */
+    }
+
+    .airdrop-section-container p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: var(--text-light);
+        margin-bottom: 20px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* How It Works Section */
+    .how-it-works-steps {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+
+    .how-it-works-step {
+        background-color: var(--card-bg);
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        width: 280px;
+        text-align: center;
+    }
+
+    .how-it-works-step h3 {
+         font-family: 'Orbitron', sans-serif;
+         color: var(--secondary-neon); /* Using secondary neon for steps */
+         margin-top: 0;
+         font-size: 1.5em;
+         text-shadow: 0 0 8px var(--secondary-neon);
+    }
+
+     .how-it-works-step .step-icon {
+        font-size: 3em;
+        color: var(--primary-neon);
+        margin-bottom: 15px;
+     }
+
+
+    /* Tasks Section */
+    .task-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .task-item {
+        background-color: var(--card-bg);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Pushes button to bottom */
+    }
+
+    .task-item h3 {
+        font-family: 'Orbitron', sans-serif;
+        color: var(--primary-neon);
+        margin-top: 0;
+        font-size: 1.4em;
+    }
+
+    .task-item p {
+        color: var(--text-medium);
+        font-size: 0.95em;
+        margin-bottom: 15px;
+        flex-grow: 1; /* Allows paragraph to take available space */
+    }
+
+    .task-item .points {
+        font-weight: 700;
+        color: var(--secondary-neon);
+        margin-bottom: 15px;
+        font-size: 1.1em;
+    }
+
+     .task-status {
+        font-size: 0.9em;
+        color: var(--text-medium);
+        margin-bottom: 15px;
+     }
+
+     .status-incomplete { color: #FF6B6B; } /* Reddish */
+     .status-pending { color: #FFD166; } /* Yellowish */
+     .status-completed { color: #06D6A0; } /* Greenish */
+
+
+    .task-item .btn, .task-item a.btn {
+        width: 100%; /* Button takes full width */
+        text-align: center;
+        margin-top: auto; /* Pushes button to the bottom */
+    }
+
+    .task-item button:disabled, .task-item a.btn.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+        background: gray; /* Or a specific disabled color */
+    }
+
+    /* Ranking Section */
+    .ranking-table {
+        width: 100%;
+        margin-top: 30px;
+        border-collapse: collapse;
+        overflow: hidden; /* For rounded corners */
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); /* Add subtle shadow */
+        border: 1px solid rgba(0, 255, 255, 0.1);
+    }
+
+    .ranking-table th, .ranking-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    }
+
+    .ranking-table th {
+        background-color: rgba(0, 255, 255, 0.1);
+        font-family: 'Orbitron', sans-serif;
+        color: var(--primary-neon);
+        text-transform: uppercase;
+        font-size: 0.9em;
+    }
+
+    .ranking-table td {
+        background-color: var(--card-bg);
+        color: var(--text-light);
+    }
+
+    .ranking-table tbody tr:nth-child(even) td {
+        background-color: rgba(26, 26, 46, 0.8); /* Slightly different background for even rows */
+    }
+
+    .ranking-table tbody tr:hover td {
+        background-color: rgba(0, 255, 255, 0.05); /* Hover effect */
+    }
+
+    .ranking-table tbody tr.user-row td {
+        background-color: rgba(255, 0, 255, 0.15); /* Highlight for logged-in user row */
+        font-weight: 700;
+        color: var(--secondary-neon);
+        border-left: 3px solid var(--secondary-neon); /* Visual indicator */
+    }
+
+    /* FAQ Section */
+    .faq-list {
+        margin-top: 30px;
+        text-align: left;
+    }
+
+    .faq-item {
+        background-color: var(--card-bg);
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+         border: 1px solid rgba(0, 255, 255, 0.15);
+         box-shadow: 0 0 8px rgba(0, 255, 255, 0.1);
+         cursor: pointer; /* Indicate clickable for accordion */
+         transition: background-color 0.3s ease;
+    }
+
+     .faq-item:hover {
+         background-color: rgba(26, 26, 46, 0.8);
+     }
+
+    .faq-item h3 {
+        font-family: 'Lato', sans-serif; /* Lato for easier reading in FAQ */
+        color: var(--primary-neon);
+        margin: 0;
+        font-size: 1.2em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-item p {
+        color: var(--text-medium);
+        font-size: 1em;
+        margin-top: 15px;
+        margin-bottom: 0;
+        display: none; /* Hidden by default, shown with JS for accordion */
+    }
+
+    .faq-item.active p {
+        display: block; /* Show when active */
+    }
+
+     .faq-item h3 .toggle-icon {
+         font-size: 1em;
+         transition: transform 0.3s ease;
+     }
+
+    .faq-item.active h3 .toggle-icon {
+         transform: rotate(180deg);
+    }
+
+
+    /* Footer - Reused */
+    footer {
+      width: 100%;
+      margin-top: auto; /* Pushes footer to the bottom */
+      padding: 30px 20px;
+      background-color: var(--card-bg);
+      color: var(--text-medium);
+      text-align: center;
+      font-size: 0.9em;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .social-links {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .social-links a {
+      color: var(--primary-neon);
+      font-size: 1.5em;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--secondary-neon);
+      transform: translateY(-3px);
+    }
+
+    /* Responsiveness - Adjust existing media queries as needed */
+    @media (max-width: 992px) {
+       /* Keep existing adjustments */
+        .hero-content h1 { font-size: 3em; }
+        .airdrop-section-container { max-width: 95%; }
+        nav { gap: 15px; } /* Adjust gap */
+    }
+
+    @media (max-width: 768px) {
+        /* Keep existing adjustments */
+        header { flex-direction: column; }
+        nav, .header-buttons { justify-content: center; width: 100%; }
+        .hero-section { height: 50vh; } /* Further adjust hero height */
+        .hero-content h1 { font-size: 2.5em; }
+        .section-title { font-size: 2em; }
+        .how-it-works-steps { flex-direction: column; align-items: center; }
+        .how-it-works-step { width: 90%; max-width: 350px; }
+        .task-list { grid-template-columns: 1fr; } /* Stack tasks on small screens */
+        .task-item { max-width: 350px; margin: 0 auto; } /* Center tasks */
+         .ranking-table th, .ranking-table td { padding: 10px; } /* Adjust padding */
+
+         /* Mobile Responsiveness for Ranking Table - Reused from previous example */
+        .ranking-table, .ranking-table tbody, .ranking-table tr, .ranking-table td {
+            display: block;
+            width: 100%;
+        }
+        .ranking-table thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        .ranking-table tr { border: 1px solid rgba(0, 255, 255, 0.1); margin-bottom: 8px; border-radius: 8px;} /* Added border-radius */
+        .ranking-table td {
+            border: none;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.05);
+            position: relative;
+            padding-left: 50%;
+            text-align: right;
+        }
+        .ranking-table td::before {
+            position: absolute;
+            top: 10px; /* Adjust position */
+            left: 10px; /* Adjust position */
+            width: 40%; /* Adjust width */
+            padding-right: 10px;
+            white-space: nowrap;
+            content: attr(data-label);
+            font-weight: 700;
+            color: var(--primary-neon);
+            text-align: left;
+        }
+        .ranking-table tbody tr:last-child td { border-bottom: none; } /* No border on last cell */
+    }
+     @media (max-width: 480px) {
+         .hero-content h1 { font-size: 2em; }
+         .hero-content p { font-size: 1em; }
+         .section-title { font-size: 1.8em; }
+         header { padding: 15px 10px; }
+         nav a { font-size: 1em; }
+         .btn { padding: 10px 14px; font-size: 0.9em; }
+         .airdrop-section-container { padding: 30px 15px; }
+     }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <!-- Your Logo/Text -->
+   <img src="sui cars.png" alt="SUI Cars Logo" class="logo" />
+   <!-- OR -->
+   <!-- <a href="index.html" class="logo-text">SUI CARS</a> -->
+
+  <nav>
+    <a href="index.html#about">About</a>
+    <a href="index.html#gameplay">Gameplay</a>
+    <a href="index.html#nfts">NFTs</a>
+    <a href="index.html#roadmap">Roadmap</a>
+    <a href="index.html#tokenomics">Tokenomics</a>
+    <a href="whitepaper.html" >Whitepaper</a> <!-- Link to Whitepaper -->
+    <a href="airdrop.html" style="color: var(--secondary-neon); text-shadow: 0 0 5px var(--secondary-neon);">Airdrop</a> <!-- New Airdrop Link - Highlighted -->
+  </nav>
+
+  <div class="header-buttons">
+    <button onclick="connectWallet()" class="btn">
+      Connect Wallet
+    </button>
+    <!-- Removed Secondary Whitepaper Button as it's in Nav -->
+  </div>
+</header>
 
 <main>
-  <section class="hero-section airdrop-hero"> <!-- Using existing hero style with a specific class -->
+  <section class="hero-section airdrop-hero">
     <div class="hero-content">
       <h1>Accelerate Your Journey:<br>Join the SUI Cars Airdrop!</h1>
-      <p>Complete tasks, collect points, and qualify for exclusive SUI Cars rewards.</p>
+      <p>Complete tasks, collect points, and qualify for exclusive SUI Cars rewards on the SUI Network.</p>
       <button onclick="connectWallet()" class="btn">Connect Your Wallet to Start</button>
-      <!-- Add Countdown Timer here -->
-      <!-- <div class="countdown">Airdrop Ends In: <span>...</span></div> -->
+      <!-- Add Countdown Timer here if desired -->
+      <!-- <div class="countdown" style="margin-top: 20px; font-size: 1.2em; color: var(--primary-neon);">Airdrop Ends In: <span id="airdrop-countdown">...</span></div> -->
     </div>
   </section>
 
-  <section class="tasks-section">
-    <h2 class="section-title">Earn Points: Complete These Missions</h2>
-    <div class="task-list">
-      <!-- Example Task Item (Dynamic Content from Backend) -->
-      <div class="task-item">
-        <h3>Follow on X/Twitter</h3>
-        <p>Follow our official X (formerly Twitter) account.</p>
-        <div class="points">Points: <span>100</span></div>
-        <div class="task-status">Status: <span class="status-incomplete">Incomplete</span></div> <!-- Use classes for status -->
-        <a href="https://x.com/suicarsxyz"  class="btn btn-secondary">Follow</a> <!-- Or a button triggering verification -->
+  <section class="airdrop-section-container">
+      <h2 class="section-title">Race Towards Rewards: How it Works</h2>
+      <div class="how-it-works-steps">
+          <div class="how-it-works-step">
+               <div class="step-icon"><i class="fas fa-wallet"></i></div> <!-- Example icon -->
+               <h3>Connect</h3>
+               <p>Securely connect your SUI wallet to begin participating.</p>
+          </div>
+           <div class="how-it-works-step">
+               <div class="step-icon"><i class="fas fa-list-check"></i></div> <!-- Example icon -->
+               <h3>Complete Tasks</h3>
+               <p>Engage with SUI Cars across social media and our platform.</p>
+          </div>
+           <div class="how-it-works-step">
+               <div class="step-icon"><i class="fas fa-star"></i></div> <!-- Example icon -->
+               <h3>Earn Points</h3>
+               <p>Each completed task earns you points towards the airdrop.</p>
+          </div>
+           <div class="how-it-works-step">
+               <div class="step-icon"><i class="fas fa-trophy"></i></div> <!-- Example icon -->
+               <h3>Climb Ranking</h3>
+               <p>Higher points mean a better position on the leaderboard.</p>
+          </div>
       </div>
-      <!-- Another Task Item -->
+  </section>
+
+
+  <section class="airdrop-section-container tasks-section">
+    <h2 class="section-title">Earn Points: Complete These Missions</h2>
+    <p style="margin-bottom: 40px;">Finish the tasks below to accumulate points and boost your rank!</p>
+    <div class="task-list">
+      <!-- Example Task Item (Dynamic Content should replace these static examples) -->
       <div class="task-item">
         <h3>Connect Your Wallet</h3>
-        <p>Connect your SUI wallet to register for the Airdrop.</p>
+        <p>Connect your SUI wallet to register for the Airdrop and earn initial points.</p>
         <div class="points">Points: <span>50</span></div>
-         <div class="task-status">Status: <span class="status-completed">Completed <i class="fas fa-check-circle"></i></span></div>
-        <button onclick="connectWallet()" class="btn" disabled>Wallet Connected</button> <!-- Disable if completed -->
+         <div class="task-status">Status: <span class="status-incomplete"><i class="fas fa-circle-dot"></i> Incomplete</span></div>
+        <button onclick="connectWallet()" class="btn">Connect Wallet</button>
       </div>
-      <!-- Add more task items here -->
+      <div class="task-item">
+        <h3>Follow on X/Twitter</h3>
+        <p>Follow our official X (formerly Twitter) account <a href="https://x.com/suicarsxyz"  style="color: var(--primary-neon);">@suicarsxyz</a>.</p>
+        <div class="points">Points: <span>100</span></div>
+        <div class="task-status">Status: <span class="status-completed"><i class="fas fa-check-circle"></i> Completed</span></div>
+        <a href="https://x.com/suicarsxyz"  class="btn btn-secondary disabled" disabled>Followed</a> <!-- Example of completed task -->
+      </div>
+      <div class="task-item">
+        <h3>Join Discord</h3>
+        <p>Join the official SUI Cars Discord community server.</p>
+        <div class="points">Points: <span>100</span></div>
+        <div class="task-status">Status: <span class="status-pending"><i class="fas fa-spinner fa-spin"></i> Pending Verification</span></div>
+        <a href="#"  class="btn">Join Discord</a> <!-- Link to Discord -->
+      </div>
+       <div class="task-item">
+        <h3>Retweet Pinned Tweet</h3>
+        <p>Retweet the pinned announcement tweet on our X profile.</p>
+        <div class="points">Points: <span>75</span></div>
+        <div class="task-status">Status: <span class="status-incomplete"><i class="fas fa-circle-dot"></i> Incomplete</span></div>
+        <a href="https://x.com/suicarsxyz"  class="btn">Retweet</a> <!-- Link to Twitter profile -->
+      </div>
+      <!-- Add more task items here following the same structure -->
+       <div class="task-item">
+        <h3>Daily Visit Bonus</h3>
+        <p>Visit the Airdrop page daily to claim bonus points.</p>
+        <div class="points">Points: <span>10</span></div>
+         <div class="task-status">Status: <span class="status-completed"><i class="fas fa-check-circle"></i> Claimed Today</span></div>
+        <button class="btn btn-secondary disabled" disabled>Claimed</button> <!-- Button will change based on daily status -->
+      </div>
     </div>
   </section>
 
-  <section class="ranking-section">
+  <section class="airdrop-section-container ranking-section">
     <h2 class="section-title">Leaderboard: Top Racers</h2>
-    <!-- Add a note about update frequency -->
-    <p style="color: var(--text-medium); margin-bottom: 20px;">Ranking updates every hour.</p>
+    <p style="color: var(--text-medium); margin-bottom: 30px;">See who's leading the race for points!</p>
     <table class="ranking-table">
       <thead>
         <tr>
           <th>Rank</th>
-          <th>Wallet Address</th>
-          <th>Total Points</th>
+          <th data-label="Wallet Address">Wallet Address</th>
+          <th data-label="Total Points">Total Points</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Example Ranking Rows (Dynamic Content from Backend) -->
-        <tr class="user-row"> <!-- Class to highlight logged-in user -->
-            <td data-label="Rank">1</td>
+        <!-- Example Ranking Rows (Dynamic Content from Backend should replace these) -->
+        <tr class="user-row"> <!-- Add class="user-row" for the logged-in user -->
+            <td>1</td>
             <td data-label="Wallet Address">0x1a2b...3c4d</td>
             <td data-label="Total Points">1500</td>
         </tr>
          <tr>
-            <td data-label="Rank">2</td>
+            <td>2</td>
             <td data-label="Wallet Address">0x5e6f...7g8h</td>
             <td data-label="Total Points">1480</td>
         </tr>
-         <!-- More ranking rows -->
+         <tr>
+            <td>3</td>
+            <td data-label="Wallet Address">0x9i0j...1k2l</td>
+            <td data-label="Total Points">1450</td>
+        </tr>
+         <tr>
+            <td>4</td>
+            <td data-label="Wallet Address">0xa1b2...c3d4</td>
+            <td data-label="Total Points">1400</td>
+        </tr>
+         <tr>
+            <td>5</td>
+            <td data-label="Wallet Address">0xe5f6...g7h8</td>
+            <td data-label="Total Points">1350</td>
+        </tr>
+        <!-- More ranking rows will be loaded here -->
       </tbody>
     </table>
+     <p style="color: var(--text-medium); margin-top: 20px; font-size: 0.9em;">Ranking updates every hour.</p>
   </section>
 
-  <!-- Optional Rewards Section -->
-  <section class="rewards-section">
+  <section class="airdrop-section-container rewards-section">
       <h2 class="section-title">What Your Points Earn</h2>
-      <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-medium);">
-          Points earned in the Airdrop campaign increase your chances of qualifying for a share of the $SCAR token airdrop pool. High-ranking participants may receive additional benefits. Final reward distribution details will be announced closer to the TGE.
+      <p>
+          Points accumulated in the Airdrop campaign directly influence your eligibility and potential allocation from the $SCAR token airdrop pool.
       </p>
+       <p>
+           High-ranking participants may also qualify for exclusive benefits, such as guaranteed spots for future NFT mints or early access to new game features.
+       </p>
+       <p style="font-size: 0.9em; color: var(--text-medium); margin-top: 30px;">
+           *Note: Final reward structure and distribution details will be announced closer to the Token Generation Event (TGE).
+       </p>
   </section>
 
-   <!-- Optional FAQ Section -->
-   <section class="faq-section">
+   <section class="airdrop-section-container faq-section">
       <h2 class="section-title">Frequently Asked Questions</h2>
-      <!-- Add FAQ items (could use a simple list or JavaScript for an accordion effect) -->
-       <div class="faq-item">
-            <h3>How do I participate?</h3>
-            <p>Connect your SUI wallet and start completing tasks listed on this page.</p>
-       </div>
-       <!-- More FAQ items -->
+      <div class="faq-list">
+        <!-- Example FAQ Item (Accordion structure handled by JS if you implement it) -->
+         <div class="faq-item">
+              <h3>How do I participate in the Airdrop?<span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h3>
+              <p>Participation is easy! First, connect your SUI wallet using the button on this page. Then, start completing the available tasks listed above to earn points.</p>
+         </div>
+         <div class="faq-item">
+              <h3>How are points calculated?<span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h3>
+              <p>Points are awarded for completing specific actions, such as following our social media, joining our community channels, or interacting with the SUI Cars platform. Each task has a designated point value.</p>
+         </div>
+          <div class="faq-item">
+              <h3>How often is the ranking updated?<span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h3>
+              <p>The ranking is updated approximately every hour to reflect newly earned points and task completions.</p>
+         </div>
+          <div class="faq-item">
+              <h3>How do you verify social media tasks?<span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h3>
+              <p>Verification may require linking your social media accounts (like X/Twitter or Discord) to your Airdrop profile. Our system will then check if the required actions have been performed. Some tasks might involve manual review.</p>
+         </div>
+          <div class="faq-item">
+              <h3>When will the Airdrop rewards be distributed?<span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h3>
+              <p>The exact distribution date for the Airdrop rewards will be announced closer to the official launch of the $SCAR token (TGE).</p>
+         </div>
+          <div class="faq-item">
+              <h3>What kind of rewards can I get?<span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h3>
+              <p>By participating and earning points, you qualify for a share of the $SCAR token airdrop. Top participants may also receive additional bonuses like NFT whitelist spots.</p>
+         </div>
+          <div class="faq-item">
+              <h3>Is there a referral system?<span class="toggle-icon"><i class="fas fa-chevron-down"></i></span></h3>
+              <p>A referral system may be introduced later in the campaign. Please stay tuned for updates on new ways to earn points!</p>
+         </div>
+         <!-- More FAQ items -->
+      </div>
    </section>
 
 </main>
 
 <footer>
-  <!-- Your existing footer -->
+  <div class="social-links">
+    <!-- Using Font Awesome icons here -->
+    <!-- <a href="#"  title="Join us on Discord"><i class="fab fa-discord"></i></a> -->
+    <a href="https://x.com/suicarsxyz"  title="Follow us on X/Twitter"><i class="fab fa-twitter"></i></a>
+    <!-- <a href="#"  title="Join our Telegram group"><i class="fab fa-telegram-plane"></i></a> -->
+     <!-- Add other relevant social links -->
+  </div>
+  &copy; 2025 SUI Cars. All rights reserved.
 </footer>
 
 <script>
-  // Keep your connectWallet() script here, updated to English alerts
+  // Keep your connectWallet() script here, with English alerts
   async function connectWallet() {
     if (!window.suiWallet) {
-      alert("Wallet connection is not working yet. Please try again later or ensure the SUI wallet extension is installed.");
+      alert("SUI Wallet not found. Please install a SUI-compatible wallet extension (like Sui Wallet by Mysten Labs) to participate.");
+      window.open("https://sui.io/wallet", "_blank"); // Optional: link to Sui wallet info page
       return;
     }
 
     try {
+      // Request basic permissions
       const result = await window.suiWallet.requestPermissions({
-        permissions: ["viewAccount", "suggestTransactions"],
+        permissions: ["viewAccount", "suggestTransactions"], // "suggestTransactions" might be needed for future on-chain tasks
       });
 
       if (result && result.accounts && result.accounts.length > 0) {
         const connectedAccount = result.accounts[0];
-        alert("Wallet connected: " + connectedAccount.address);
-        // TODO: Send connectedAccount.address to your backend
-        // Example: registerAirdropParticipant(connectedAccount.address);
+        alert("Wallet connected successfully: " + connectedAccount.address);
+        // TODO: Send connectedAccount.address to your backend API to:
+        // 1. Register participant if new
+        // 2. Award points for wallet connection task
+        // 3. Fetch and display user's task status and points
+        // 4. Fetch and display the updated ranking
+        // Example calls:
+        // registerAirdropParticipant(connectedAccount.address);
+        // loadUserAirdropData(connectedAccount.address);
+        // loadRanking();
       } else {
-        alert("Could not connect wallet or no account address found.");
+        alert("Could not connect wallet or retrieve account address.");
       }
     } catch (error) {
-      alert("Failed to connect wallet: " + error.message);
-      console.error("Wallet connection error:", error);
+      // Handle specific errors (e.g., user rejected connection)
+      if (error.code === 4001) { // Standard EIP-1193 user rejected request code
+           alert("Wallet connection rejected by the user.");
+      } else {
+        alert("Failed to connect wallet: " + error.message);
+        console.error("Wallet connection error:", error);
+      }
     }
   }
 
-  // TODO: Add JavaScript functions to fetch tasks, user status, and ranking from your backend API
-  // Example:
-  // async function loadAirdropData(walletAddress) {
-  //   const tasksResponse = await fetch('/api/airdrop/tasks?wallet=' + walletAddress);
-  //   const tasks = await tasksResponse.json();
-  //   renderTasks(tasks); // Function to update the HTML tasks section
+  // TODO: Implement JavaScript functions to interact with your backend API:
+  // 1. registerAirdropParticipant(walletAddress)
+  // 2. loadUserAirdropData(walletAddress) - fetches task status and user's total points
+  // 3. loadRanking() - fetches leaderboard data
+  // 4. completeTask(taskId, walletAddress) - sends task completion event to backend for verification
+  // 5. updateUI(data) - function to render task list, status, points, and ranking
 
-  //   const rankingResponse = await fetch('/api/airdrop/ranking');
-  //   const ranking = await rankingResponse.json();
-  //   renderRanking(ranking, walletAddress); // Function to update the HTML ranking table
-  // }
+   // Optional: JavaScript for FAQ Accordion
+   document.addEventListener('DOMContentLoaded', function() {
+       const faqItems = document.querySelectorAll('.faq-item');
 
-  // Call loadAirdropData after wallet connection or page load if wallet is already connected
+       faqItems.forEach(item => {
+           item.addEventListener('click', function() {
+               // Toggle active class on clicked item
+               this.classList.toggle('active');
+
+               // Optional: Close other open items
+               faqItems.forEach(otherItem => {
+                   if (otherItem !== this && otherItem.classList.contains('active')) {
+                       otherItem.classList.remove('active');
+                   }
+               });
+           });
+       });
+   });
+
+   // Optional: Simple countdown timer script
+   // Needs backend to provide end date
+   /*
+   function startCountdown(endDate) {
+        const countdownElement = document.getElementById('airdrop-countdown');
+        const end = new Date(endDate).getTime(); // End date from your backend
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = end - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(timer);
+                countdownElement.innerHTML = "Airdrop Ended";
+                // Disable task buttons etc.
+            }
+        }, 1000);
+   }
+
+   // Call startCountdown with the actual end date from your backend
+   // startCountdown('2025-12-31T23:59:59Z'); // Example end date
+   */
+
 </script>
 
 </body>
