@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SUI Cars</title>
-  <link rel="icon" href="favicon.png" type="image/png" /> 
+  <link rel="icon" href="favicon.png" type="image/png" />
   <!-- Google Fonts - Orbitron for headings, Lato for body -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
@@ -51,7 +51,7 @@
       height: 80px; /* Adjust height for your logo */
       filter: drop-shadow(0 0 5px var(--primary-neon)); /* Subtle glow on logo */
     }
-    
+
     header .logo-text {
       font-family: 'Orbitron', sans-serif;
       font-size: 2.2em;
@@ -91,8 +91,8 @@
       background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
       color: var(--bg-dark); /* Dark text on bright button */
       border: none;
-      padding: 12px 16px; 
-      border-radius: 6px; 
+      padding: 12px 16px;
+      border-radius: 6px;
       cursor: pointer;
       font-weight: 700;
       font-size: 1em;
@@ -468,11 +468,11 @@
 <header>
   <!-- Replace 'sui cars.png' with your actual logo, or use text like below -->
    <img src="sui cars.png" alt="SUI Cars Logo" class="logo" />
-    <!-- <a href="#" class="logo-text">SUI CARS</a> --> 
-  
+    <!-- <a href="#" class="logo-text">SUI CARS</a> -->
+
   <nav>
     <a href="#about">About</a>
-    <a href="#gameplay">Gameplay</a> 
+    <a href="#gameplay">Gameplay</a>
     <a href="#nfts">NFTs</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#tokenomics">Tokenomics</a>
@@ -549,7 +549,7 @@
     <h1 class="section-title">Our Racing Roadmap</h1>
     <p class="roadmap-description">Race with us on this journey! Our roadmap is the future of SUI Cars. Each stop is a new goal achieved.</p>
     <div class="roadmap-image-container">
-      <img src="roadmap.png" alt="SUI Cars Roadmap - Race Track"> 
+      <img src="roadmap.png" alt="SUI Cars Roadmap - Race Track">
     </div>
   </section>
 
@@ -632,6 +632,11 @@
         alert("Failed to connect wallet: " + error.message);
       }
     }
+
+    // New script for the construction alert
+    window.onload = function() {
+      alert("Welcome to SUI Cars! This website is currently under construction. Please check back later for updates!");
+    };
   </script>
 </body>
 </html>
