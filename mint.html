@@ -284,8 +284,8 @@
         margin-top: 25px;
         font-size: 1.1em;
         color: var(--text-light);
-        text-align: center;
         min-height: 30px; /* Reserve space for status messages */
+        text-align: center;
     }
 
     .mint-status.success {
@@ -921,8 +921,7 @@
         <!-- Dates are commented out as requested -->
         <!-- <p>Starts: <strong>${phase.startTime.toLocaleString()} UTC</strong></p> -->
         <!-- <p>Ends: <strong>${phase.endTime.toLocaleString()} UTC</strong></p> -->
-        <p>Max Per Transaction: <strong>${phase.maxPerTx}</strong></p>
-        <p>Max Per Wallet: <strong>${phase.maxPerWallet === Infinity ? "Unlimited" : phase.maxPerWallet}</strong></p>
+        <!-- Max Per Transaction and Max Per Wallet lines are hidden as requested -->
         ${countdownHtml}
       `;
       mintPhasesOverviewContainer.appendChild(phaseCard);
