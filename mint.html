@@ -354,7 +354,7 @@
 
 <main>
   <section class="mint-section">
-    <h1>Mint your SUI Car NFT</h1>
+    <h1>Mint your car</h1>
 
     <div class="mint-details-container">
       <div id="currentPhaseDisplay" class="current-phase">Mint is Live!</div>
@@ -406,7 +406,7 @@
 
   // --- Configuration for a single, unlimited mint ---
   const MINT_CONFIG = {
-    price: 3.5, // Example price for one NFT
+    price: 100, // Example price for one NFT
     contractFunctionName: 'mint_one_random_nft' // Your Sui contract function to mint one random NFT
   };
 
@@ -468,7 +468,7 @@
   // --- Minting Logic ---
   async function mintNFT() {
     if (!currentWalletAddress) {
-      displayStatus("Please connect your Sui Wallet first. 🦊", "error");
+      displayStatus("Please connect your Sui Wallet first.", "error");
       return;
     }
 
@@ -519,7 +519,7 @@
   // --- UI Update Helper Functions ---
   function updateMintUI() {
     currentPhaseDisplay.textContent = "Mint is Live!"; // Always "Mint is Live!"
-    mintPriceSpan.textContent = `${MINT_CONFIG.price} SUI`; // Set the single price
+    mintPriceSpan.textContent = `${MINT_CONFIG.price} SCAR`; // Set the single price
 
     if (currentWalletAddress) {
       displayStatus("You're ready to mint your SUI Car NFT!", "");
