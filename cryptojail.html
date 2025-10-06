@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prison Floors - Simulação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --primary-color: #2e7bff;
+            --border-color: #30363d;
+            --card-bg: #161b22;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scroll for the dynamic background */
+        }
+
+        /* Basic container for the dynamic background effect - simplified */
+        .background-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--border-color) 0%, transparent 70%);
+            opacity: 0.1;
+            z-index: 0;
+            animation: pulseBackground 15s infinite alternate;
+        }
+
+        @keyframes pulseBackground {
+            0% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 90%;
+            width: 600px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        input[type="number"] {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 1em;
+            outline: none;
+            flex-grow: 1;
+            max-width: 200px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Space Mono', monospace;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #216cdb;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .display-area {
+            min-height: 150px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 1.2em;
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floor-display {
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .floor-details {
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.2s;
+            max-width: 80%;
+        }
+
+        .message {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            font-size: 1em;
+            color: #ccc;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cell-like visual elements - very simplified, just for concept */
+        .cell-border {
+            position: absolute;
+            border: 2px solid rgba(46, 123, 255, 0.2);
+            box-shadow: 0 0 15px rgba(46, 123, 255, 0.2);
+            transition: all 0.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .cell-border.top-left { top: 10px; left: 10px; width: 50px; height: 50px; border-bottom: none; border-right: none; }
+        .cell-border.top-right { top: 10px; right: 10px; width: 50px; height: 50px; border-bottom: none; border-left: none; }
+        .cell-border.bottom-left { bottom: 10px; left: 10px; width: 50px; height: 50px; border-top: none; border-right: none; }
+        .cell-border.bottom-right { bottom: 10px; right: 10px; width: 50px; height: 50px; border-top: none; border-left: none; }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                width: 95%;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            input[type="number"] {
+                max-width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background-effect"></div>
+
+    <div class="container">
+        <h1>PRISON FLOORS</h1>
+        <div class="input-group">
+            <input type="number" id="floorInput" placeholder="Enter floor number (e.g., 42)" min="1">
+            <button id="viewFloorBtn">VIEW FLOOR</button>
+        </div>
+        <div class="display-area" id="displayArea">
+            <div class="cell-border top-left"></div>
+            <div class="cell-border top-right"></div>
+            <div class="cell-border bottom-left"></div>
+            <div class="cell-border bottom-right"></div>
+            <p class="message">Enter a floor number to reveal its details.</p>
+        </div>
+    </div>
+
+    <script>
+        const floorInput = document.getElementById('floorInput');
+        const viewFloorBtn = document.getElementById('viewFloorBtn');
+        const displayArea = document.getElementById('displayArea');
+
+        viewFloorBtn.addEventListener('click', () => {
+            const floorNumber = parseInt(floorInput.value);
+
+            if (isNaN(floorNumber) || floorNumber < 1) {
+                displayArea.innerHTML = `
+                    <div class="cell-border top-left"></div>
+                    <div class="cell-border top-right"></div>
+                    <div class="cell-border bottom-left"></div>
+                    <div class="cell-border bottom-right"></div>
+                    <p class="message" style="color: #ff6b6b;">Please enter a valid floor number.</p>
+                `;
+                return;
+            }
+
+            // Simulate fetching or generating floor data
+            const floorData = generateFloorData(floorNumber);
+
+            displayArea.innerHTML = `
+                <div class="cell-border top-left"></div>
+                <div class="cell-border top-right"></div>
+                <div class="cell-border bottom-left"></div>
+                <div class="cell-border bottom-right"></div>
+                <p class="floor-display">FLOOR #${floorNumber}</p>
+                <p class="floor-details">${floorData}</p>
+            `;
+            
+            // Optional: Animate the border on update
+            const cellBorders = displayArea.querySelectorAll('.cell-border');
+            cellBorders.forEach(border => {
+                border.style.transform = `scale(1.05)`;
+                setTimeout(() => border.style.transform = `scale(1)`, 300);
+            });
+        });
+
+        function generateFloorData(floor) {
+            // This is where you would integrate actual data or a more complex generation logic
+            let description = "";
+            if (floor % 10 === 0) {
+                description = `A central security hub, heavily fortified. Access restricted.`;
+            } else if (floor % 7 === 0) {
+                description = `Recreational level with limited facilities. Expect low activity.`;
+            } else if (floor % 3 === 0) {
+                description = `Standard residential cells. Occupancy varies.`;
+            } else {
+                description = `Storage area for maintenance equipment. Largely automated.`;
+            }
+            return `Status: Active | Type: ${description}`;
+        }
+
+        // Initial state
+        floorInput.value = ""; // Clear input on load
+    </script>
+</body>
+</html>
