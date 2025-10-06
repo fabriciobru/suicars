@@ -1,38 +1,87 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoJail - Construa seu Império Criminante na Blockchain Solana</title>
-    <link rel="icon" href="#" type="image/x-icon"> <!-- Substitua pelo ícone do seu site -->
+    <title>CryptoJail - Build Your Criminal Empire on the Solana Blockchain</title>
+    <link rel="icon" href="#" type="image/x-icon"> <!-- Replace with your site's favicon -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos Básicos para Estrutura e Centralização (Apenas para demonstração) */
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            background-color: #0d0d0d; /* Fundo escuro */
-            color: #f0f0f0; /* Texto claro */
-            line-height: 1.6;
+        /* Base Styles - Mimicking suicars.xyz */
+        :root {
+            --dark-bg: #0A0A0A;
+            --light-text: #F0F0F0;
+            --accent-green: #00FF00; /* Neon green accent */
+            --subtle-gray: #666666;
+            --border-color: #222222;
         }
 
-        header {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 15px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #333;
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'DM Mono', monospace;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 3.8em; line-height: 1.1; margin-bottom: 0.3em; }
+        h2 { font-size: 2.5em; margin-bottom: 40px; }
+        h3 { font-size: 1.6em; margin-bottom: 25px; }
+        h4 { font-size: 1.2em; margin-bottom: 15px; }
+
+        p {
+            font-size: 1.05em;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            color: #ccc;
+        }
+
+        a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--light-text);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
         }
 
         .navbar {
@@ -42,12 +91,15 @@
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: #00ff00; /* Cor de destaque, como o verde neon */
-            text-decoration: none;
-            text-transform: uppercase;
-            font-family: 'Roboto Mono', monospace;
+            font-size: 2.2em;
+            font-weight: 500;
+            color: var(--accent-green);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+        .logo:hover {
+            color: var(--light-text);
         }
 
         .nav-links ul {
@@ -58,19 +110,17 @@
         }
 
         .nav-links li {
-            margin-left: 30px;
+            margin-left: 35px;
         }
 
         .nav-links a {
-            color: #f0f0f0;
-            text-decoration: none;
+            color: var(--light-text);
+            font-size: 0.95em;
             font-weight: 400;
-            font-size: 16px;
-            transition: color 0.3s ease;
+            text-transform: uppercase;
         }
-
         .nav-links a:hover {
-            color: #00ff00;
+            color: var(--accent-green);
         }
 
         .nav-actions {
@@ -79,141 +129,139 @@
         }
 
         .btn {
-            background-color: #00ff00; /* Cor de destaque */
-            color: #0d0d0d;
-            padding: 10px 20px;
-            border-radius: 5px;
+            background-color: var(--accent-green);
+            color: var(--dark-bg);
+            padding: 12px 25px;
+            border-radius: 4px;
             text-decoration: none;
-            font-weight: 700;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
         }
 
         .btn.outline {
             background-color: transparent;
-            color: #00ff00;
-            border: 2px solid #00ff00;
+            color: var(--accent-green);
+            border: 2px solid var(--accent-green);
         }
 
         .btn:hover {
-            background-color: #00cc00;
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
         }
         .btn.outline:hover {
-            background-color: #00ff00;
-            color: #0d0d0d;
+            background-color: var(--accent-green);
+            color: var(--dark-bg);
         }
 
-        main {
-            padding-top: 80px; /* Espaço para o header fixo */
-        }
-
-        section {
-            padding: 80px 0;
-            text-align: center; /* Centraliza o texto como no suicars.xyz */
-        }
-
-        h1, h2, h3 {
-            color: #00ff00; /* Cor de destaque para títulos */
-            font-family: 'Roboto Mono', monospace;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 4em; /* Tamanho maior para o título principal */
-            margin-bottom: 0.2em;
-        }
-        h2 {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-        }
-        h3 {
-            font-size: 1.8em;
-            margin-bottom: 25px;
-        }
-
-        p {
-            font-size: 1.1em;
-            max-width: 800px;
-            margin: 0 auto 20px auto;
-        }
-
+        /* Hero Section */
         .hero-section {
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: url('https://via.placeholder.com/1920x1080/0d0d0d/00ff00?text=FUNDO+IMERSIVO+DO+JOGO') no-repeat center center/cover; /* Placeholder para fundo */
+            /* Placeholder for video background. In a real site, use <video> tag */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1920x1080/000000/333333?text=IMMERSIVE+GAME+VIDEO+BACKGROUND') no-repeat center center/cover;
             position: relative;
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7); /* Overlay escuro */
-            z-index: 1;
+            padding-top: 0; /* Override section padding */
         }
         .hero-section .content {
             position: relative;
             z-index: 2;
-            color: #f0f0f0;
+            max-width: 1000px;
         }
 
         .hero-section h1 {
-            font-size: 3.5em;
+            font-size: 4.5em;
             line-height: 1.1;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         .hero-section p {
-            font-size: 1.4em;
+            font-size: 1.5em;
             max-width: 900px;
             margin-bottom: 40px;
+            color: var(--light-text);
         }
         .hero-ctas {
             display: flex;
-            gap: 20px;
-            margin-top: 30px;
+            gap: 25px;
+            margin-top: 40px;
         }
         .counters {
             display: flex;
-            gap: 40px;
-            margin-top: 60px;
-            color: #00ff00;
+            gap: 50px;
+            margin-top: 80px;
+            color: var(--accent-green);
+            font-family: 'DM Mono', monospace;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
         }
         .counter-item {
-            font-size: 1.5em;
-            font-weight: 700;
-            font-family: 'Roboto Mono', monospace;
+            font-size: 2em;
+            font-weight: 500;
         }
         .counter-item span {
             display: block;
-            font-size: 0.7em;
-            color: #aaa;
+            font-size: 0.5em;
+            color: var(--subtle-gray);
             margin-top: 5px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .content-section p {
-            font-size: 1.1em;
-            max-width: 900px;
-            margin: 0 auto 30px auto;
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .content-section:last-of-type {
+            border-bottom: none;
         }
         .content-section blockquote {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-style: italic;
-            margin: 40px auto;
+            margin: 50px auto;
             max-width: 700px;
-            color: #00ff00;
-            border-left: 4px solid #00ff00;
-            padding-left: 20px;
+            color: var(--accent-green);
+            border-left: 5px solid var(--accent-green);
+            padding-left: 25px;
+            line-height: 1.5;
+        }
+        .content-section ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 30px auto;
+            text-align: left;
+            color: #ccc;
+        }
+        .content-section ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        .content-section ul li::before {
+            content: '»'; /* Custom bullet point */
+            color: var(--accent-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            top: -2px;
+        }
+        .content-section strong {
+            color: var(--accent-green);
         }
 
+        /* How to Play */
         .how-to-play ol {
             list-style: none;
             padding: 0;
@@ -222,80 +270,97 @@
             text-align: left;
         }
         .how-to-play ol li {
-            background-color: #1a1a1a;
-            margin-bottom: 25px;
-            padding: 30px;
+            background-color: #1A1A1A;
+            margin-bottom: 30px;
+            padding: 35px;
             border-radius: 8px;
-            border-left: 5px solid #00ff00;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(0, 255, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .how-to-play ol li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 255, 0, 0.1);
         }
         .how-to-play ol li h3 {
             margin-top: 0;
-            color: #00ff00;
-            font-size: 1.5em;
+            font-size: 1.4em;
+            color: var(--light-text); /* Title of step can be lighter */
+        }
+        .how-to-play ol li h3 strong {
+            color: var(--accent-green);
         }
         .how-to-play ol li p {
             margin: 15px 0 0 0;
             font-size: 1em;
             max-width: none;
+            color: #bbb;
         }
         .how-to-play ol li em {
             display: block;
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 0.9em;
-            color: #aaa;
-        }
-        .how-to-play ol li strong {
-             color: #00ff00;
+            color: var(--subtle-gray);
+            font-style: normal;
         }
 
+        /* NFT Gallery */
         .nft-gallery {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-            margin-top: 40px;
+            margin-top: 50px;
         }
         .nft-item {
-            background-color: #1a1a1a;
+            background-color: #1A1A1A;
             border-radius: 8px;
-            padding: 20px;
-            width: 300px;
+            padding: 25px;
+            width: 320px;
             text-align: left;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 1px solid #333;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nft-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 255, 0, 0.1);
         }
         .nft-item img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
             border-radius: 5px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
         }
         .nft-item h4 {
-            color: #00ff00;
+            color: var(--accent-green);
             margin: 0 0 10px 0;
-            font-size: 1.3em;
-            text-transform: uppercase;
+            font-size: 1.4em;
         }
         .nft-item p {
-            font-size: 0.9em;
+            font-size: 0.95em;
             margin: 0;
             max-width: none;
+            color: #bbb;
         }
         .nft-item ul {
             list-style: none;
             padding: 0;
             margin-top: 15px;
             font-size: 0.9em;
+            text-align: left;
         }
         .nft-item ul li {
             margin-bottom: 5px;
+            color: #bbb;
         }
         .nft-item ul li strong {
-            color: #00ff00;
+            color: var(--light-text); /* Key stats can be lighter */
         }
 
+        /* Tokenomics */
         .tokenomics-content {
             max-width: 900px;
             margin: 0 auto;
@@ -303,28 +368,36 @@
         }
         .tokenomics-content h3 {
             text-align: center;
+            margin-top: 40px;
+            color: var(--light-text);
         }
         .tokenomics-content ul {
             list-style: disc;
             margin-left: 20px;
             margin-bottom: 20px;
-        }
-        .tokenomics-content ul li {
-            margin-bottom: 10px;
+            color: #ccc;
         }
         .tokenomics-chart-placeholder {
-            background-color: #1a1a1a;
+            background-color: #1A1A1A;
             height: 300px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             border-radius: 8px;
-            margin-top: 30px;
-            font-family: 'Roboto Mono', monospace;
-            color: #00ff00;
+            margin-top: 40px;
+            font-family: 'DM Mono', monospace;
+            color: var(--accent-green);
             font-size: 1.2em;
+            border: 1px dashed var(--subtle-gray);
+        }
+        .tokenomics-chart-placeholder span {
+            font-size: 0.8em;
+            color: var(--subtle-gray);
+            margin-top: 10px;
         }
 
+        /* Roadmap */
         .roadmap-timeline {
             display: flex;
             flex-direction: column;
@@ -332,7 +405,7 @@
             max-width: 900px;
             margin: 0 auto;
             position: relative;
-            padding: 40px 0;
+            padding-top: 40px;
         }
         .roadmap-timeline::before {
             content: '';
@@ -340,27 +413,30 @@
             left: 50%;
             width: 2px;
             height: calc(100% - 80px);
-            background-color: #00ff00;
+            background-color: var(--accent-green);
             transform: translateX(-50%);
             top: 40px;
+            z-index: 0;
         }
         .timeline-quarter {
             display: flex;
             align-items: center;
             width: 100%;
             margin-bottom: 60px;
+            position: relative;
         }
         .timeline-quarter:nth-child(even) {
             flex-direction: row-reverse;
         }
         .timeline-quarter-date {
-            flex: 0 0 200px;
+            flex: 0 0 220px; /* Wider space for date */
             text-align: center;
             font-size: 1.8em;
-            font-weight: 700;
-            color: #00ff00;
-            font-family: 'Roboto Mono', monospace;
+            font-weight: 500;
+            color: var(--accent-green);
+            font-family: 'DM Mono', monospace;
             position: relative;
+            z-index: 1;
         }
         .timeline-quarter-date::before {
             content: '';
@@ -368,91 +444,118 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            background-color: #00ff00;
+            width: 25px;
+            height: 25px;
+            background-color: var(--accent-green);
             border-radius: 50%;
-            z-index: 1;
-            border: 4px solid #0d0d0d;
+            z-index: -1; /* Behind the text */
+            border: 5px solid var(--dark-bg);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
         }
         .timeline-quarter-content {
             flex: 1;
-            background-color: #1a1a1a;
+            background-color: #1A1A1A;
             border-radius: 8px;
-            padding: 25px;
+            padding: 30px;
             margin: 0 40px;
             text-align: left;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 1px solid #333;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
         }
         .timeline-quarter-content h4 {
-            color: #f0f0f0;
+            color: var(--light-text);
             margin-top: 0;
-            font-size: 1.4em;
-            text-transform: uppercase;
+            font-size: 1.5em;
         }
         .timeline-quarter-content ul {
-            list-style: disc;
-            margin-left: 20px;
+            list-style: none; /* No default bullets */
             padding: 0;
+            margin-top: 20px;
             font-size: 1em;
+            text-align: left;
         }
         .timeline-quarter-content ul li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            color: #bbb;
+            position: relative;
+            padding-left: 20px;
+        }
+        .timeline-quarter-content ul li::before {
+            content: '•'; /* Custom bullet */
+            color: var(--accent-green);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            top: -2px;
         }
 
+
+        /* Community */
         .community-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 25px;
+            margin-top: 50px;
             flex-wrap: wrap;
         }
         .community-link-item {
-            background-color: #1a1a1a;
-            border-radius: 8px;
-            padding: 20px 30px;
+            background-color: #1A1A1A;
+            border-radius: 6px;
+            padding: 18px 25px;
             text-decoration: none;
-            color: #f0f0f0;
-            font-weight: 700;
-            font-size: 1.2em;
+            color: var(--light-text);
+            font-weight: 500;
+            font-size: 1.1em;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            border: 1px solid #333;
+            gap: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
         }
         .community-link-item:hover {
-            background-color: #00ff00;
-            color: #0d0d0d;
+            background-color: var(--accent-green);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 255, 0, 0.2);
         }
         .community-link-item img {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
+            filter: grayscale(100%) brightness(200%); /* Make icons bright on dark bg */
+            transition: filter 0.3s ease;
         }
+        .community-link-item:hover img {
+            filter: grayscale(0%) brightness(100%); /* Colorize on hover */
+        }
+
         .news-feed-placeholder {
-            background-color: #1a1a1a;
-            height: 200px;
-            max-width: 600px;
-            margin: 50px auto 0 auto;
+            background-color: #1A1A1A;
+            height: 220px;
+            max-width: 650px;
+            margin: 60px auto 0 auto;
             border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #aaa;
+            color: var(--subtle-gray);
             font-style: italic;
-            border: 1px solid #333;
+            border: 1px dashed var(--border-color);
+            font-family: 'DM Mono', monospace;
+            font-size: 1.1em;
         }
 
+        /* Footer */
         footer {
-            background-color: #111;
+            background-color: #111111;
             padding: 60px 0;
             text-align: center;
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--border-color);
         }
         footer .logo {
             margin-bottom: 30px;
-            display: block;
+            display: inline-block; /* Keep logo centered */
         }
         .footer-links ul {
             list-style: none;
@@ -465,12 +568,11 @@
         }
         .footer-links a {
             color: #aaa;
-            text-decoration: none;
-            font-size: 0.95em;
-            transition: color 0.3s ease;
+            font-size: 0.9em;
+            text-transform: uppercase;
         }
         .footer-links a:hover {
-            color: #00ff00;
+            color: var(--accent-green);
         }
         footer p {
             font-size: 0.9em;
@@ -480,15 +582,31 @@
         }
         footer .disclaimer {
             font-size: 0.8em;
-            color: #666;
+            color: var(--subtle-gray);
             margin-top: 30px;
+            max-width: 900px;
+        }
+        footer .copyright {
+             color: var(--subtle-gray);
+             margin-top: 20px;
+             font-size: 0.85em;
         }
 
-        /* Responsividade Básica (para telas menores) */
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .nav-links li {
+                margin-left: 20px;
+            }
+            .hero-section h1 {
+                font-size: 3.5em;
+            }
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
             }
             .nav-links ul {
                 flex-wrap: wrap;
@@ -498,50 +616,108 @@
             .nav-links li {
                 margin: 0;
             }
+            .nav-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .btn {
+                width: 45%;
+                text-align: center;
+                padding: 10px 15px;
+                font-size: 0.85em;
+            }
+
             .hero-section h1 {
-                font-size: 2.5em;
+                font-size: 2.8em;
+                padding: 0 10px;
             }
             .hero-section p {
-                font-size: 1.1em;
+                font-size: 1.2em;
+                padding: 0 10px;
             }
             .hero-ctas {
                 flex-direction: column;
+                gap: 15px;
+                width: 80%;
+            }
+            .hero-ctas .btn {
+                width: 100%;
             }
             .counters {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
+                margin-top: 60px;
+            }
+            .counter-item {
+                font-size: 1.8em;
             }
             h2 {
                 font-size: 2em;
             }
-            .how-to-play ol {
+            h3 {
+                font-size: 1.4em;
+            }
+            p {
+                font-size: 1em;
+            }
+            section {
+                padding: 70px 0;
+            }
+
+            .how-to-play ol li {
+                padding: 25px;
+            }
+
+            .nft-item {
+                width: 90%;
+            }
+
+            .tokenomics-content, .roadmap-timeline {
                 padding: 0 15px;
+            }
+            .roadmap-timeline::before {
+                left: 20px; /* Move timeline line to left */
+                transform: none;
+                height: calc(100% - 100px);
             }
             .timeline-quarter {
                 flex-direction: column;
-                text-align: center;
+                align-items: flex-start; /* Align items to the left */
             }
             .timeline-quarter:nth-child(even) {
-                flex-direction: column;
-            }
-            .roadmap-timeline::before {
-                left: 50%;
-                transform: translateX(-50%);
-                height: calc(100% - 120px); /* Ajusta a altura da linha central */
+                flex-direction: column; /* Keep same direction */
             }
             .timeline-quarter-date {
-                margin-bottom: 20px;
+                text-align: left;
+                margin-left: 20px; /* Align with line */
                 flex: none;
                 width: auto;
+                font-size: 1.6em;
             }
             .timeline-quarter-date::before {
-                 left: 50%;
+                left: -10px; /* Position dot on the line */
+                top: 50%;
+                transform: translateY(-50%);
             }
             .timeline-quarter-content {
-                margin: 0 20px; /* Ajusta margens para mobile */
+                margin: 20px 0 0 20px; /* Adjust margin */
+                width: calc(100% - 40px); /* Fill width */
             }
             .community-links {
                 flex-direction: column;
+                gap: 15px;
+            }
+            .community-link-item {
+                width: 80%;
+                margin: 0 auto;
+                justify-content: center;
+            }
+            .news-feed-placeholder {
+                max-width: 90%;
+            }
+            footer .footer-links ul {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -553,17 +729,17 @@
             <nav class="nav-links">
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Sobre o Jogo</a></li>
-                    <li><a href="#how-to-play">Como Jogar</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#how-to-play">How to Play</a></li>
                     <li><a href="#nfts">NFTs</a></li>
                     <li><a href="#tokenomics">Tokenomics</a></li>
                     <li><a href="#roadmap">Roadmap</a></li>
-                    <li><a href="#community">Comunidade</a></li>
+                    <li><a href="#community">Community</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
-                <a href="https://app.phantom.app/connect"  class="btn outline">Conectar Carteira</a>
-                <a href="https://game.cryptojail.com"  class="btn">Jogue Agora</a>
+                <a href="https://app.phantom.app/connect"  class="btn outline">Connect Wallet</a>
+                <a href="https://game.cryptojail.com"  class="btn">Play Now</a>
             </div>
         </div>
     </header>
@@ -571,248 +747,247 @@
     <main>
         <section id="home" class="hero-section">
             <div class="content">
-                <h1>CRYPTOGIAIL: CONSTRUA SEU IMPÉRIO CRIMINANTE NA BLOCKCHAIN SOLANA</h1>
-                <p>Gerencie prisões, colete prisioneiros NFT e ganhe $JAIL!</p>
+                <h1>CRYPTOJAIL: BUILD YOUR CRIMINAL EMPIRE ON THE SOLANA BLOCKCHAIN</h1>
+                <p>Manage prisons, collect NFT inmates, and earn $JAIL!</p>
                 <div class="hero-ctas">
-                    <a href="https://discord.gg/cryptojail"  class="btn outline">Junte-se à Rebelião</a>
-                    <a href="https://game.cryptojail.com"  class="btn">Comece a Jogar</a>
+                    <a href="https://discord.gg/cryptojail"  class="btn outline">Join the Rebellion</a>
+                    <a href="https://game.cryptojail.com"  class="btn">Start Playing</a>
                 </div>
                 <div class="counters">
-                    <div class="counter-item">9,999+<span>Prisioneiros Mintados</span></div>
-                    <div class="counter-item">1,234+<span>Andares Vendidos</span></div>
-                    <div class="counter-item">[XX,XXX,XXX]<span>$JAIL em Circulação</span></div>
+                    <div class="counter-item">9,999+<span>Inmates Minted</span></div>
+                    <div class="counter-item">1,234+<span>Floors Sold</span></div>
+                    <div class="counter-item">[XX,XXX,XXX]<span>$JAIL In Circulation</span></div>
                 </div>
             </div>
         </section>
 
         <section id="about" class="content-section container">
-            <h2>O QUE É CRYPTOJAIL?</h2>
-            <p>CryptoJail não é apenas um jogo; é uma economia digital onde você comanda as rédeas do seu próprio império carcerário. Construído sobre a velocidade e eficiência da blockchain Solana, CryptoJail mergulha você em um mundo de estratégia, coleção e recompensas.</p>
-            <p>Sua missão é clara: <strong>adquira andares de presídios em formato NFT</strong>, cada um com sua própria capacidade. Em seguida, popule essas celas com <strong>prisioneiros NFT únicos</strong>, que variam em nível e capacidade de geração de lucro. Quanto mais prisioneiros de alto nível você gerenciar, mais tokens <strong>$JAIL</strong> você produzirá.</p>
-            <p>Gerencie sua cadeia de custódia com sabedoria, expanda seu império andar por andar e domine o submundo da blockchain enquanto seus prisioneiros trabalham para você! É hora de transformar a punição em lucro e a estratégia em riqueza digital.</p>
-            <blockquote><strong>CryptoJail:</strong> Onde a estratégia encontra a descentralização, e seus ativos digitais geram liberdade financeira.</blockquote>
+            <h2>WHAT IS CRYPTOJAIL?</h2>
+            <p>CryptoJail is not just a game; it's a digital economy where you take the reins of your own carceral empire. Built on the speed and efficiency of the Solana blockchain, CryptoJail immerses you in a world of strategy, collection, and rewards.</p>
+            <p>Your mission is clear: <strong>acquire prison floors in NFT format</strong>, each with its own capacity. Then, populate these cells with <strong>unique NFT inmates</strong>, which vary in level and profit-generating capability. The more high-level inmates you manage, the more <strong>$JAIL</strong> tokens you will produce.</p>
+            <p>Wisely manage your custody chain, expand your empire floor by floor, and dominate the blockchain underworld as your inmates work for you! It's time to turn punishment into profit and strategy into digital wealth.</p>
+            <blockquote><strong>CryptoJail:</strong> Where strategy meets decentralization, and your digital assets generate financial freedom.</blockquote>
         </section>
 
         <section id="how-to-play" class="content-section container">
-            <h2>SUA JORNADA EM CRYPTOJAIL</h2>
-            <p>Descubra os passos para construir e expandir seu império em CryptoJail. Uma estratégia bem definida é a chave para o sucesso.</p>
+            <h2>YOUR JOURNEY IN CRYPTOJAIL</h2>
+            <p>Discover the steps to build and expand your empire in CryptoJail. A well-defined strategy is the key to success.</p>
             <ol>
                 <li>
-                    <h3>Adquira Seu Primeiro Andar de Presídio (NFT)</h3>
-                    <p>Sua jornada começa com a compra de um <strong>andar de presídio NFT</strong>. Este é o seu ativo principal, a base do seu império.</p>
+                    <h3><strong>1.</strong> Acquire Your First Prison Floor (NFT)</h3>
+                    <p>Your journey begins with the purchase of an <strong>NFT prison floor</strong>. This is your primary asset, the foundation of your empire.</p>
                     <ul>
-                        <li><strong>Preço Inicial:</strong> O primeiro andar tem um custo fixo de <strong>20 USDC</strong>.</li>
-                        <li><strong>Capacidade:</strong> Cada andar inicial possui capacidade para <strong>2 Prisioneiros NFT</strong>.</li>
+                        <li><strong>Initial Price:</strong> The first floor has a fixed cost of <strong>20 USDC</strong>.</li>
+                        <li><strong>Capacity:</strong> Each initial floor has a capacity for <strong>2 NFT Inmates</strong>.</li>
                     </ul>
-                    <em>> Cada andar é um NFT único na Solana, garantindo sua propriedade e transferibilidade. Pense nele como seu imóvel digital no jogo!</em>
+                    <em>» Each floor is a unique NFT on Solana, ensuring your ownership and transferability. Think of it as your digital real estate in the game!</em>
                 </li>
                 <li>
-                    <h3>Povoando Suas Celas com Prisioneiros NFT</h3>
-                    <p>Prisioneiros NFT são a alma do seu presídio, responsáveis por gerar tokens <strong>$JAIL</strong> passivamente.</p>
+                    <h3><strong>2.</strong> Populating Your Cells with NFT Inmates</h3>
+                    <p>NFT Inmates are the soul of your prison, responsible for passively generating <strong>$JAIL</strong> tokens.</p>
                     <ul>
-                        <li><strong>Geração de Renda:</strong> Prisioneiros são adquiridos usando o token <strong>$JAIL</strong>. O custo varia de acordo com o nível.</li>
-                        <li><strong>Produtividade:</strong> Prisioneiros de níveis mais altos custam mais $JAIL, mas em contrapartida, geram uma quantidade significativamente maior de $JAIL ao longo do tempo.</li>
+                        <li><strong>Income Generation:</strong> Inmates are acquired using the <strong>$JAIL</strong> token. The cost varies by level.</li>
+                        <li><strong>Productivity:</strong> Higher-level inmates cost more $JAIL, but in return, generate a significantly larger amount of $JAIL over time.</li>
                     </ul>
-                    <em>> Escolha seus prisioneiros estrategicamente para otimizar a produção de $JAIL e maximizar seus lucros.</em>
+                    <em>» Strategically choose your inmates to optimize $JAIL production and maximize your profits.</em>
                 </li>
                 <li>
-                    <h3>Expanda Seu Império Andar por Andar</h3>
-                    <p>Para desbloquear a compra de um novo andar, você deve ter <strong>ocupado completamente todos os espaços de prisioneiros do andar anterior</strong>. Não há atalhos; a expansão exige gerenciamento eficaz.</p>
+                    <h3><strong>3.</strong> Expand Your Empire Floor by Floor</h3>
+                    <p>To unlock the purchase of a new floor, you must have <strong>completely occupied all inmate slots of the previous floor</strong>. There are no shortcuts; expansion requires effective management.</p>
                     <ul>
-                        <li><strong>Escala de Preço:</strong> O preço de cada novo andar é <strong>o dobro do preço do andar anterior</strong>.</li>
-                        <li><strong>Escala de Capacidade:</strong> A capacidade de prisioneiros de cada novo andar é <strong>a capacidade do andar anterior mais 1</strong>.</li>
-                        <li><strong>Exemplos de Progressão:</strong>
+                        <li><strong>Price Scaling:</strong> The price of each new floor is <strong>double the price of the previous floor</strong>.</li>
+                        <li><strong>Capacity Scaling:</strong> The inmate capacity of each new floor is <strong>the previous floor's capacity plus 1</strong>.</li>
+                        <li><strong>Progression Examples:</strong>
                             <ul>
-                                <li><strong>Andar 1:</strong> 20 USDC | Capacidade: 2 Prisioneiros</li>
-                                <li><em>(Após preencher Andar 1)</em></li>
-                                <li><strong>Andar 2:</strong> 40 USDC | Capacidade: 3 Prisioneiros</li>
-                                <li><em>(Após preencher Andar 2)</em></li>
-                                <li><strong>Andar 3:</strong> 80 USDC | Capacidade: 4 Prisioneiros</li>
+                                <li><strong>Floor 1:</strong> 20 USDC | Capacity: 2 Inmates</li>
+                                <li><em>(After filling Floor 1)</em></li>
+                                <li><strong>Floor 2:</strong> 40 USDC | Capacity: 3 Inmates</li>
+                                <li><em>(After filling Floor 2)</em></li>
+                                <li><strong>Floor 3:</strong> 80 USDC | Capacity: 4 Inmates</li>
                             </ul>
                         </li>
                     </ul>
-                    <em>> O ciclo vicioso do lucro: mais prisioneiros, mais $JAIL, mais expansão!</em>
+                    <em>» The vicious cycle of profit: more inmates, more $JAIL, more expansion!</em>
                 </li>
                 <li>
-                    <h3>Gere e Utilize $JAIL</h3>
-                    <p>Uma vez que seus prisioneiros estão em suas celas, eles começam a gerar tokens <strong>$JAIL</strong> para você de forma contínua.</p>
+                    <h3><strong>4.</strong> Generate and Utilize $JAIL</h3>
+                    <p>Once your inmates are in their cells, they begin to passively generate <strong>$JAIL</strong> tokens for you continuously.</p>
                     <ul>
-                        <li><strong>Renda Passiva:</strong> Use o $JAIL gerado para comprar mais prisioneiros de níveis superiores, investir em novos andares (indiretamente), ou negociar no mercado.</li>
+                        <li><strong>Passive Income:</strong> Use the generated $JAIL to buy more higher-level inmates, invest in new floors (indirectly), or trade it on the market.</li>
                     </ul>
-                    <em>> O ciclo vicioso do lucro: mais prisioneiros, mais $JAIL, mais expansão!</em>
+                    <em>» The cycle of wealth: the more prisoners, the more $JAIL, the greater the expansion!</em>
                 </li>
             </ol>
         </section>
 
         <section id="nfts" class="content-section container">
-            <h2>SEUS ATIVOS DIGITAIS: ANDARES E PRISIONEIROS NFT</h2>
+            <h2>FLOORS & INMATES: YOUR DIGITAL ASSETS IN CRYPTOJAIL</h2>
 
-            <h3>Andares NFT - A Fundação do Seu Império</h3>
-            <p>Cada andar de presídio em CryptoJail é um NFT único na blockchain Solana. Eles não são apenas representações visuais, mas contratos inteligentes que definem a capacidade do seu presídio e seu potencial de crescimento. A posse de um andar NFT concede a você o direito de abrigar prisioneiros e expandir sua propriedade no jogo.</p>
+            <h3>NFT Floors - The Foundation of Your Empire</h3>
+            <p>Each prison floor in CryptoJail is a unique NFT on the Solana blockchain. They are not just visual representations, but smart contracts that define your prison's capacity and its growth potential. Owning an NFT floor grants you the right to house inmates and expand your property in the game.</p>
             <ul>
-                <li><strong>Colecionáveis Únicos:</strong> Cada andar possui características visuais distintas e metadados.</li>
-                <li><strong>Progressão Estratégica:</strong> A aquisição e preenchimento de andares é a chave para desbloquear níveis mais altos.</li>
-                <li><strong>Propriedade na Solana:</strong> Desfrute de transações rápidas, seguras e com baixo custo.</li>
+                <li><strong>Unique Collectibles:</strong> Each floor has distinct visual characteristics and metadata.</li>
+                <li><strong>Strategic Progression:</strong> Acquiring and filling floors is key to unlocking higher levels of expansion.</li>
+                <li><strong>Solana Ownership:</strong> Enjoy fast, secure, and low-cost transactions on the Solana network when buying and selling your floors.</li>
             </ul>
 
             <div class="nft-gallery">
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/300x200/222/00ff00?text=Andar+1" alt="Andar Básico (Nível 1)">
-                    <h4>Andar Básico (Nível 1)</h4>
-                    <p>A entrada para o seu império. Simples, mas eficiente.</p>
+                    <img src="https://via.placeholder.com/320x180/0d0d0d/00ff00?text=BASIC+FLOOR+LVL1" alt="Basic Floor (Level 1)">
+                    <h4>Basic Floor (Level 1)</h4>
+                    <p>The entry point to your empire. Simple, yet efficient.</p>
                     <ul>
-                        <li><strong>Capacidade:</strong> 2 Prisioneiros</li>
-                        <li><strong>Custo Inicial:</strong> 20 USDC</li>
+                        <li><strong>Capacity:</strong> 2 Inmates</li>
+                        <li><strong>Initial Cost:</strong> 20 USDC</li>
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/300x200/222/00ff00?text=Andar+3" alt="Andar Médio (Nível 3)">
-                    <h4>Andar Médio (Nível 3)</h4>
-                    <p>Um andar mais robusto com maior capacidade de prisioneiros.</p>
+                    <img src="https://via.placeholder.com/320x180/0d0d0d/00ff00?text=MEDIUM+FLOOR+LVL3" alt="Medium Floor (Level 3)">
+                    <h4>Medium Floor (Level 3)</h4>
+                    <p>A more robust floor with increased inmate capacity.</p>
                     <ul>
-                        <li><strong>Capacidade:</strong> 4 Prisioneiros</li>
-                        <li><strong>Custo Estimado:</strong> 80 USDC</li>
+                        <li><strong>Capacity:</strong> 4 Inmates</li>
+                        <li><strong>Estimated Cost:</strong> 80 USDC</li>
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/300x200/222/00ff00?text=Andar+Elite" alt="Andar de Elite (Nível 5+)">
-                    <h4>Andar de Elite (Nível 5+)</h4>
-                    <p>Estrutura imponente para os maiores criminosos e lucros.</p>
+                    <img src="https://via.placeholder.com/320x180/0d0d0d/00ff00?text=ELITE+FLOOR+LVL5" alt="Elite Floor (Level 5+)">
+                    <h4>Elite Floor (Level 5+)</h4>
+                    <p>An imposing structure for the biggest criminals and profits.</p>
                     <ul>
-                        <li><strong>Capacidade:</strong> 6+ Prisioneiros</li>
-                        <li><strong>Custo Estimado:</strong> 320+ USDC</li>
+                        <li><strong>Capacity:</strong> 6+ Inmates</li>
+                        <li><strong>Estimated Cost:</strong> 320+ USDC</li>
                     </ul>
                 </div>
             </div>
 
-            <h3>Prisioneiros NFT - Seus Geradores de Lucro</h3>
-            <p>Os prisioneiros são os corações pulsantes do seu império. Cada prisioneiro é um NFT com seu próprio 'Nível', que diretamente influencia a quantidade de tokens <strong>$JAIL</strong> que ele gerará para você. Quanto maior o nível, maior o potencial de lucro!</p>
+            <h3>NFT Inmates - Your Profit Generators</h3>
+            <p>Inmates are the beating hearts of your empire. Each inmate is an NFT with its own 'Level', which directly influences the amount of <strong>$JAIL</strong> tokens it will generate for you. The higher the level, the greater the profit potential!</p>
             <ul>
-                <li><strong>Geradores de $JAIL:</strong> Mineração passiva do token $JAIL.</li>
-                <li><strong>Níveis de Renda:</strong> Diferentes níveis de prisioneiros oferecem diferentes taxas de geração.</li>
-                <li><strong>Rareza e Atributos:</strong> Características raras podem aumentar eficiência ou valor.</li>
+                <li><strong>$JAIL Generators:</strong> Passive mining of the $JAIL token.</li>
+                <li><strong>Income Levels:</strong> Different inmate levels offer different generation rates.</li>
+                <li><strong>Rarity & Attributes:</strong> Rare characteristics can increase efficiency or value.</li>
             </ul>
 
             <div class="nft-gallery">
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/300x200/333/00ff00?text=Pequeno+Ladrao" alt="Pequeno Ladrão NFT">
-                    <h4>Pequeno Ladrão (Nível 1)</h4>
-                    <p>Um recém-chegado ao mundo do crime, com uma contribuição modesta.</p>
+                    <img src="https://via.placeholder.com/320x180/1A1A1A/00ff00?text=PETTY+THIEF+NFT" alt="Petty Thief NFT">
+                    <h4>Petty Thief (Level 1)</h4>
+                    <p>A newcomer to the criminal world, with a modest contribution.</p>
                     <ul>
-                        <li><strong>Custo:</strong> X $JAIL</li>
-                        <li><strong>Geração:</strong> Y $JAIL/dia</li>
+                        <li><strong>Cost:</strong> X $JAIL</li>
+                        <li><strong>Generation:</strong> Y $JAIL/day</li>
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/300x200/333/00ff00?text=Mestre+da+Fraude" alt="Mestre da Fraude NFT">
-                    <h4>Mestre da Fraude (Nível 5)</h4>
-                    <p>Astuto e com habilidades para gerar lucros mais significativos.</p>
+                    <img src="https://via.placeholder.com/320x180/1A1A1A/00ff00?text=MASTER+FRAUDSTER+NFT" alt="Master Fraudster NFT">
+                    <h4>Master Fraudster (Level 5)</h4>
+                    <p>Cunning and skilled at generating more significant profits.</p>
                     <ul>
-                        <li><strong>Custo:</strong> XX $JAIL</li>
-                        <li><strong>Geração:</strong> YY $JAIL/dia</li>
+                        <li><strong>Cost:</strong> XX $JAIL</li>
+                        <li><strong>Generation:</strong> YY $JAIL/day</li>
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/300x200/333/00ff00?text=Chefe+do+Crime" alt="Chefão do Crime NFT">
-                    <h4>Chefão do Crime (Nível 10)</h4>
-                    <p>O ápice da hierarquia criminal, gerando o máximo de $JAIL.</p>
+                    <img src="https://via.placeholder.com/320x180/1A1A1A/00ff00?text=CRIME+BOSS+NFT" alt="Crime Boss NFT">
+                    <h4>Crime Boss (Level 10)</h4>
+                    <p>The pinnacle of the criminal hierarchy, generating maximum $JAIL.</p>
                     <ul>
-                        <li><strong>Custo:</strong> XXX $JAIL</li>
-                        <li><strong>Geração:</strong> YYY $JAIL/dia</li>
+                        <li><strong>Cost:</strong> XXX $JAIL</li>
+                        <li><strong>Generation:</strong> YYY $JAIL/day</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <section id="tokenomics" class="content-section container">
-            <h2>O ECOSSISTEMA FINANCEIRO DE CRYPTOJAIL</h2>
-            <p>A economia de CryptoJail é impulsionada por dois tokens essenciais: <strong>$JAIL</strong>, nosso token de utilidade nativo, e <strong>USDC</strong>, uma stablecoin confiável. Juntos, eles formam a base para uma experiência de jogo justa, transparente e economicamente viável.</p>
+            <h2>THE CRYPTOJAIL FINANCIAL ECOSYSTEM</h2>
+            <p>The CryptoJail economy is driven by two essential tokens: <strong>$JAIL</strong>, our native utility token, and <strong>USDC</strong>, a reliable stablecoin. Together, they form the foundation for a fair, transparent, and economically viable gaming experience.</p>
 
             <div class="tokenomics-content">
                 <h3>$JAIL Token</h3>
                 <ul>
-                    <li><strong>Nome:</strong> $JAIL</li>
-                    <li><strong>Rede:</strong> Solana (SPL Token)</li>
-                    <li><strong>Tipo:</strong> Token de Utilidade e Recompensa</li>
-                    <li><strong>Utilidades Primárias:</strong>
+                    <li><strong>Name:</strong> $JAIL</li>
+                    <li><strong>Network:</strong> Solana (SPL Token)</li>
+                    <li><strong>Type:</strong> Utility and Reward Token</li>
+                    <li><strong>Primary Utilities:</strong>
                         <ul>
-                            <li><strong>Aquisição de Prisioneiros NFT:</strong> O $JAIL é a moeda exclusiva para comprar e negociar prisioneiros dentro do jogo.</li>
-                            <li><strong>Recompensas Play-to-Earn:</strong> É o token que seus prisioneiros geram passivamente, representando seu lucro no jogo.</li>
-                            <li><strong>Governança (Futuro):</strong> Planos para permitir que detentores de $JAIL participem de decisões futuras do jogo.</li>
-                            <li><strong>Staking (Futuro):</strong> Possibilidade de fazer staking de $JAIL para obter recompensas adicionais e fortalecer a rede.</li>
+                            <li><strong>Acquisition of NFT Inmates:</strong> $JAIL is the exclusive currency for buying and trading inmates within the game.</li>
+                            <li><strong>Play-to-Earn Rewards:</strong> It is the token that your inmates passively generate, representing your in-game profit.</li>
+                            <li><strong>Governance (Future):</strong> Plans to allow $JAIL holders to participate in future game decisions.</li>
+                            <li><strong>Staking (Future):</strong> Possibility to stake $JAIL to earn additional rewards and strengthen the network.</li>
                         </ul>
                     </li>
                 </ul>
-                <p><strong>Distribuição do Token $JAIL:</strong> A distribuição do $JAIL foi cuidadosamente planejada para garantir a sustentabilidade e o crescimento do ecossistema.</p>
+                <p><strong>$JAIL Token Distribution:</strong> The distribution of $JAIL has been carefully planned to ensure the sustainability and growth of the ecosystem.</p>
                 <div class="tokenomics-chart-placeholder">
-                    [ GRÁFICO DE PIZZA DA DISTRIBUIÇÃO DO $JAIL AQUI ]
-                    <br>
-                    Ex: 50% P2E, 20% Dev, 10% Liquidez, 10% MKT, 5% Equipe, 5% Reserva.
+                    [ $JAIL TOKEN DISTRIBUTION PIE CHART HERE ]
+                    <span>E.g., 50% P2E, 20% Dev, 10% Liquidity, 10% MKT, 5% Team, 5% Reserve.</span>
                 </div>
 
                 <h3>USDC (USD Coin)</h3>
                 <ul>
-                    <li><strong>Tipo:</strong> Stablecoin (lastreada ao Dólar Americano)</li>
-                    <li><strong>Utilidade Primária:</strong>
+                    <li><strong>Type:</strong> Stablecoin (pegged to the US Dollar)</li>
+                    <li><strong>Primary Utility:</strong>
                         <ul>
-                            <li><strong>Compra de Andares de Presídio NFT:</strong> O USDC é utilizado exclusivamente para a aquisição inicial dos andares de presídio.</li>
+                            <li><strong>Purchase of NFT Prison Floors:</strong> USDC is exclusively used for the initial acquisition of prison floors.</li>
                         </ul>
                     </li>
-                    <li><strong>Benefícios:</strong> A utilização de uma stablecoin garante que o custo inicial dos seus ativos fundamentais seja previsível e não sofra com a volatilidade do mercado de criptomoedas.</li>
+                    <li><strong>Benefits:</strong> The use of a stablecoin ensures that the initial cost of your fundamental assets is predictable and not subject to market volatility.</li>
                 </ul>
             </div>
         </section>
 
         <section id="roadmap" class="content-section container">
-            <h2>O CAMINHO ADIANTE: EVOLUÇÃO DE CRYPTOJAIL</h2>
-            <p>Nossa visão para CryptoJail é ambiciosa e de longo prazo. Acreditamos na construção iterativa e na entrega de valor contínuo à nossa comunidade. Abaixo estão os marcos que planejamos alcançar, divididos por trimestres.</p>
+            <h2>THE PATH AHEAD: CRYPTOJAIL'S PLANNED EVOLUTION</h2>
+            <p>Our vision for CryptoJail is ambitious and long-term. We believe in iterative construction and continuous value delivery to our community. Below are the milestones we plan to achieve, divided by quarters.</p>
 
             <div class="roadmap-timeline">
                 <div class="timeline-quarter">
                     <div class="timeline-quarter-date">Q4 2024</div>
                     <div class="timeline-quarter-content">
-                        <h4>Fundação e Lançamento (Concluído/Em Andamento)</h4>
+                        <h4>Foundation and Launch (Completed/In Progress)</h4>
                         <ul>
-                            <li>Conceito e Design de Jogo</li>
-                            <li>Desenvolvimento Smart Contracts Solana</li>
-                            <li>Lançamento do Website v1</li>
-                            <li>Lançamento Canais de Comunidade (Discord, Twitter)</li>
+                            <li>Game Concept and Design Finalization</li>
+                            <li>Solana Smart Contracts Development</li>
+                            <li>Website v1 Launch</li>
+                            <li>Community Channels Launch (Discord, Twitter)</li>
                         </ul>
                     </div>
                 </div>
                 <div class="timeline-quarter">
                     <div class="timeline-quarter-date">Q1 2025</div>
                     <div class="timeline-quarter-content">
-                        <h4>Auditoria, Pré-venda e Beta</h4>
+                        <h4>Audit, Pre-sale, and Beta</h4>
                         <ul>
-                            <li>Auditoria de Smart Contracts</li>
-                            <li>Pré-venda de Andares de Presídio NFT</li>
-                            <li>Lançamento da Beta Fechada do Jogo</li>
-                            <li>Listagem $JAIL em DEX (Decentralized Exchange)</li>
+                            <li>Smart Contracts Audit</li>
+                            <li>NFT Prison Floor Pre-sale</li>
+                            <li>Game Closed Beta Launch</li>
+                            <li>$JAIL DEX Listing (Decentralized Exchange)</li>
                         </ul>
                     </div>
                 </div>
                 <div class="timeline-quarter">
                     <div class="timeline-quarter-date">Q2 2025</div>
                     <div class="timeline-quarter-content">
-                        <h4>Lançamento Oficial e Expansão</h4>
+                        <h4>Official Launch and Expansion</h4>
                         <ul>
-                            <li>Lançamento Oficial de CryptoJail</li>
-                            <li>Introdução de Novos Níveis de Prisioneiros NFT</li>
-                            <li>Recursos de Staking $JAIL</li>
-                            <li>Eventos da Comunidade / Competições</li>
+                            <li>Official CryptoJail Game Launch</li>
+                            <li>Introduction of New NFT Inmate Levels</li>
+                            <li>$JAIL Staking Features</li>
+                            <li>Community Events / Competitions</li>
                         </ul>
                     </div>
                 </div>
                 <div class="timeline-quarter">
-                    <div class="timeline-quarter-date">Q3 2025 e Além</div>
+                    <div class="timeline-quarter-date">Q3 2025 and Beyond</div>
                     <div class="timeline-quarter-content">
-                        <h4>Inovação e Ecossistema</h4>
+                        <h4>Innovation and Ecosystem</h4>
                         <ul>
-                            <li>Implementação de Batalhas de Gangues (PvP)</li>
-                            <li>Novos Andares e Temáticas de Prisões</li>
-                            <li>Integração com Metagame / Outros Jogos</li>
-                            <li>Mercado de Itens para Prisioneiros NFT</li>
+                            <li>Implementation of Gang Battles (PvP)</li>
+                            <li>New Floors and Prison Themes</li>
+                            <li>Metagame Integration / Other Games</li>
+                            <li>Inmate NFT Item Marketplace</li>
                         </ul>
                     </div>
                 </div>
@@ -820,40 +995,35 @@
         </section>
 
         <section id="community" class="content-section container">
-            <h2>JUNTE-SE À NOSSA CÉLULA: A FORÇA DA COMUNIDADE CRYPTOJAIL</h2>
-            <p>Em CryptoJail, acreditamos que a força do nosso jogo reside na vitalidade da nossa comunidade. Conecte-se com outros magnatas da prisão, troque estratégias, participe de discussões, e fique por dentro de todas as últimas notícias e desenvolvimentos. Sua voz é importante para moldar o futuro de CryptoJail!</p>
-            <blockquote>Não fique atrás das grades sozinho! Junte-se à nossa comunidade e comece a construir seu legado.</blockquote>
+            <h2>JOIN OUR CELL: THE STRENGTH OF THE CRYPTOJAIL COMMUNITY</h2>
+            <p>At CryptoJail, we believe that the strength of our game lies in the vitality of our community. Connect with other prison tycoons, exchange strategies, participate in discussions, and stay updated on all the latest news and developments. Your voice is important in shaping the future of CryptoJail!</p>
+            <blockquote>Don't get locked up alone! Join our community and start building your legacy.</blockquote>
 
             <div class="community-links">
                 <a href="https://discord.gg/cryptojail"  class="community-link-item">
-                    <!-- Ícone Discord - substituir por SVG ou Font Awesome -->
-                    <img src="https://via.placeholder.com/30x30/00ff00/0d0d0d?text=DC" alt="Discord">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=DC" alt="Discord Icon">
                     Discord
                 </a>
                 <a href="https://twitter.com/cryptojail"  class="community-link-item">
-                    <!-- Ícone Twitter/X -->
-                    <img src="https://via.placeholder.com/30x30/00ff00/0d0d0d?text=X" alt="Twitter/X">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=X" alt="Twitter X Icon">
                     Twitter (X)
                 </a>
                 <a href="https://t.me/cryptojail"  class="community-link-item">
-                    <!-- Ícone Telegram -->
-                    <img src="https://via.placeholder.com/30x30/00ff00/0d0d0d?text=TG" alt="Telegram">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=TG" alt="Telegram Icon">
                     Telegram
                 </a>
                 <a href="https://medium.com/cryptojail"  class="community-link-item">
-                    <!-- Ícone Medium -->
-                    <img src="https://via.placeholder.com/30x30/00ff00/0d0d0d?text=M" alt="Medium">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=M" alt="Medium Icon">
                     Medium / Blog
                 </a>
                 <a href="https://youtube.com/cryptojail"  class="community-link-item">
-                    <!-- Ícone YouTube -->
-                    <img src="https://via.placeholder.com/30x30/00ff00/0d0d0d?text=YT" alt="YouTube">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=YT" alt="YouTube Icon">
                     YouTube
                 </a>
             </div>
 
             <div class="news-feed-placeholder">
-                [ Widget de Últimas Notícias / Anúncios do Twitter ou Discord ]
+                [ Latest News / Announcements Widget from Twitter or Discord ]
             </div>
         </section>
     </main>
@@ -864,23 +1034,23 @@
             <div class="footer-links">
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Sobre o Jogo</a></li>
-                    <li><a href="#how-to-play">Como Jogar</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#how-to-play">How to Play</a></li>
                     <li><a href="#nfts">NFTs</a></li>
                     <li><a href="#tokenomics">Tokenomics</a></li>
                     <li><a href="#roadmap">Roadmap</a></li>
-                    <li><a href="#community">Comunidade</a></li>
+                    <li><a href="#community">Community</a></li>
                 </ul>
                 <ul>
-                    <li><a href="https://cryptojail.com/termos-de-servico" >Termos de Serviço</a></li>
-                    <li><a href="https://cryptojail.com/politica-de-privacidade" >Política de Privacidade</a></li>
-                    <li><a href="https://cryptojail.com/isencao-de-responsabilidade" >Isenção de Responsabilidade</a></li>
+                    <li><a href="https://cryptojail.com/terms-of-service" >Terms of Service</a></li>
+                    <li><a href="https://cryptojail.com/privacy-policy" >Privacy Policy</a></li>
+                    <li><a href="https://cryptojail.com/disclaimer" >Disclaimer</a></li>
                 </ul>
             </div>
             <p class="disclaimer">
-                <strong>Importante:</strong> CryptoJail envolve ativos digitais e a economia de tokens, que estão sujeitos a riscos de mercado. Este não é um conselho financeiro. Sempre faça sua própria pesquisa (DYOR) e jogue com responsabilidade.
+                <strong>Important:</strong> CryptoJail involves digital assets and token economics, which are subject to market risks. This is not financial advice. Always do your own research (DYOR) and play responsibly.
             </p>
-            <p>&copy; 2024 CryptoJail. Todos os direitos reservados.</p>
+            <p class="copyright">&copy; 2024 CryptoJail. All rights reserved.</p>
         </div>
     </footer>
 </body>
