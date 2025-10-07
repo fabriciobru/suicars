@@ -13,7 +13,7 @@
         :root {
             --dark-bg: #0A0A0A;
             --light-text: #F0F0F0;
-            --accent-green: #00FF00; /* Neon green accent */
+            --accent-neon: #00FFFF; /* Electric Cyan Neon, similar to suicars.xyz */
             --subtle-gray: #666666;
             --border-color: #222222;
         }
@@ -30,11 +30,12 @@
 
         h1, h2, h3, h4 {
             font-family: 'DM Mono', monospace;
-            color: var(--accent-green);
+            color: var(--accent-neon);
             text-transform: uppercase;
             font-weight: 500;
             letter-spacing: 1px;
             margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.6); /* Neon glow effect */
         }
 
         h1 { font-size: 3.8em; line-height: 1.1; margin-bottom: 0.3em; }
@@ -50,7 +51,7 @@
         }
 
         a {
-            color: var(--accent-green);
+            color: var(--accent-neon);
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -93,13 +94,15 @@
         .logo {
             font-size: 2.2em;
             font-weight: 500;
-            color: var(--accent-green);
+            color: var(--accent-neon);
             font-family: 'DM Mono', monospace;
             letter-spacing: 2px;
-            transition: color 0.3s ease;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Neon glow */
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
         .logo:hover {
             color: var(--light-text);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
         }
 
         .nav-links ul {
@@ -118,9 +121,11 @@
             font-size: 0.95em;
             font-weight: 400;
             text-transform: uppercase;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
         .nav-links a:hover {
-            color: var(--accent-green);
+            color: var(--accent-neon);
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
         }
 
         .nav-actions {
@@ -129,7 +134,7 @@
         }
 
         .btn {
-            background-color: var(--accent-green);
+            background-color: var(--accent-neon);
             color: var(--dark-bg);
             padding: 12px 25px;
             border-radius: 4px;
@@ -142,22 +147,25 @@
             text-transform: uppercase;
             font-size: 0.9em;
             letter-spacing: 0.5px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Initial button glow */
         }
 
         .btn.outline {
             background-color: transparent;
-            color: var(--accent-green);
-            border: 2px solid var(--accent-green);
+            color: var(--accent-neon);
+            border: 2px solid var(--accent-neon);
+            box-shadow: none; /* Remove initial shadow for outline */
         }
 
         .btn:hover {
             opacity: 0.9;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Stronger glow on hover */
         }
         .btn.outline:hover {
-            background-color: var(--accent-green);
+            background-color: var(--accent-neon);
             color: var(--dark-bg);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Glow on hover for outline */
         }
 
         /* Hero Section */
@@ -182,7 +190,7 @@
             font-size: 4.5em;
             line-height: 1.1;
             margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8); /* Stronger neon glow for H1 */
         }
         .hero-section p {
             font-size: 1.5em;
@@ -199,9 +207,9 @@
             display: flex;
             gap: 50px;
             margin-top: 80px;
-            color: var(--accent-green);
+            color: var(--accent-neon);
             font-family: 'DM Mono', monospace;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6); /* Neon glow for counters */
         }
         .counter-item {
             font-size: 2em;
@@ -230,10 +238,11 @@
             font-style: italic;
             margin: 50px auto;
             max-width: 700px;
-            color: var(--accent-green);
-            border-left: 5px solid var(--accent-green);
+            color: var(--accent-neon);
+            border-left: 5px solid var(--accent-neon);
             padding-left: 25px;
             line-height: 1.5;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4); /* Subtle glow for blockquote */
         }
         .content-section ul {
             list-style: none;
@@ -250,15 +259,17 @@
         }
         .content-section ul li::before {
             content: '»'; /* Custom bullet point */
-            color: var(--accent-green);
+            color: var(--accent-neon);
             position: absolute;
             left: 0;
             font-weight: bold;
             font-size: 1.2em;
             top: -2px;
+            text-shadow: 0 0 3px rgba(0, 255, 255, 0.3); /* Subtle glow for bullets */
         }
         .content-section strong {
-            color: var(--accent-green);
+            color: var(--accent-neon);
+            text-shadow: 0 0 3px rgba(0, 255, 255, 0.3); /* Subtle glow for strong text */
         }
 
         /* How to Play */
@@ -275,20 +286,22 @@
             padding: 35px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 8px 20px rgba(0, 255, 0, 0.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.1); /* Subtle glow */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .how-to-play ol li:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 255, 0, 0.1);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 255, 0.4); /* Stronger glow on hover */
         }
         .how-to-play ol li h3 {
             margin-top: 0;
             font-size: 1.4em;
             color: var(--light-text); /* Title of step can be lighter */
+            text-shadow: none; /* Remove glow for step titles themselves */
         }
         .how-to-play ol li h3 strong {
-            color: var(--accent-green);
+            color: var(--accent-neon);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Glow for number in step title */
         }
         .how-to-play ol li p {
             margin: 15px 0 0 0;
@@ -318,13 +331,13 @@
             padding: 25px;
             width: 320px;
             text-align: left;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.1); /* Subtle glow */
             border: 1px solid var(--border-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .nft-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 255, 0, 0.1);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 255, 0.4); /* Stronger glow on hover */
         }
         .nft-item img {
             width: 100%;
@@ -335,9 +348,10 @@
             border: 1px solid #333;
         }
         .nft-item h4 {
-            color: var(--accent-green);
+            color: var(--accent-neon);
             margin: 0 0 10px 0;
             font-size: 1.4em;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4); /* Glow for NFT item titles */
         }
         .nft-item p {
             font-size: 0.95em;
@@ -370,12 +384,32 @@
             text-align: center;
             margin-top: 40px;
             color: var(--light-text);
+            text-shadow: none; /* Remove glow for "USDC (USD Coin)" */
+        }
+        .tokenomics-content h3.token-title { /* specific styling for "$JAIL Token" heading */
+             color: var(--accent-neon);
+             text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
         }
         .tokenomics-content ul {
-            list-style: disc;
-            margin-left: 20px;
+            list-style: none; /* Remove default bullet */
+            padding: 0;
+            margin-left: 20px; /* Add some indentation */
             margin-bottom: 20px;
             color: #ccc;
+        }
+        .tokenomics-content ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .tokenomics-content ul li::before {
+            content: '♦'; /* Custom diamond bullet */
+            color: var(--accent-neon);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            line-height: 1;
+            text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
         }
         .tokenomics-chart-placeholder {
             background-color: #1A1A1A;
@@ -387,9 +421,10 @@
             border-radius: 8px;
             margin-top: 40px;
             font-family: 'DM Mono', monospace;
-            color: var(--accent-green);
+            color: var(--accent-neon);
             font-size: 1.2em;
-            border: 1px dashed var(--subtle-gray);
+            border: 1px dashed var(--accent-neon); /* Neon dashed border */
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4); /* Neon glow */
         }
         .tokenomics-chart-placeholder span {
             font-size: 0.8em;
@@ -413,10 +448,11 @@
             left: 50%;
             width: 2px;
             height: calc(100% - 80px);
-            background-color: var(--accent-green);
+            background-color: var(--accent-neon);
             transform: translateX(-50%);
             top: 40px;
             z-index: 0;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6); /* Glow on timeline line */
         }
         .timeline-quarter {
             display: flex;
@@ -433,10 +469,11 @@
             text-align: center;
             font-size: 1.8em;
             font-weight: 500;
-            color: var(--accent-green);
+            color: var(--accent-neon);
             font-family: 'DM Mono', monospace;
             position: relative;
             z-index: 1;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.6); /* Glow for date */
         }
         .timeline-quarter-date::before {
             content: '';
@@ -446,11 +483,11 @@
             transform: translate(-50%, -50%);
             width: 25px;
             height: 25px;
-            background-color: var(--accent-green);
+            background-color: var(--accent-neon);
             border-radius: 50%;
             z-index: -1; /* Behind the text */
             border: 5px solid var(--dark-bg);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Strong glow for dot */
         }
         .timeline-quarter-content {
             flex: 1;
@@ -459,13 +496,14 @@
             padding: 30px;
             margin: 0 40px;
             text-align: left;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.1); /* Subtle glow */
             border: 1px solid var(--border-color);
         }
         .timeline-quarter-content h4 {
             color: var(--light-text);
             margin-top: 0;
             font-size: 1.5em;
+            text-shadow: none; /* Remove glow from H4 */
         }
         .timeline-quarter-content ul {
             list-style: none; /* No default bullets */
@@ -482,11 +520,12 @@
         }
         .timeline-quarter-content ul li::before {
             content: '•'; /* Custom bullet */
-            color: var(--accent-green);
+            color: var(--accent-neon);
             position: absolute;
             left: 0;
             font-size: 1.2em;
             top: -2px;
+            text-shadow: 0 0 3px rgba(0, 255, 255, 0.3); /* Subtle glow for bullets */
         }
 
 
@@ -511,14 +550,14 @@
             gap: 12px;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 255, 255, 0.1); /* Subtle glow */
             text-transform: uppercase;
         }
         .community-link-item:hover {
-            background-color: var(--accent-green);
+            background-color: var(--accent-neon);
             color: var(--dark-bg);
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 255, 0.6); /* Stronger glow on hover */
         }
         .community-link-item img {
             width: 28px;
@@ -544,6 +583,7 @@
             border: 1px dashed var(--border-color);
             font-family: 'DM Mono', monospace;
             font-size: 1.1em;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.2); /* Subtle glow */
         }
 
         /* Footer */
@@ -570,9 +610,11 @@
             color: #aaa;
             font-size: 0.9em;
             text-transform: uppercase;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
         .footer-links a:hover {
-            color: var(--accent-green);
+            color: var(--accent-neon);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
         }
         footer p {
             font-size: 0.9em;
@@ -833,7 +875,7 @@
 
             <div class="nft-gallery">
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/320x180/0d0d0d/00ff00?text=BASIC+FLOOR+LVL1" alt="Basic Floor (Level 1)">
+                    <img src="https://via.placeholder.com/320x180/0d0d0d/00FFFF?text=BASIC+FLOOR+LVL1" alt="Basic Floor (Level 1)">
                     <h4>Basic Floor (Level 1)</h4>
                     <p>The entry point to your empire. Simple, yet efficient.</p>
                     <ul>
@@ -842,7 +884,7 @@
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/320x180/0d0d0d/00ff00?text=MEDIUM+FLOOR+LVL3" alt="Medium Floor (Level 3)">
+                    <img src="https://via.placeholder.com/320x180/0d0d0d/00FFFF?text=MEDIUM+FLOOR+LVL3" alt="Medium Floor (Level 3)">
                     <h4>Medium Floor (Level 3)</h4>
                     <p>A more robust floor with increased inmate capacity.</p>
                     <ul>
@@ -851,7 +893,7 @@
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/320x180/0d0d0d/00ff00?text=ELITE+FLOOR+LVL5" alt="Elite Floor (Level 5+)">
+                    <img src="https://via.placeholder.com/320x180/0d0d0d/00FFFF?text=ELITE+FLOOR+LVL5" alt="Elite Floor (Level 5+)">
                     <h4>Elite Floor (Level 5+)</h4>
                     <p>An imposing structure for the biggest criminals and profits.</p>
                     <ul>
@@ -871,7 +913,7 @@
 
             <div class="nft-gallery">
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/320x180/1A1A1A/00ff00?text=PETTY+THIEF+NFT" alt="Petty Thief NFT">
+                    <img src="https://via.placeholder.com/320x180/1A1A1A/00FFFF?text=PETTY+THIEF+NFT" alt="Petty Thief NFT">
                     <h4>Petty Thief (Level 1)</h4>
                     <p>A newcomer to the criminal world, with a modest contribution.</p>
                     <ul>
@@ -880,7 +922,7 @@
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/320x180/1A1A1A/00ff00?text=MASTER+FRAUDSTER+NFT" alt="Master Fraudster NFT">
+                    <img src="https://via.placeholder.com/320x180/1A1A1A/00FFFF?text=MASTER+FRAUDSTER+NFT" alt="Master Fraudster NFT">
                     <h4>Master Fraudster (Level 5)</h4>
                     <p>Cunning and skilled at generating more significant profits.</p>
                     <ul>
@@ -889,7 +931,7 @@
                     </ul>
                 </div>
                 <div class="nft-item">
-                    <img src="https://via.placeholder.com/320x180/1A1A1A/00ff00?text=CRIME+BOSS+NFT" alt="Crime Boss NFT">
+                    <img src="https://via.placeholder.com/320x180/1A1A1A/00FFFF?text=CRIME+BOSS+NFT" alt="Crime Boss NFT">
                     <h4>Crime Boss (Level 10)</h4>
                     <p>The pinnacle of the criminal hierarchy, generating maximum $JAIL.</p>
                     <ul>
@@ -905,7 +947,7 @@
             <p>The CryptoJail economy is driven by two essential tokens: <strong>$JAIL</strong>, our native utility token, and <strong>USDC</strong>, a reliable stablecoin. Together, they form the foundation for a fair, transparent, and economically viable gaming experience.</p>
 
             <div class="tokenomics-content">
-                <h3>$JAIL Token</h3>
+                <h3 class="token-title">$JAIL Token</h3>
                 <ul>
                     <li><strong>Name:</strong> $JAIL</li>
                     <li><strong>Network:</strong> Solana (SPL Token)</li>
@@ -1001,23 +1043,23 @@
 
             <div class="community-links">
                 <a href="https://discord.gg/cryptojail"  class="community-link-item">
-                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=DC" alt="Discord Icon">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00FFFF?text=DC" alt="Discord Icon">
                     Discord
                 </a>
                 <a href="https://twitter.com/cryptojail"  class="community-link-item">
-                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=X" alt="Twitter X Icon">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00FFFF?text=X" alt="Twitter X Icon">
                     Twitter (X)
                 </a>
                 <a href="https://t.me/cryptojail"  class="community-link-item">
-                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=TG" alt="Telegram Icon">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00FFFF?text=TG" alt="Telegram Icon">
                     Telegram
                 </a>
                 <a href="https://medium.com/cryptojail"  class="community-link-item">
-                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=M" alt="Medium Icon">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00FFFF?text=M" alt="Medium Icon">
                     Medium / Blog
                 </a>
                 <a href="https://youtube.com/cryptojail"  class="community-link-item">
-                    <img src="https://via.placeholder.com/30x30/0d0d0d/00ff00?text=YT" alt="YouTube Icon">
+                    <img src="https://via.placeholder.com/30x30/0d0d0d/00FFFF?text=YT" alt="YouTube Icon">
                     YouTube
                 </a>
             </div>
