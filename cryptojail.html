@@ -16,6 +16,9 @@
             --accent-neon: #00FFFF; /* Electric Cyan Neon, similar to suicars.xyz */
             --subtle-gray: #666666;
             --border-color: #222222;
+
+            /* Gradient for text, simulating metallic/holographic effect like suicars.xyz */
+            --metallic-text-gradient: linear-gradient(90deg, #FFFFFF 0%, var(--accent-neon) 20%, #A0FFFF 40%, #FFFFFF 60%, var(--accent-neon) 80%, #A0FFFF 100%);
         }
 
         body {
@@ -94,14 +97,22 @@
         .logo {
             font-size: 2.2em;
             font-weight: 500;
-            color: var(--accent-neon);
+            /* Using the metallic text gradient for the logo text */
+            background: var(--metallic-text-gradient);
+            background-size: 200% auto; /* Make gradient wider for animation */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback for browsers not supporting text-fill-color */
+
             font-family: 'DM Mono', monospace;
             letter-spacing: 2px;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Neon glow */
-            transition: color 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Neon glow around gradient */
+            transition: background-position 0.5s ease-in-out, text-shadow 0.3s ease;
+            animation: gradient-shift 8s linear infinite; /* Continuous subtle animation */
         }
         .logo:hover {
-            color: var(--light-text);
+            background-position: -100% 0; /* Shift gradient on hover */
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
         }
 
@@ -133,9 +144,8 @@
             gap: 15px;
         }
 
+        /* Button Styling - Replicating multi-color effect */
         .btn {
-            background-color: var(--accent-neon);
-            color: var(--dark-bg);
             padding: 12px 25px;
             border-radius: 4px;
             text-decoration: none;
@@ -147,493 +157,128 @@
             text-transform: uppercase;
             font-size: 0.9em;
             letter-spacing: 0.5px;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Initial button glow */
+
+            /* Base background for the button itself (behind the gradient text) */
+            background-color: #1A1A1A; /* Dark subtle background */
+            border: 1px solid var(--border-color); /* Subtle border */
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); /* Initial button glow */
+
+            /* Text color using gradient and background-clip */
+            background-image: var(--metallic-text-gradient);
+            background-size: 200% auto; /* Make gradient wider for animation */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback for browsers not supporting text-fill-color */
+            text-shadow: 0 0 5px rgba(0,255,255,0.4); /* Glow for the gradient text */
+            animation: gradient-shift 8s linear infinite; /* Continuous subtle animation */
         }
 
         .btn.outline {
-            background-color: transparent;
-            color: var(--accent-neon);
-            border: 2px solid var(--accent-neon);
-            box-shadow: none; /* Remove initial shadow for outline */
+            background-color: transparent; /* Transparent background */
+            border: 2px solid var(--accent-neon); /* Neon border */
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Stronger glow for outline */
+            
+            /* Text color using gradient and background-clip */
+            background-image: var(--metallic-text-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(0,255,255,0.4);
+            animation: gradient-shift 8s linear infinite; /* Continuous subtle animation */
         }
 
+        /* Hover effects for buttons */
         .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Stronger glow on hover */
+            transform: translateY(-3px); /* Lift button */
+            box-shadow: 0 5px 25px rgba(0, 255, 255, 0.6), 0 0 25px rgba(0, 255, 255, 0.8); /* Stronger overall glow */
+            background-position: -100% 0; /* Animate text gradient */
         }
         .btn.outline:hover {
-            background-color: var(--accent-neon);
-            color: var(--dark-bg);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Glow on hover for outline */
+            background-color: rgba(0, 255, 255, 0.1); /* Subtle fill on hover */
+            border-color: var(--light-text); /* Change border color on hover */
+            box-shadow: 0 5px 25px rgba(0, 255, 255, 0.6), 0 0 25px rgba(0, 255, 255, 0.8); /* Stronger overall glow */
+            background-position: -100% 0; /* Animate text gradient */
         }
 
-        /* Hero Section */
-        .hero-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            /* Placeholder for video background. In a real site, use <video> tag */
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1920x1080/000000/333333?text=IMMERSIVE+GAME+VIDEO+BACKGROUND') no-repeat center center/cover;
-            position: relative;
-            padding-top: 0; /* Override section padding */
-        }
-        .hero-section .content {
-            position: relative;
-            z-index: 2;
-            max-width: 1000px;
+        /* Keyframe for text gradient animation (used on buttons and logo) */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
+        /* Hero Section (update glow to neon cyan) */
         .hero-section h1 {
             font-size: 4.5em;
             line-height: 1.1;
             margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8); /* Stronger neon glow for H1 */
-        }
-        .hero-section p {
-            font-size: 1.5em;
-            max-width: 900px;
-            margin-bottom: 40px;
-            color: var(--light-text);
-        }
-        .hero-ctas {
-            display: flex;
-            gap: 25px;
-            margin-top: 40px;
+            text-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.6); /* Stronger neon glow for H1 */
         }
         .counters {
-            display: flex;
-            gap: 50px;
-            margin-top: 80px;
-            color: var(--accent-neon);
-            font-family: 'DM Mono', monospace;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.6); /* Neon glow for counters */
         }
-        .counter-item {
-            font-size: 2em;
-            font-weight: 500;
-        }
-        .counter-item span {
-            display: block;
-            font-size: 0.5em;
-            color: var(--subtle-gray);
-            margin-top: 5px;
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 80px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .content-section:last-of-type {
-            border-bottom: none;
-        }
         .content-section blockquote {
-            font-size: 1.3em;
-            font-style: italic;
-            margin: 50px auto;
-            max-width: 700px;
-            color: var(--accent-neon);
-            border-left: 5px solid var(--accent-neon);
-            padding-left: 25px;
-            line-height: 1.5;
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.4); /* Subtle glow for blockquote */
         }
-        .content-section ul {
-            list-style: none;
-            padding: 0;
-            max-width: 800px;
-            margin: 30px auto;
-            text-align: left;
-            color: #ccc;
-        }
-        .content-section ul li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 25px;
-        }
         .content-section ul li::before {
-            content: '»'; /* Custom bullet point */
-            color: var(--accent-neon);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-            font-size: 1.2em;
-            top: -2px;
             text-shadow: 0 0 3px rgba(0, 255, 255, 0.3); /* Subtle glow for bullets */
         }
         .content-section strong {
-            color: var(--accent-neon);
+            color: var(--accent-neon); /* Ensure strong elements use neon color */
             text-shadow: 0 0 3px rgba(0, 255, 255, 0.3); /* Subtle glow for strong text */
         }
-
-        /* How to Play */
-        .how-to-play ol {
-            list-style: none;
-            padding: 0;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .how-to-play ol li {
-            background-color: #1A1A1A;
-            margin-bottom: 30px;
-            padding: 35px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.1); /* Subtle glow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .how-to-play ol li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 255, 0.4); /* Stronger glow on hover */
-        }
-        .how-to-play ol li h3 {
-            margin-top: 0;
-            font-size: 1.4em;
-            color: var(--light-text); /* Title of step can be lighter */
-            text-shadow: none; /* Remove glow for step titles themselves */
-        }
         .how-to-play ol li h3 strong {
-            color: var(--accent-neon);
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); /* Glow for number in step title */
         }
-        .how-to-play ol li p {
-            margin: 15px 0 0 0;
-            font-size: 1em;
-            max-width: none;
-            color: #bbb;
-        }
-        .how-to-play ol li em {
-            display: block;
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: var(--subtle-gray);
-            font-style: normal;
-        }
-
-        /* NFT Gallery */
-        .nft-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 50px;
-        }
-        .nft-item {
-            background-color: #1A1A1A;
-            border-radius: 8px;
-            padding: 25px;
-            width: 320px;
-            text-align: left;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.1); /* Subtle glow */
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .nft-item:hover {
-            transform: translateY(-5px);
+        .how-to-play ol li:hover {
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 255, 0.4); /* Stronger glow on hover */
         }
-        .nft-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
+        .nft-item:hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 255, 0.4); /* Stronger glow on hover */
         }
         .nft-item h4 {
-            color: var(--accent-neon);
-            margin: 0 0 10px 0;
-            font-size: 1.4em;
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.4); /* Glow for NFT item titles */
-        }
-        .nft-item p {
-            font-size: 0.95em;
-            margin: 0;
-            max-width: none;
-            color: #bbb;
-        }
-        .nft-item ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 15px;
-            font-size: 0.9em;
-            text-align: left;
-        }
-        .nft-item ul li {
-            margin-bottom: 5px;
-            color: #bbb;
-        }
-        .nft-item ul li strong {
-            color: var(--light-text); /* Key stats can be lighter */
-        }
-
-        /* Tokenomics */
-        .tokenomics-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .tokenomics-content h3 {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--light-text);
-            text-shadow: none; /* Remove glow for "USDC (USD Coin)" */
         }
         .tokenomics-content h3.token-title { /* specific styling for "$JAIL Token" heading */
              color: var(--accent-neon);
              text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
         }
-        .tokenomics-content ul {
-            list-style: none; /* Remove default bullet */
-            padding: 0;
-            margin-left: 20px; /* Add some indentation */
-            margin-bottom: 20px;
-            color: #ccc;
-        }
-        .tokenomics-content ul li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 20px;
-        }
         .tokenomics-content ul li::before {
-            content: '♦'; /* Custom diamond bullet */
-            color: var(--accent-neon);
-            position: absolute;
-            left: 0;
-            font-size: 1.2em;
-            line-height: 1;
             text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
         }
         .tokenomics-chart-placeholder {
-            background-color: #1A1A1A;
-            height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 8px;
-            margin-top: 40px;
-            font-family: 'DM Mono', monospace;
-            color: var(--accent-neon);
-            font-size: 1.2em;
             border: 1px dashed var(--accent-neon); /* Neon dashed border */
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.4); /* Neon glow */
         }
-        .tokenomics-chart-placeholder span {
-            font-size: 0.8em;
-            color: var(--subtle-gray);
-            margin-top: 10px;
-        }
-
-        /* Roadmap */
-        .roadmap-timeline {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            padding-top: 40px;
-        }
         .roadmap-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            width: 2px;
-            height: calc(100% - 80px);
-            background-color: var(--accent-neon);
-            transform: translateX(-50%);
-            top: 40px;
-            z-index: 0;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.6); /* Glow on timeline line */
         }
-        .timeline-quarter {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        .timeline-quarter:nth-child(even) {
-            flex-direction: row-reverse;
-        }
         .timeline-quarter-date {
-            flex: 0 0 220px; /* Wider space for date */
-            text-align: center;
-            font-size: 1.8em;
-            font-weight: 500;
-            color: var(--accent-neon);
-            font-family: 'DM Mono', monospace;
-            position: relative;
-            z-index: 1;
             text-shadow: 0 0 8px rgba(0, 255, 255, 0.6); /* Glow for date */
         }
         .timeline-quarter-date::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 25px;
-            height: 25px;
-            background-color: var(--accent-neon);
-            border-radius: 50%;
-            z-index: -1; /* Behind the text */
-            border: 5px solid var(--dark-bg);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Strong glow for dot */
         }
         .timeline-quarter-content {
-            flex: 1;
-            background-color: #1A1A1A;
-            border-radius: 8px;
-            padding: 30px;
-            margin: 0 40px;
-            text-align: left;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.1); /* Subtle glow */
-            border: 1px solid var(--border-color);
-        }
-        .timeline-quarter-content h4 {
-            color: var(--light-text);
-            margin-top: 0;
-            font-size: 1.5em;
-            text-shadow: none; /* Remove glow from H4 */
-        }
-        .timeline-quarter-content ul {
-            list-style: none; /* No default bullets */
-            padding: 0;
-            margin-top: 20px;
-            font-size: 1em;
-            text-align: left;
-        }
-        .timeline-quarter-content ul li {
-            margin-bottom: 10px;
-            color: #bbb;
-            position: relative;
-            padding-left: 20px;
         }
         .timeline-quarter-content ul li::before {
-            content: '•'; /* Custom bullet */
-            color: var(--accent-neon);
-            position: absolute;
-            left: 0;
-            font-size: 1.2em;
-            top: -2px;
             text-shadow: 0 0 3px rgba(0, 255, 255, 0.3); /* Subtle glow for bullets */
         }
-
-
-        /* Community */
-        .community-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
         .community-link-item {
-            background-color: #1A1A1A;
-            border-radius: 6px;
-            padding: 18px 25px;
-            text-decoration: none;
-            color: var(--light-text);
-            font-weight: 500;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 255, 255, 0.1); /* Subtle glow */
-            text-transform: uppercase;
         }
         .community-link-item:hover {
-            background-color: var(--accent-neon);
-            color: var(--dark-bg);
-            transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 255, 255, 0.6); /* Stronger glow on hover */
         }
-        .community-link-item img {
-            width: 28px;
-            height: 28px;
-            filter: grayscale(100%) brightness(200%); /* Make icons bright on dark bg */
-            transition: filter 0.3s ease;
-        }
-        .community-link-item:hover img {
-            filter: grayscale(0%) brightness(100%); /* Colorize on hover */
-        }
-
         .news-feed-placeholder {
-            background-color: #1A1A1A;
-            height: 220px;
-            max-width: 650px;
-            margin: 60px auto 0 auto;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--subtle-gray);
-            font-style: italic;
-            border: 1px dashed var(--border-color);
-            font-family: 'DM Mono', monospace;
-            font-size: 1.1em;
             box-shadow: 0 0 5px rgba(0, 255, 255, 0.2); /* Subtle glow */
         }
-
-        /* Footer */
-        footer {
-            background-color: #111111;
-            padding: 60px 0;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-        }
-        footer .logo {
-            margin-bottom: 30px;
-            display: inline-block; /* Keep logo centered */
-        }
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 30px 0;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-        .footer-links a {
-            color: #aaa;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-        .footer-links a:hover {
-            color: var(--accent-neon);
+        footer .footer-links a:hover {
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
         }
-        footer p {
-            font-size: 0.9em;
-            color: #888;
-            max-width: 800px;
-            margin: 15px auto;
-        }
-        footer .disclaimer {
-            font-size: 0.8em;
-            color: var(--subtle-gray);
-            margin-top: 30px;
-            max-width: 900px;
-        }
-        footer .copyright {
-             color: var(--subtle-gray);
-             margin-top: 20px;
-             font-size: 0.85em;
-        }
-
 
         /* Responsive Adjustments */
         @media (max-width: 1024px) {
